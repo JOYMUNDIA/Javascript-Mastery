@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000767",
+                    "secondary-container": "#62259b",
+                    "surface-container": "#1c1f29",
+                    "on-tertiary-fixed-variant": "#005047",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#003731",
+                    "on-primary": "#131e8c",
+                    "surface-container-highest": "#31353f",
+                    "tertiary-fixed": "#62fae3",
+                    "inverse-surface": "#dfe2ef",
+                    "error": "#ffb4ab",
+                    "background": "#0f131c",
+                    "tertiary-fixed-dim": "#3cddc7",
+                    "on-secondary-fixed": "#2c0051",
+                    "tertiary": "#3cddc7",
+                    "surface-container-low": "#181b25",
+                    "on-primary-container": "#081486",
+                    "primary-container": "#7c87f3",
+                    "on-error": "#690005",
+                    "surface": "#0f131c",
+                    "on-surface": "#dfe2ef",
+                    "secondary-fixed": "#f0dbff",
+                    "surface-container-high": "#262a34",
+                    "secondary-fixed-dim": "#ddb8ff",
+                    "outline": "#908fa0",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#00201c",
+                    "primary": "#bdc2ff",
+                    "surface-variant": "#31353f",
+                    "on-secondary-container": "#d1a1ff",
+                    "secondary": "#ddb8ff",
+                    "on-surface-variant": "#c7c4d7",
+                    "on-secondary": "#490081",
+                    "on-primary-fixed-variant": "#2f3aa3",
+                    "inverse-primary": "#4953bc",
+                    "surface-dim": "#0f131c",
+                    "primary-fixed": "#e0e0ff",
+                    "surface-bright": "#353943",
+                    "on-tertiary-container": "#000705",
+                    "surface-container-lowest": "#0a0e17",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "surface-tint": "#bdc2ff",
+                    "tertiary-container": "#008678",
+                    "outline-variant": "#464554",
+                    "on-background": "#dfe2ef",
+                    "inverse-on-surface": "#2c303a",
+                    "on-secondary-fixed-variant": "#62259b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(49, 53, 63, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(189, 194, 255, 0.1);
+        }
+        .text-glow {
+            text-shadow: 0 0 12px rgba(189, 194, 255, 0.4);
+        }
+        .progress-glow {
+            box-shadow: 0 0 10px rgba(124, 135, 243, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-surface selection:bg-primary/30 min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-6 py-4 bg-slate-900/40 backdrop-blur-xl border-b border-white/10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="User Avatar" data-alt="close-up portrait of a modern stylish professional person with glasses in a soft studio lighting setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxL1O8RaFILSPjAFe1PyNDZXLzDdlawMAk78yZJwhrdMw0tIaieBaQZ94cyjNqp39QbUIxqVsE8Z0IpDCcb6lTQ1mzZjeDnAqVU7yXO1cKvwVAj4VPuFXxqzMfbXpIEgdBUk4cJv6roEZ2Swcl8ubEwd3P7Z4JaX-pYLHpzjYVfQs_mS1oX4tsJ5vqiNDOpxPbt70gW-f9YqxMG7PgWfTCw51T5dyoeVH-ETFwlpdWT1YCgP3GTIm9JlsWaxQs6dafLycNzZ1NiErz"/>
+</div>
+<h1 class="text-xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-indigo-100 font-headline">Luminous Ledger</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-indigo-200 dark:text-indigo-100 hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-8">
+<!-- Page Header -->
+<div class="mb-10">
+<h2 class="font-headline font-extrabold text-3xl tracking-tight mb-2">Savings Goals</h2>
+<p class="text-on-surface-variant text-sm font-medium">Visualizing your future, one deposit at a time.</p>
+</div>
+<!-- Bento Stats Layout -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="col-span-2 glass-panel p-6 rounded-3xl border border-white/5 bg-gradient-to-br from-primary-container/10 to-transparent">
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant mb-1">Total Progress</p>
+<div class="flex items-end gap-2">
+<span class="text-4xl font-headline font-bold text-primary">$12,450.00</span>
+<span class="text-sm text-tertiary-fixed-dim pb-1.5 font-semibold">/ $25,000</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mt-4 overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-tertiary h-full rounded-full progress-glow" style="width: 49.8%"></div>
+</div>
+</div>
+</div>
+<!-- Goals List -->
+<section class="space-y-6">
+<!-- Goal Card: Emergency Fund -->
+<div class="glass-panel p-6 rounded-[32px] transition-all hover:bg-white/5 group border border-white/5">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-primary transition-colors">Emergency Fund</h3>
+<p class="text-xs text-on-surface-variant font-label tracking-wide">Target: June 2024</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-xl font-headline font-bold text-on-surface">$5,000</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Target Amount</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end text-sm">
+<span class="text-on-surface-variant">Progress</span>
+<span class="font-bold text-primary">75%</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary-container to-primary h-full rounded-full" style="width: 75%"></div>
+</div>
+<div class="flex justify-between pt-2">
+<div class="text-[11px] font-label text-on-surface-variant">Current: <span class="text-on-surface font-semibold">$3,750</span></div>
+<div class="text-[11px] font-label text-on-surface-variant">Remaining: <span class="text-on-surface font-semibold">$1,250</span></div>
+</div>
+</div>
+</div>
+<!-- Goal Card: Vacation -->
+<div class="glass-panel p-6 rounded-[32px] transition-all hover:bg-white/5 group border border-white/5">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container/20 flex items-center justify-center text-tertiary-fixed-dim">
+<span class="material-symbols-outlined" data-icon="beach_access" style="font-variation-settings: 'FILL' 1;">beach_access</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-tertiary-fixed-dim transition-colors">Vacation</h3>
+<p class="text-xs text-on-surface-variant font-label tracking-wide">Target: August 2024</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-xl font-headline font-bold text-on-surface">$2,000</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Target Amount</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end text-sm">
+<span class="text-on-surface-variant">Progress</span>
+<span class="font-bold text-tertiary-fixed-dim">40%</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-tertiary-container to-tertiary h-full rounded-full" style="width: 40%"></div>
+</div>
+<div class="flex justify-between pt-2">
+<div class="text-[11px] font-label text-on-surface-variant">Current: <span class="text-on-surface font-semibold">$800</span></div>
+<div class="text-[11px] font-label text-on-surface-variant">Remaining: <span class="text-on-surface font-semibold">$1,200</span></div>
+</div>
+</div>
+</div>
+<!-- Goal Card: Rent Deposit -->
+<div class="glass-panel p-6 rounded-[32px] transition-all hover:bg-white/5 group border border-white/5">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-lg text-on-surface group-hover:text-secondary transition-colors">Rent Deposit</h3>
+<p class="text-xs text-on-surface-variant font-label tracking-wide">Target: September 2024</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-xl font-headline font-bold text-on-surface">$3,200</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Target Amount</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end text-sm">
+<span class="text-on-surface-variant">Progress</span>
+<span class="font-bold text-secondary">90%</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-secondary-container to-secondary h-full rounded-full" style="width: 90%"></div>
+</div>
+<div class="flex justify-between pt-2">
+<div class="text-[11px] font-label text-on-surface-variant">Current: <span class="text-on-surface font-semibold">$2,880</span></div>
+<div class="text-[11px] font-label text-on-surface-variant">Remaining: <span class="text-on-surface font-semibold">$320</span></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-28 right-8 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary-container flex items-center justify-center text-on-primary shadow-[0_0_30px_rgba(124,135,243,0.4)] hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-8 pb-8 pt-4 bg-[#1c1f29]/60 backdrop-blur-2xl rounded-t-[32px] shadow-[0_-8px_32px_rgba(0,0,0,0.3)]">
+<a class="flex flex-col items-center justify-center text-slate-500 w-12 h-12 hover:text-indigo-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 w-12 h-12 hover:text-indigo-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-indigo-500/20 text-indigo-200 rounded-full w-12 h-12 shadow-[0_0_15px_rgba(99,102,241,0.3)] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="target">target</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 w-12 h-12 hover:text-indigo-300 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+</a>
+</nav>
+<!-- Decorative Glow Elements -->
+<div class="fixed top-1/4 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-secondary-container/10 rounded-full blur-[120px] pointer-events-none"></div>
+</body></html>

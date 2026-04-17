@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Console.log Café</title>
+
+<!-- Import Google Fonts for stylish text -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- SweetAlert2 library for fancy alert popups -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+/* ===== ROOT VARIABLES ===== */
+:root{
+  /* CSS variables are reusable values. They make it easy to change colors/fonts later. */
+  --primary:#caa25d;  /* main gold color for buttons and highlights */
+  --accent:#d9a066;   /* secondary accent color for hover effects */
+  --bg:#f7f5f2;       /* background color of the page */
+  --card:#ffffff;      /* background color for cards (like menu items) */
+  --text:#2d2d2d;     /* main text color */
+}
+
+/* ===== RESET DEFAULT STYLES ===== */
+*{
+  /* The * selector targets everything on the page */
+  margin:0;           /* removes default spacing outside elements */
+  padding:0;          /* removes default spacing inside elements */
+  box-sizing:border-box; /* makes width/height include padding & border */
+  font-family:'Poppins',sans-serif; /* sets the font for all text */
+}
+
+/* ===== BODY STYLES ===== */
+body{
+  background:var(--bg); /* uses the page background color variable */
+  color:var(--text);    /* sets text color for entire page */
+}
+
+/* ===== HEADER SECTION ===== */
+header{
+  min-height:70vh; /* header takes at least 70% of screen height */
+  background:linear-gradient(135deg,#0b1d3a,#0f2f6b,#1b4aa5); /* gradient background */
+  display:flex; /* makes it a flex container for easy layout */
+  align-items:center; /* vertically centers content inside */
+  justify-content:center; /* horizontally centers content inside */
+  flex-wrap:wrap; /* allows items to move to next line on small screens */
+  gap:40px; /* space between flex items */
+  padding:60px 8%; /* inner spacing top/bottom 60px, sides 8% */
+  color:white; /* text color inside header */
+}
+
+/* Hero text section */
+.hero-content{
+  flex:1 1 350px; /* flexible width: grow, shrink, minimum 350px */
+  max-width:500px; /* don’t let it get wider than 500px */
+}
+
+.hero-content h1{
+  font-size:3.5rem; /* big main heading */
+  font-weight:700;  /* bold text */
+}
+
+.hero-content p{
+  margin-top:1rem; /* space above paragraph */
+  font-size:1.2rem; /* slightly larger text than default */
+  opacity:0.9; /* slightly transparent text */
+}
+
+/* Hero image section */
+.hero-image{
+  flex:1 1 300px; /* flexible width for image container */
+  display:flex; 
+  justify-content:center; /* centers image horizontally */
+  position:relative; /* allows absolute positioning of child elements */
+}
+
+/* ===== STEAM ANIMATION ===== */
+.steam{
+  position:absolute; /* positions steam relative to hero-image */
+  top:-40px; /* place above the cup */
+  display:flex; /* line up steam dots horizontally */
+  gap:10px; /* space between steam dots */
+}
+
+.steam span{
+  width:8px; height:80px; /* size of each steam dot */
+  background:white; /* color of steam */
+  border-radius:50%; /* makes steam rounded */
+  opacity:0; /* start invisible */
+  filter:blur(8px); /* soft blur for steam effect */
+  animation:steam 5s infinite; /* play steam animation forever */
+}
+
+/* stagger animation delay for each steam dot */
+.steam span:nth-child(1){animation-delay:0s;}
+.steam span:nth-child(2){animation-delay:1s;}
+.steam span:nth-child(3){animation-delay:2s;}
+.steam span:nth-child(4){animation-delay:3s;}
+.steam span:nth-child(5){animation-delay:4s;}
+
+/* define how steam moves */
+@keyframes steam{
+  0%{transform:translateY(0) scaleX(1); opacity:0;} /* start at bottom, invisible */
+  20%{opacity:.7;} /* appear gradually */
+  50%{transform:translateY(-40px) scaleX(1.5);} /* move up and stretch */
+  100%{transform:translateY(-80px) scaleX(2); opacity:0;} /* disappear at top, stretched */
+}
+
+/* Hero image styling */
+.hero-image img{
+  width:300px; /* default image width */
+  max-width:100%; /* shrinks on small screens */
+  filter:drop-shadow(0 25px 50px rgba(0,0,0,0.6)); /* shadow below image */
+}
+
+/* ===== MENU SECTION ===== */
+.container{
+  width:90%; /* almost full width */
+  max-width:1200px; /* don’t get too wide on big screens */
+  margin:-80px auto 50px; /* pulls menu up toward header, centers horizontally */
+  position:relative; /* for z-index stacking */
+  z-index:5; /* ensures it appears above background */
+}
+
+.menu{
+  display:grid; /* grid layout for menu items */
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); /* responsive grid columns */
+  gap:30px; /* spacing between cards */
+}
+
+/* ===== CARD STYLES ===== */
+.card{
+  background:var(--card); /* white card */
+  border-radius:20px; /* rounded corners */
+  overflow:hidden; /* prevent content from spilling out */
+  box-shadow:0 10px 30px rgba(0,0,0,0.08); /* subtle shadow */
+  transition:0.3s; /* smooth hover effects */
+  display:flex; /* flex for content layout */
+  flex-direction:column; /* stack image & text vertically */
+}
+
+.card:hover{
+  transform:translateY(-10px); /* lift card slightly when hovered */
+}
+
+/* Card image - responsive & centered */
+.card img {
+  width: 70%; /* 70% of card width */
+  max-width: 100%; /* never exceed container */
+  height: auto; /* maintain ratio */
+  max-height: 180px; /* limit height */
+  object-fit: contain; /* avoid cutting image */
+  align-self: center; /* center horizontally */
+  display: block; /* treat as block element */
+  padding-top: 1rem; /* space from top of card */
+}
+
+.card-content{
+  padding:20px; /* inner spacing */
+  flex:1; /* fills remaining space */
+  display:flex; 
+  flex-direction:column; 
+  justify-content:space-between; /* space between content items */
+}
+
+.card h3{
+  font-size:1.2rem; /* slightly bigger heading */
+}
+
+.price{
+  margin:10px 0; /* spacing above/below */
+  font-weight:600; /* semi-bold text */
+  color:var(--primary); /* gold color for price */
+}
+
+/* ===== BUTTONS ===== */
+button{
+  background:var(--primary); /* gold button */
+  color:white; /* text color */
+  border:none; /* remove default border */
+  padding:10px; /* inner spacing */
+  border-radius:10px; /* rounded corners */
+  cursor:pointer; /* pointer on hover */
+  transition:0.3s; /* smooth hover effect */
+}
+
+button:hover{
+  background:var(--accent); /* change color on hover */
+}
+
+/* ===== OPTION GROUPS (Dropdowns, Radios) ===== */
+.option-group {
+  margin:10px 0; /* spacing between groups */
+  display:flex;
+  flex-direction:column; /* stack label + input */
+  gap:10px; /* space between label + input */
+}
+
+.option-group label {
+  font-size:0.95rem; /* slightly smaller text */
+  font-weight:500;
+  color:#2d2d2d; /* dark gray label */
+}
+
+.option-group select {
+  padding:10px 16px; /* inner spacing */
+  border-radius:14px;
+  border:none;
+  background:linear-gradient(145deg, #ffffff, #f0f0f0); /* soft gradient background */
+  color:#2d2d2d;
+  font-size:0.95rem;
+  outline:none; /* remove default focus outline */
+  cursor:pointer;
+  box-shadow:5px 5px 10px #dcdcdc, -5px -5px 10px #ffffff; /* soft shadow */
+  transition: all 0.3s ease;
+  appearance:none; /* remove default dropdown arrow */
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7L10 12L15 7' stroke='%232d2d2d' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center; /* position custom arrow */
+  background-size:12px;
+}
+
+.option-group select:hover{
+  transform:translateY(-2px); /* lift slightly on hover */
+  box-shadow:5px 5px 15px #d0d0d0, -5px -5px 15px #ffffff;
+}
+
+.option-group select:focus{
+  box-shadow: inset 0 0 0 2px var(--primary), 5px 5px 15px #d0d0d0, -5px -5px 15px #ffffff;
+}
+
+/* ===== RADIO BUTTONS ===== */
+.radio-column {
+  display:flex; /* column layout for radio buttons */
+  flex-direction:column;
+  gap:8px; /* spacing between each radio */
+}
+
+.radio-column .radio-option {
+  display:flex; /* label + radio inline */
+  align-items:center; 
+  gap:8px;
+}
+
+.radio-column input[type="radio"] {
+  appearance:none; /* remove default style */
+  width:20px; height:20px; /* size */
+  border-radius:50%; /* round shape */
+  border:2px solid #ccc;
+  cursor:pointer;
+  position:relative; /* for checked indicator */
+  transition: all 0.3s ease;
+  background:linear-gradient(145deg, #ffffff, #f0f0f0); /* soft gradient */
+  box-shadow:3px 3px 6px #dcdcdc, -3px -3px 6px #ffffff; /* soft shadow */
+}
+
+.radio-column input[type="radio"]:checked::before {
+  content:''; /* create inner dot */
+  position:absolute;
+  top:4px; left:4px;
+  width:10px; height:10px;
+  border-radius:50%;
+  background:var(--primary); /* gold inner dot */
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.15);
+}
+
+.radio-column input[type="radio"]:hover{
+  transform:translateY(-2px); /* lift on hover */
+  border-color:var(--accent); /* change border on hover */
+  box-shadow:3px 3px 8px #d0d0d0, -3px -3px 8px #ffffff;
+}
+
+/* ===== CART ===== */
+.cart{
+  margin-top:50px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.cart h2{
+  margin-bottom:20px;
+}
+
+.cart-item{
+  display:flex; /* horizontal layout */
+  justify-content:space-between; /* space between name + price */
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.cart-item span{
+  font-size:0.9rem;
+}
+
+.qty-btn{
+  background:#eee;
+  color:black;
+  padding:5px 10px;
+  border-radius:6px;
+  margin:0 5px;
+}
+
+.total{
+  margin-top:20px;
+  font-size:1.2rem;
+  font-weight:600;
+}
+
+.checkout{
+  margin-top:20px;
+  width:100%;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero-content h1{
+    font-size:2.2rem; /* smaller heading on mobile */
+    text-align:center;
+  }
+  .hero-content p{
+    text-align:center; /* center paragraph on mobile */
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <!-- Hero text: café name and tagline -->
+  <div class="hero-content">
+    <h1>console.log Café</h1> <!-- Main heading -->
+    <p>Debugging life, one espresso at a time.</p> <!-- Subheading / tagline -->
+  </div>
+
+  <!-- Hero image with animated steam -->
+  <div class="hero-image">
+    <div class="steam">
+      <!-- Steam effect: multiple span elements animated with CSS -->
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <!-- Coffee cup image -->
+    <img src="images/heroImg.png" alt="Coffee Cup">
+  </div>
+</header>
+
+<!-- ===== MENU & CART ===== -->
+<div class="container">
+  <!-- Menu: products will be dynamically inserted here -->
+  <div class="menu" id="menu"></div>
+
+  <!-- Shopping cart section -->
+  <div class="cart">
+    <h2>Your Order</h2>
+    <!-- Cart items will be dynamically rendered here -->
+    <div id="cart-items"></div>
+    <!-- Total price -->
+    <div class="total" id="total"></div>
+    <!-- Checkout button: calls checkout() when clicked -->
+    <button class="checkout" onclick="checkout()">Checkout</button>
+  </div>
+</div>
+
+<script>
+/**
+ * ===== PRODUCTS ARRAY =====
+ * Each product is an object with properties:
+ * - id: unique number
+ * - name: product name shown to users
+ * - basePrice: starting price
+ * - img: path to product image
+ * - sizes: optional object mapping size names to extra price
+ * - shots: optional object mapping shot types to extra price
+ */
+const products = [
+  {id:1,name:"Cappuccino",basePrice:4.00,img:"images/heroImg.png",sizes:{small:0,medium:0.5,large:1},shots:{single:0,double:0.75}},
+  {id:2,name:"Latte",basePrice:4.00,img:"images/latte.png",sizes:{small:0,medium:0.5,large:1},shots:{single:0,double:0.75}},
+  {id:3,name:"Iced Coffee",basePrice:3.50,img:"images/icedCoffee.png",sizes:{small:0,medium:0.5,large:1},shots:{single:0,double:0.75}},
+  {id:4,name:"Croissant",basePrice:2.50,img:"images/croissants.png",sizes:null,shots:null},
+  {id:5,name:"Chocolate Cake Slice",basePrice:3.75,img:"images/chocolateCakeSlice.png",sizes:null,shots:null},
+  {id:6,name:"Blueberry Muffin",basePrice:2.75,img:"images/blueberryMuffin.png",sizes:null,shots:null}
+];
+
+/* ===== CART INITIALIZATION ===== */
+// Try to load cart from browser's local storage. If nothing is saved, start with empty array
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+/* ===== DOM ELEMENTS ===== */
+const menu = document.getElementById("menu"); // where products will be displayed
+const cartItems = document.getElementById("cart-items"); // where cart items will appear
+const totalEl = document.getElementById("total"); // where total price is shown
+
+/**
+ * ===== FUNCTION: renderMenu =====
+ * Dynamically creates HTML for each product card and inserts into #menu
+ */
+function renderMenu(){
+  menu.innerHTML=""; // clear existing menu
+
+  // Loop through each product
+  products.forEach(product=>{
+    menu.innerHTML+=`
+      <div class="card">
+        <!-- Product image -->
+        <img src="${product.img}" alt="${product.name}">
+        
+        <div class="card-content">
+          <div>
+            <!-- Product name -->
+            <h3>${product.name}</h3>
+            <!-- Base price -->
+            <div class="price">$${product.basePrice.toFixed(2)}</div>
+          </div>
+
+          <!-- If product has sizes and shots, show options -->
+          ${product.sizes ? `
+          <!-- SIZE DROPDOWN -->
+          <div class="option-group">
+            <label for="size-${product.id}">Size:</label>
+            <select id="size-${product.id}">
+              ${Object.entries(product.sizes).map(([size,extra])=>`
+                <option value="${size}">${size.charAt(0).toUpperCase()+size.slice(1)} ($${(product.basePrice+extra).toFixed(2)})</option>
+              `).join('')}
+            </select>
+          </div>
+
+          <!-- SHOT RADIO BUTTONS -->
+          <div class="option-group radio-column">
+            ${Object.entries(product.shots).map(([shot,value],i)=>`
+            <div class="radio-option">
+              <input type="radio" name="shot-${product.id}" id="shot-${shot}-${product.id}" value="${shot}" ${i===0?'checked':''}>
+              <label for="shot-${shot}-${product.id}">${shot.charAt(0).toUpperCase()+shot.slice(1)} (+$${value.toFixed(2)})</label>
+            </div>`).join('')}
+          </div>
+          `:''}
+
+          <!-- ADD TO CART BUTTON -->
+          <button onclick="addToCart(${product.id})">Add to Cart</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/**
+ * ===== FUNCTION: renderCart =====
+ * Updates the cart display and calculates total price
+ */
+function renderCart(){
+  cartItems.innerHTML=""; // clear current items
+  let total=0; // initialize total price
+
+  // Loop through each item in cart
+  cart.forEach((item,index)=>{
+    total+=item.price*item.qty; // add item price * quantity to total
+    cartItems.innerHTML+=`
+      <div class="cart-item">
+        <!-- Display item name, size, shot, and price -->
+        <span>${item.name}${item.size?' ('+item.size+')':''}${item.shot?' '+item.shot:''} ($${item.price.toFixed(2)})</span>
+        <div>
+          <!-- Buttons to decrease/increase quantity -->
+          <button class="qty-btn" onclick="changeQty(${index},-1)">-</button>
+          ${item.qty} <!-- current quantity -->
+          <button class="qty-btn" onclick="changeQty(${index},1)">+</button>
+        </div>
+      </div>
+    `;
+  });
+
+  // Show total price
+  totalEl.textContent="Total: $"+total.toFixed(2);
+
+  // Save updated cart to local storage so it persists if page is refreshed
+  localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+/**
+ * ===== FUNCTION: addToCart =====
+ * Adds a product to the cart when button clicked
+ * @param {number} id - product ID
+ */
+function addToCart(id){
+  const product = products.find(p=>p.id===id); // find the product object
+  let size = null;
+  let shot = null;
+  let price = product.basePrice; // start with base price
+
+  // If product has size/shot options, get selected values and update price
+  if(product.sizes){
+    const sizeSelect = document.getElementById(`size-${id}`);
+    size = sizeSelect.value; // selected size
+    const shotRadio = document.querySelector(`input[name="shot-${id}"]:checked`);
+    shot = shotRadio.value; // selected shot
+    price += product.sizes[size] + product.shots[shot]; // add extra charges
+  }
+
+  // Add new item to cart
+  cart.push({id, name: product.name, size, shot, price, qty:1});
+  renderCart(); // update cart display
+
+  // Show success notification using SweetAlert2 library
+  Swal.fire({
+    toast: true,
+    position: 'top-end',
+    icon: 'success',
+    title: `${product.name} added to cart!`,
+    showConfirmButton: false,
+    timer: 1500, // disappears after 1.5 seconds
+    timerProgressBar: true,
+    background: '#ffffff',
+    color: '#2d2d2d',
+    iconColor: '#caa25d'
+  });
+}
+
+/**
+ * ===== FUNCTION: changeQty =====
+ * Increases or decreases quantity of a cart item
+ * @param {number} index - index of item in cart array
+ * @param {number} amount - positive to increase, negative to decrease
+ */
+function changeQty(index,amount){
+  cart[index].qty += amount; // update quantity
+  if(cart[index].qty <= 0) cart.splice(index,1); // remove if zero
+  renderCart(); // refresh cart display
+}
+
+/**
+ * ===== FUNCTION: checkout =====
+ * Simulates order checkout
+ */
+function checkout(){
+  if(cart.length===0){ 
+    alert("Your cart is empty!"); // warn if cart is empty
+    return; 
+  }
+  alert("Order placed successfully! ☕✨"); // success message
+  cart = []; // clear cart
+  renderCart(); // refresh cart
+}
+
+// ===== INITIAL RENDERING =====
+renderMenu(); // show menu when page loads
+renderCart(); // show cart contents when page loads
+</script>
+</body>
+</html>

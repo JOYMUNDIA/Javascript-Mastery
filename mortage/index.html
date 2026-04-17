@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Mortgage Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    /* ------------------------------
+   GENERAL STYLING
+--------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #cfd9df, #e2ebf0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: #1e1e2f;
+}
+
+header {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+/* ------------------------------
+   GLASSY CONTAINER WITH SIDES
+--------------------------------*/
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);  /* frosted glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    max-width: 900px;
+    width: 90%;
+    padding: 2rem;
+    gap: 2rem;
+    transition: 0.3s;
+    flex-wrap: wrap;
+}
+
+/* ------------------------------
+   ICON SIDES
+--------------------------------*/
+ /* Base styling for all corner icons */
+.icon {
+    position: absolute; /* allows positioning relative to container */
+    /*width: 60px;
+    height: 60px;*/
+    opacity: 0.9;
+    transition: transform 0.3s;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+/* Top-left corner */
+.icon.top-left {
+    top: -30px;    /* adjust to “pop out” from the form */
+    left: -30px;
+    width: 100px;
+}
+
+/* Top-right corner */
+.icon.top-right {
+    top: -40px;
+    right: -30px;
+    width: 60px;
+}
+
+/* Extra right icon (like money bag) */
+.icon.top-right.extra {
+    top: -40px;
+    right: 30px; /* space from the other top-right icon */
+    width: 60px;
+}
+
+
+/* ------------------------------
+   FORM STYLING
+--------------------------------*/
+form {
+    flex: 2 1 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #34495e;
+}
+
+input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    color: #1e1e2f;
+    backdrop-filter: blur(8px);
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ------------------------------
+   BUTTON STYLING
+--------------------------------*/
+/* ------------------------------
+   FANCY BUTTON (Uiverse.io)
+--------------------------------*/
+
+/* From Uiverse.io by shokat_2650 */
+.button-wrap {
+  position: relative;
+  z-index: 2;
+  border-radius: 999vw;
+  background: transparent;
+  pointer-events: none;
+  transition: all 400ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Button Base */
+button {
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  pointer-events: auto;
+  z-index: 3;
+  background: linear-gradient(-75deg, rgba(255,255,255,0.05), rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  border-radius: 999vw;
+  box-shadow: inset 0 0.125em 0.125em rgba(0,0,0,0.05), inset 0 -0.125em 0.125em rgba(255,255,255,0.5), 0 0.25em 0.125em -0.125em rgba(0,0,0,0.2), 0 0 0.1em 0.25em inset rgba(255,255,255,0.2);
+  backdrop-filter: blur(0.125em);
+  transition: all 400ms cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: rgba(50,50,50,1);
+  padding: 0.875em 1.5em;
+}
+
+button:hover {
+  transform: scale(0.975);
+}
+
+/* Shadow hover */
+.button-wrap:has(button:hover) .button-shadow {
+  filter: blur(clamp(2px,0.0625em,6px));
+}
+
+
+/* ------------------------------
+   RESULTS PANEL
+--------------------------------*/
+.results {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.results p {
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+@media(max-width: 900px) {
+    .container {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+    .icon-left, .icon-right {
+        margin-bottom: 1rem;
+    }
+    form {
+        grid-template-columns: 1fr;
+    }
+    button {
+        grid-column: 1;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Mortgage Calculator</h1>
+</header>
+
+<div class="container">
+    <!-- Corner icons -->
+    <img src="images/house.png" alt="House Icon" class="icon top-left">
+    <img src="images/calculator.png" alt="Calculator Icon" class="icon top-right">
+    <img src="images/piggyBank.png" alt="Piggy Bank Icon" class="icon top-right extra">
+
+    <!-- Middle: form -->
+    <form id="mortgageForm">
+        <div>
+            <label for="loanAmount">Loan Amount ($)</label>
+            <input type="number" id="loanAmount" placeholder="e.g. 300000" required>
+        </div>
+        <div>
+            <label for="annualInterest">Annual Interest Rate (%)</label>
+            <input type="number" step="0.01" id="annualInterest" placeholder="e.g. 3.75" required>
+        </div>
+        <div>
+            <label for="loanTerm">Loan Term (years)</label>
+            <input type="number" id="loanTerm" placeholder="e.g. 30" required>
+        </div>
+        <div>
+            <label for="monthlyPayment">Fixed Monthly Payment ($)</label>
+            <input type="number" id="monthlyPayment" placeholder="Optional for custom payoff">
+        </div>
+        <div>
+            <label for="downPayment">Planned Down Payment ($)</label>
+            <input type="number" id="downPayment" placeholder="Optional to calculate duration">
+        </div>
+        <div>
+            <label for="contributionDuration">Contribution Duration (months)</label>
+            <input type="number" id="contributionDuration" placeholder="Optional to calculate down payment">
+        </div>
+
+        <div class="button-wrap">
+            <button type="button" onclick="calculateMortgage()">
+                <span>Calculate</span>
+            </button>
+            
+        </div>
+
+    </form>
+
+    
+</div>
+<!-- Results panel -->
+    <div class="results" id="results"></div>
+
+
+<script>
+function calculateMortgage() {
+    // Retrieve input values
+    const P = parseFloat(document.getElementById('loanAmount').value); // Principal loan
+    const annualRate = parseFloat(document.getElementById('annualInterest').value); // Annual % interest
+    const years = parseFloat(document.getElementById('loanTerm').value); // Loan term in years
+    const fixedPayment = parseFloat(document.getElementById('monthlyPayment').value); // Optional custom monthly payment
+    const downPayment = parseFloat(document.getElementById('downPayment').value); // Optional planned down payment
+    const contributionMonths = parseFloat(document.getElementById('contributionDuration').value); // Optional duration for fixed contributions
+
+    // Convert annual interest to monthly and calculate total months
+    const r = annualRate / 100 / 12; // Monthly interest rate
+    const n = years * 12; // Total months
+
+    let results = '';
+
+    // Helper function for formatting numbers with commas and 2 decimals
+    const formatCurrency = num => num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // ----------------------------
+    // 1️⃣ Standard monthly payment calculation
+    // ----------------------------
+    if (P && n >= 1) {
+        let monthlyPayment;
+        if (r === 0) {
+            monthlyPayment = P / n;
+        } else {
+            monthlyPayment = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+        }
+
+        results += `<p><strong>Estimated Monthly Payment:</strong> $${formatCurrency(monthlyPayment)}</p>`;
+        results += `<p><strong>Total Payment Over Term:</strong> $${formatCurrency(monthlyPayment * n)}</p>`;
+        results += `<p><strong>Total Interest Paid:</strong> $${formatCurrency(monthlyPayment * n - P)}</p>`;
+    }
+
+    // ----------------------------
+    // 2️⃣ Time to payoff with custom monthly payment
+    // ----------------------------
+    if (fixedPayment && P) {
+        if (r === 0) {
+            const months = P / fixedPayment;
+            results += `<p><strong>Months to Pay Off Loan:</strong> ${Math.ceil(months).toLocaleString()} months (~${Math.ceil(months / 12).toLocaleString()} years)</p>`;
+        } else if (fixedPayment > P * r) {
+            const months = Math.log(fixedPayment / (fixedPayment - P * r)) / Math.log(1 + r);
+            results += `<p><strong>Months to Pay Off Loan:</strong> ${Math.ceil(months).toLocaleString()} months (~${Math.ceil(months / 12).toLocaleString()} years)</p>`;
+        } else {
+            results += `<p><strong>Months to Pay Off Loan:</strong> ❌ Monthly payment too low to cover interest!</p>`;
+        }
+    }
+
+    // ----------------------------
+    // 3️⃣ Required down payment / principal for fixed contributions
+    // ----------------------------
+    if (fixedPayment && contributionMonths >= 1) {
+        let principalNeeded;
+        if (r === 0) {
+            principalNeeded = fixedPayment * contributionMonths;
+        } else {
+            principalNeeded = fixedPayment * (1 - Math.pow(1 + r, -contributionMonths)) / r;
+        }
+        results += `<p><strong>Required Down Payment / Principal:</strong> $${formatCurrency(principalNeeded)}</p>`;
+    }
+
+    // Display results
+    document.getElementById('results').innerHTML = results || '<p>Please fill in values to calculate.</p>';
+}
+
+
+</script>
+
+</body>
+</html>

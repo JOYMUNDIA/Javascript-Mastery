@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break-Even Lesson | Console.log Café</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f7f5f2;
+  color:#2d2d2d;
+  padding:20px;
+  line-height:1.6;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+.section{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-bottom:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+h1,h2{
+  margin-bottom:10px;
+}
+
+.highlight{
+  background:#fff3cd;
+  padding:10px;
+  border-radius:10px;
+  margin:10px 0;
+}
+
+.calc{
+  margin-top:15px;
+}
+
+input{
+  padding:10px;
+  margin:5px 0;
+  width:100%;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+button{
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#caa25d;
+  color:white;
+  cursor:pointer;
+}
+
+.result{
+  margin-top:15px;
+  padding:15px;
+  background:#f0f0f0;
+  border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>☕ Break-Even Explained — Console.log Café</h1>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <h2>1. The Core Question</h2>
+  <p>
+    Every café owner must answer one question:
+  </p>
+
+  <div class="highlight">
+    How many items do I need to sell before I stop losing money?
+  </div>
+
+  <p>
+    That point is called <strong>Break-Even</strong>.
+  </p>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <h2>2. Your Café Costs</h2>
+
+  <p><strong>Fixed Costs (monthly):</strong></p>
+  <ul>
+    <li>Rent: $300</li>
+    <li>Equipment: $200</li>
+    <li>Utilities: $100</li>
+  </ul>
+
+  <p><strong>Total Fixed Costs = $600</strong></p>
+
+  <p><strong>Variable Cost per coffee = $1.00</strong></p>
+  <p><strong>Selling Price = $4.00</strong></p>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <h2>3. Contribution Margin</h2>
+
+  <p>
+    Contribution = Price - Variable Cost
+  </p>
+
+  <div class="highlight">
+    4.00 - 1.00 = $3.00 per coffee
+  </div>
+
+  <p>
+    Each coffee contributes $3 toward paying your fixed costs.
+  </p>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <h2>4. Break-Even Formula</h2>
+
+  <p>
+    Break-even = Fixed Costs ÷ Contribution
+  </p>
+
+  <div class="highlight">
+    600 ÷ 3 = 200 coffees per month
+  </div>
+
+  <p>
+    That means:
+    <br>👉 About 7 coffees per day to break even.
+  </p>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+  <h2>5. Try It Yourself</h2>
+
+  <div class="calc">
+    <input type="number" id="fixed" placeholder="Fixed Costs (e.g. 600)">
+    <input type="number" id="price" placeholder="Price (e.g. 4)">
+    <input type="number" id="variable" placeholder="Variable Cost (e.g. 1)">
+    
+    <button onclick="calc()">Calculate</button>
+
+    <div class="result" id="output"></div>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section">
+  <h2>6. Real Business Insight</h2>
+
+  <p>
+    If you sell:
+  </p>
+
+  <ul>
+    <li>Less than break-even → You lose money</li>
+    <li>Equal → You break even</li>
+    <li>More → You make profit</li>
+  </ul>
+
+  <div class="highlight">
+    Break-even is not theory — it's your survival line.
+  </div>
+</div>
+
+</div>
+
+<script>
+function calc(){
+  const fixed = parseFloat(document.getElementById("fixed").value);
+  const price = parseFloat(document.getElementById("price").value);
+  const variable = parseFloat(document.getElementById("variable").value);
+
+  if(!fixed || !price || !variable){
+    alert("Fill all fields");
+    return;
+  }
+
+  const contribution = price - variable;
+  const breakeven = fixed / contribution;
+  const daily = breakeven / 30;
+
+  document.getElementById("output").innerHTML = `
+    <p><strong>Contribution:</strong> $${contribution.toFixed(2)}</p>
+    <p><strong>Break-even:</strong> ${breakeven.toFixed(0)} items/month</p>
+    <p><strong>Daily target:</strong> ${daily.toFixed(1)} per day</p>
+  `;
+}
+</script>
+
+</body>
+</html>

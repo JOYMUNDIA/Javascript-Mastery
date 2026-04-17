@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOM Console Lesson</title>
+<style>
+body { font-family: sans-serif; padding: 20px; background: #f4f7f5; }
+h1 { color: #2e7d32; }
+button { margin: 5px 0; padding: 10px; }
+#demoArea { margin-top: 20px; padding: 20px; background: white; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<h1 id="mainTitle">DOM Console Lesson</h1>
+
+<div id="demoArea">
+  <p id="para1" class="demo">This is a demo paragraph.</p>
+  <p class="demo">Another demo paragraph.</p>
+  <button id="changeTextBtn">Change Text</button>
+  <button id="styleBtn">Change Style</button>
+  <button id="createBtn">Create New Element</button>
+  <button id="traverseBtn">Traverse DOM</button>
+</div>
+
+<script>
+// ===== 1. Selecting Elements =====
+console.log("=== 1. Selecting Elements ===");
+
+// By ID
+const mainTitle = document.getElementById("mainTitle");
+console.log("By ID:", mainTitle);
+
+// By class
+const demos = document.getElementsByClassName("demo");
+console.log("By class (HTMLCollection):", demos);
+
+// By tag
+const paragraphs = document.getElementsByTagName("p");
+console.log("By tag (HTMLCollection):", paragraphs);
+
+// Query selector
+const firstDemo = document.querySelector(".demo");
+console.log("QuerySelector:", firstDemo);
+
+// Query selector all
+const allDemo = document.querySelectorAll(".demo");
+console.log("QuerySelectorAll (NodeList):", allDemo);
+
+
+// ===== 2. Changing Content =====
+document.getElementById("changeTextBtn").addEventListener("click", () => {
+  console.log("=== 2. Changing Content ===");
+  
+  mainTitle.textContent = "Text Changed via DOM!";
+  console.log("Changed mainTitle textContent:", mainTitle.textContent);
+
+  paragraphs[1].innerHTML = "<strong>Bold text added!</strong>";
+  console.log("Changed second paragraph innerHTML:", paragraphs[1].innerHTML);
+});
+
+
+// ===== 3. Changing Styles =====
+document.getElementById("styleBtn").addEventListener("click", () => {
+  console.log("=== 3. Changing Styles ===");
+  
+  mainTitle.style.color = "orange";
+  mainTitle.style.fontSize = "2em";
+  console.log("Changed mainTitle styles:", mainTitle.style.color, mainTitle.style.fontSize);
+  
+  paragraphs[0].style.backgroundColor = "#e0f7fa";
+  paragraphs[0].style.padding = "10px";
+  console.log("Changed first paragraph background and padding:", paragraphs[0].style.backgroundColor);
+});
+
+
+// ===== 4. Creating & Appending Elements =====
+document.getElementById("createBtn").addEventListener("click", () => {
+  console.log("=== 4. Creating & Appending Elements ===");
+  
+  const newPara = document.createElement("p");
+  newPara.textContent = "New paragraph created via DOM!";
+  newPara.style.color = "green";
+  document.getElementById("demoArea").appendChild(newPara);
+  
+  console.log("New element created:", newPara);
+});
+
+
+// ===== 5. Traversing the DOM =====
+document.getElementById("traverseBtn").addEventListener("click", () => {
+  console.log("=== 5. Traversing the DOM ===");
+
+  // parentNode
+  console.log("Parent of first paragraph:", paragraphs[0].parentNode);
+
+  // children
+  console.log("Children of demoArea:", document.getElementById("demoArea").children);
+
+  // nextElementSibling
+  console.log("Next sibling of first paragraph:", paragraphs[0].nextElementSibling);
+
+  // previousElementSibling
+  console.log("Previous sibling of second paragraph:", paragraphs[1].previousElementSibling);
+});
+
+</script>
+
+</body>
+</html>

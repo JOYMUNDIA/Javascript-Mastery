@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Mastery Classroom</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0f172a;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.15);
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --accent1:#22d3ee;
+  --accent2:#a78bfa;
+  --accent3:#f472b6;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ===== Animated Background ===== */
+.blob{
+  position:absolute;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.4;
+  animation:float 12s infinite alternate ease-in-out;
+  z-index: 1;
+}
+.blob1{background:var(--accent1);top:-100px;left:-100px;}
+.blob2{background:var(--accent2);bottom:-150px;right:-100px;animation-delay:4s;}
+
+@keyframes float{
+  from{transform:translateY(0px) scale(1);}
+  to{transform:translateY(60px) scale(1.15);}
+}
+
+/* ===== Hero Section ===== */
+.hero{
+  position:relative;
+  min-height:90vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px 20px;
+  z-index:2;
+  overflow:hidden;
+}
+/* HERO TITLE */
+.hero-title{
+  font-size:3.5rem;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+/* Gradient typing text */
+.typing-text{
+  background:linear-gradient(
+    270deg,
+    #22d3ee,
+    #a78bfa,
+    #f472b6,
+    #22d3ee
+  );
+  background-size:400% 400%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:gradientShift 6s ease infinite;
+}
+
+/* Gradient animation */
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* FLOATING CODE BACKGROUND */
+.code-bg{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:2;
+}
+
+.code-bg span{
+  position:absolute;
+  color:rgba(255,255,255,0.10);
+  font-size:2rem;
+  font-weight:600;
+  animation:floatCode 15s linear infinite;
+}
+
+/* random positions */
+.code-bg span:nth-child(1){top:10%;left:15%;}
+.code-bg span:nth-child(2){top:70%;left:20%;}
+.code-bg span:nth-child(3){top:30%;left:80%;}
+.code-bg span:nth-child(4){top:60%;left:70%;}
+.code-bg span:nth-child(5){top:20%;left:50%;}
+.code-bg span:nth-child(6){top:80%;left:40%;}
+
+/* float animation */
+@keyframes floatCode{
+  0%{transform:translateY(0px);}
+  50%{transform:translateY(-40px);}
+  100%{transform:translateY(0px);}
+}
+
+.hero p{
+  max-width:650px;
+  color:var(--muted);
+  font-size:1.1rem;
+  margin-bottom:40px;
+}
+.hero-buttons{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.btn{
+  padding:15px 28px;
+  border-radius:14px;
+  font-weight:600;
+  text-decoration:none;
+  color:white;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  transition:.3s;
+  box-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+.btn:nth-child(2){
+  background:linear-gradient(135deg,var(--accent2),var(--accent3));
+}
+.btn:nth-child(3){
+  background:linear-gradient(135deg,var(--accent1),var(--accent3));
+}
+.btn:nth-child(4){
+  background:linear-gradient(135deg,#34d399,#22d3ee);
+}
+.btn:hover{
+  transform:translateY(-5px) scale(1.05);
+}
+
+/* ===== Sections ===== */
+.section{
+  padding:80px 20px;
+  max-width:1000px;
+  margin:auto;
+}
+.section h2{
+  text-align:center;
+  margin-bottom:40px;
+  font-size:2rem;
+}
+.card{
+  background:var(--glass);
+  border:1px solid var(--border);
+  padding:20px;
+  border-radius:18px;
+  margin-bottom:20px;
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--accent1);
+}
+.accordion{
+  cursor:pointer;
+  font-weight:600;
+}
+.content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  margin-top:10px;
+  color:var(--muted);
+}
+footer{
+  text-align:center;
+  padding:40px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.3rem;}
+}
+
+/* ===== FullCalendar Overrides ===== */
+#calendar {
+  max-width:1100px;
+  margin:40px auto;
+  background:rgba(255,255,255,0.04);
+  border-radius:20px;
+  padding:20px;
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+  border-color: var(--border);
+}
+
+.fc-event {
+  background: linear-gradient(135deg,var(--accent1),var(--accent2)) !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 10px;
+  font-size:0.85rem;
+  cursor:pointer;
+}
+
+.fc-event:hover {
+  transform: scale(1.03);
+}
+
+/* Inline Event Details Box */
+.event-details-inline {
+  position:absolute;
+  background: rgba(255,255,255,0.08);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px;
+  color:var(--text);
+  font-size:0.85rem;
+  z-index:10;
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+}
+
+/* FullCalendar Header Black */
+.fc .fc-toolbar-title,
+.fc .fc-toolbar button {
+  color: #ffffff !important; /* White text */
+  background: #000 !important; /* black background for buttons if needed */
+  border: 1px solid #333 !important;
+}
+
+.fc .fc-col-header-cell, 
+.fc-list-day,
+.fc-list-table .fc-event:hover{
+    background: #000 !important;
+}
+
+/* Optionally, make header buttons look standard */
+.fc .fc-toolbar button {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* List view hover - event background turns black */
+.fc-list-event:hover {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Accordion fix */
+.accordion{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  font-weight:600;
+  padding:10px 0;
+  user-select:none;
+}
+
+.caret{
+  font-size: 2rem;      /* Bigger */
+  font-weight:900;       /* Thicker */
+  transition:transform .3s ease;
+  line-height:1;
+}
+
+.accordion.active .caret{
+  transform:rotate(180deg);
+}
+
+/* ===== REAL CHALKBOARD HAMBURGER ===== */
+
+/* ===== CHALKBOARD MENU BUTTON ===== */
+.menu-wrapper{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:999;
+  transform:scale(.18); /* shrink full chalkboard */
+  transform-origin:top left;
+}
+
+/* Move chalkboard when sidebar opens */
+.menu-wrapper.shifted{
+  transform:scale(.18) translateX(1100px);
+}
+
+/* Frame */
+.board-frame{
+  width:500px;
+  height:320px;
+  padding:18px;
+  background:linear-gradient(135deg,#8b5a2b,#5c3b1e,#9a6a3a);
+  border-radius:6px;
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.4),
+    inset 0 0 6px rgba(0,0,0,0.5);
+  position:relative;
+  transition:transform .35s ease;
+}
+
+/* Grow board on hover */
+.board-frame:hover{
+  transform:scale(1.08);
+}
+
+/* Blackboard */
+.board{
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 30% 30%, #2b2b2b 0%, #111 60%, #000 100%);
+  border-radius:3px;
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,0.05),
+    inset 0 0 60px rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Hamburger container */
+.hamburger{
+  width:150px;
+  transform:translateY(0) translateZ(0);
+  transition:transform .4s ease;
+}
+
+/* Pop out effect */
+.board-frame:hover .hamburger{
+  transform:translateY(-12px) translateZ(40px);
+}
+
+/* Chalk lines */
+.line{
+  height:16px;
+  background:#f7f7f7;
+  margin:22px 0;
+  border-radius:6px;
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #ddd,
+    0 0 6px rgba(255,255,255,0.6),
+    0 0 12px rgba(255,255,255,0.3);
+  filter:blur(.3px);
+  transition:box-shadow .3s ease;
+  
+  /* hide initially for drawing animation */
+  width:0;
+}
+
+/* Brighter chalk when hovering */
+.board-frame:hover .line{
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #eee,
+    0 0 10px rgba(255,255,255,0.8),
+    0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Chalk tray */
+.tray{
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  height:12px;
+  background:linear-gradient(#8b5a2b,#5c3b1e);
+  border-radius:3px;
+}
+
+/* Chalk piece */
+.chalk{
+  position:absolute;
+  bottom:2px;
+  left:30px;
+  width:40px;
+  height:10px;
+  background:linear-gradient(#ffffff,#e6e6e6);
+  border-radius:3px;
+  transform:rotate(-15deg);
+  transition: all 0.3s ease;
+}
+
+/* ===== DRAWING ANIMATION ===== */
+@keyframes drawLine {
+  from { width:0; }
+  to { width:120px; }
+}
+
+/* Chalk movement keyframes */
+@keyframes chalkMove1 { 0%{transform:rotate(-15deg) translate(0,0);} 100%{transform:rotate(-15deg) translate(0,-48px);} }
+@keyframes chalkMove2 { 0%{transform:rotate(-15deg) translate(0,-48px);} 100%{transform:rotate(-15deg) translate(0,-96px);} }
+@keyframes chalkMove3 { 0%{transform:rotate(-15deg) translate(0,-96px);} 100%{transform:rotate(-15deg) translate(0,-144px);} }
+
+@keyframes chalkReturn {
+  0%   { transform: rotate(-15deg) translate(0,-144px); }
+  60%  { transform: rotate(-10deg) translate(-10px,-70px); }
+  100% { transform: rotate(-15deg) translate(0,0); }
+}
+
+/* X lines */
+.x-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;       /* same as hamburger width */
+  height: 15px;       /* same as line thickness */
+  background: #f7f7f7;
+  border-radius: 4px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Cross rotation */
+.x-line1 {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.x-line2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Show X on active */
+.hamburger.active .x-line {
+  opacity: 1;
+}
+
+/* Hide hamburger lines */
+.hamburger.active .line {
+  opacity: 0;
+}
+
+/* Smooth transition */
+.line {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* Smooth transition */
+.line {
+  transition: all 0.4s ease;
+}
+
+/* ===== SIDE MENU ===== */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:rgba(2, 6, 23, 0.568);
+  border-right:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(20px);
+  transition:left .35s ease;
+  padding:90px 30px;
+  z-index:998;
+}
+
+.side-menu.active{
+  left:0;
+}
+
+.side-menu a{
+  display:block;
+  margin-bottom:20px;
+  text-decoration:none;
+  font-weight:600;
+  color:#f1f5f9;
+  line-height: 2.2;       /* ↑ More vertical spacing */
+  position: relative;      /* Needed for underline effect */
+}
+
+.side-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;           /* Slightly below text */
+  width: 0%;
+  height: 2px;
+  background: #22d3ee;    /* Accent color underline */
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.side-menu a:hover::after {
+  width: 100%;            /* Full width underline on hover */
+}
+
+.side-menu a:hover {
+  color: #22d3ee;         /* Match underline color */
+}
+
+.side-menu a.active {
+  color: #22d3ee;
+}
+
+.side-menu a.active::after {
+  width: 100%;
+}
+
+</style>
+</head>
+<body>
+
+<!-- CHALKBOARD HAMBURGER WITH DRAWING -->
+<!-- CHALKBOARD HAMBURGER WITH DRAWING -->
+<div class="menu-wrapper" id="menuButton">
+  <div class="board-frame">
+    <div class="board">
+      <div class="hamburger">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+        <!-- Actual chalk X -->
+        <div class="x-line x-line1"></div>
+        <div class="x-line x-line2"></div>
+      </div>
+    </div>
+    <div class="tray">
+      <div class="chalk" id="chalk"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+  <a href="#">Home</a>
+  <a href="https://joymundia.github.io/Javascript-Curriculum/">📘 Curriculum</a>
+  <a href="https://joymundia.github.io/Software-Development-for-Business/">📖 Software Development Guide</a>
+  <a href="#assignments">📝 Assignments</a>
+  <a href="#notes">📚 Notes</a>
+  <a href="#projects">🚀 Guided Projects</a>
+  <a href="#guide">📖 Expectations</a>
+</div>
+
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="code-bg">
+    <span>{ }</span>
+    <span>&lt;/&gt;</span>
+    <span>()</span>
+    <span>const</span>
+    <span>let</span>
+    <span>function()</span>
+  </div>
+  <h1 class="hero-title">
+    <span class="typing-text"></span>
+  </h1>
+  <p>
+    Curriculum, assignments, notes, and class structure — organized in one modern learning environment.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="https://joymundia.github.io/Javascript-Curriculum/" class="btn">📘 Curriculum</a>
+    <a href="https://joymundia.github.io/Software-Development-for-Business/" class="btn">📖 Software Development Guide</a>
+    <a href="#assignments" class="btn">📝 Assignments</a>
+    <a href="#notes" class="btn">📚 Notes</a>
+    <a href="#projects" class="btn">🚀 Guided Projects</a>
+  </div>
+</section>
+
+<!-- FULLCALENDAR -->
+<div id="calendar"></div>
+
+<!-- ASSIGNMENTS -->
+<section id="assignments" class="section">
+  <h2>📝 Assignments</h2>
+  <div class="card">
+    <div class="accordion">
+      <span>Assignment 1: IF ELSE (Calculator)</span>
+      <span class="caret">▾</span>
+    </div>
+    <div class="content">
+      Practice using <code>IF</code>, <code>ELSE</code> clauses.
+      <br><br>
+      <a href="https://joymundia.github.io/Calculator_Assigment/" style="color:#22d3ee;">Open Assignment →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="notes" class="section">
+  <h2>📚 Class Notes</h2>
+  <div class="card">
+    <div class="accordion">
+      <span>JavaScript Foundation Notes</span>
+      <span class="caret">▾</span>
+    </div>
+    <div class="content">
+      <a href="https://joymundia.github.io/JavaScript-Notes/" style="color:#22d3ee;">View Notes →</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <h2>🚀 Guided Projects</h2>
+
+  <!-- Mortgage Calculator -->
+  <div class="card">
+    <div class="accordion">
+      <span>💰 JavaScript Mortgage Calculator</span>
+      <span class="caret">▾</span>
+    </div>
+
+    <div class="content">
+      <p>
+        In this project we build a Mortgage Calculator using JavaScript. 
+        Students practice working with form inputs, calculations, and DOM updates.
+      </p>
+
+      <p class="codepen"
+         data-height="350"
+         data-pen-title="Mortgage Calculator"
+         data-default-tab="result"
+         data-slug-hash="zxBVRmV"
+         data-user="JOYMUNDIA"
+         style="height:350px; border:2px solid #ccc; margin:1em 0; padding:1em;">
+        <span>
+          See the Pen
+          <a href="https://codepen.io/JOYMUNDIA/pen/zxBVRmV">
+          Mortgage Calculator</a>
+          by JOY MUNDIA
+          (<a href="https://codepen.io/JOYMUNDIA">@JOYMUNDIA</a>)
+          on <a href="https://codepen.io">CodePen</a>.
+        </span>
+      </p>
+    </div>
+  </div>
+
+
+  <!-- Console.log Cafe -->
+  <div class="card">
+    <div class="accordion">
+      <span>☕ Console.log Café Ordering System</span>
+      <span class="caret">▾</span>
+    </div>
+
+    <div class="content">
+      <p>
+        This project simulates a café ordering system built with JavaScript.
+        Students learn arrays, objects, functions, DOM manipulation, and cart logic.
+      </p>
+
+      <p class="codepen"
+         data-height="350"
+         data-pen-title="Mock Cafe - Javascript Lessons"
+         data-default-tab="result"
+         data-slug-hash="VYKaQEP"
+         data-user="JOYMUNDIA"
+         style="height:350px; border:2px solid #ccc; margin:1em 0; padding:1em;">
+        <span>
+          See the Pen
+          <a href="https://codepen.io/JOYMUNDIA/pen/VYKaQEP">
+          Mock Cafe - Javascript Lessons</a>
+          by JOY MUNDIA
+          (<a href="https://codepen.io/JOYMUNDIA">@JOYMUNDIA</a>)
+          on <a href="https://codepen.io">CodePen</a>.
+        </span>
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<!-- CLASS GUIDE -->
+<section id="guide" class="section">
+  <h2>📖 Expectations</h2>
+  <div class="card">
+    <div class="accordion">
+      <span>Course Expectations</span>
+      <span class="caret">▾</span>
+    </div>
+    <div class="content">
+      Attend weekly sessions, complete assignments, and participate actively.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="accordion">
+      <span>Submission Guidelines</span>
+      <span class="caret">▾</span>
+    </div>
+    <div class="content">
+      All assignments must be submitted before the weekly deadline via codepen.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="accordion">
+      <span>Program Outcomes & Professional Expectations</span>
+      <span class="caret">▾</span>
+    </div>
+    <div class="content">
+      This course is structured around real-world impact and professional growth.
+      <br><br>
+      By the end of the program, each student is expected to:
+      <br><br>
+      • Deliver functional, production-quality software that solves real problems.<br>
+      • Contribute to collaborative projects that mirror real development teams.<br>
+      • Demonstrate version control proficiency and professional workflow practices.<br>
+      • Build a portfolio showcasing deployed, working applications.<br><br>
+      Evaluation is based on demonstrated competency, collaboration, execution quality,
+      and the ability to ship real, usable software.
+      <br><br>
+      The ultimate objective is not simply course completion, but professional readiness —
+      including opportunities for collaboration, public portfolio exposure, and potential
+      pathways toward gainful employment resulting from meaningful contributions.
+    </div>
+  </div>
+</section>
+
+<footer>
+© 2026 JavaScript Mastery Classroom 🚀<br>
+By <a href="https://www.linkedin.com/in/joy-mundia/">Joy Mundia</a>
+
+</footer>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/list@6.1.8/index.global.min.js"></script>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+<script>
+
+// ============ Hamburger Menu and Sidebar ========== //
+const menuButton = document.getElementById("menuButton");
+const sideMenu = document.getElementById("sideMenu");
+
+// ===== MENU DRAW ANIMATION =====
+const lines = document.querySelectorAll(".line");
+const chalk = document.getElementById("chalk");
+
+function drawLine(line, chalkMove, delay){
+  setTimeout(() => {
+
+    line.style.animation = `drawLine 0.6s forwards`;
+    chalk.style.animation = `${chalkMove} 0.6s forwards`;
+
+  }, delay);
+}
+
+// Sequence each line
+drawLine(lines[0], "chalkMove1", 0);
+drawLine(lines[1], "chalkMove2", 700);
+drawLine(lines[2], "chalkMove3", 1400);
+
+setTimeout(() => {
+  chalk.style.animation = "chalkReturn 0.5s forwards";
+}, 2100);
+
+// ===== ONLY TOGGLE SIDEBAR ON HAMBURGER CLICK =====
+menuButton.addEventListener("click", () => {
+  // Toggle sidebar
+  sideMenu.classList.toggle("active");
+
+  // Toggle hamburger X
+  const hamburger = menuButton.querySelector(".hamburger");
+  hamburger.classList.toggle("active");
+
+  // move chalkboard outward
+  menuButton.classList.toggle("shifted");
+});
+
+
+// ===== HERO H1 Typing Animation =====
+const text = "JavaScript Mastery Classroom";
+const typingElement = document.querySelector(".typing-text");
+let index = 0;
+function typeText() {
+  if (index < text.length) {
+    typingElement.textContent += text.charAt(index);
+    index++;
+    setTimeout(typeText, 70);
+  }
+}
+typeText();
+
+// ===== ACCORDION =====
+document.querySelectorAll(".accordion").forEach(button => {
+  button.addEventListener("click", () => {
+    const content = button.nextElementSibling;
+    const isOpen = button.classList.contains("active");
+
+    // Close all accordions
+    document.querySelectorAll(".accordion").forEach(acc => {
+      acc.classList.remove("active");
+      acc.nextElementSibling.style.maxHeight = null;
+    });
+
+    if (!isOpen) {
+      button.classList.add("active");
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+});
+
+// ===== FULLCALENDAR =====
+document.addEventListener('DOMContentLoaded', function() {
+  const calendarEl = document.getElementById('calendar');
+
+  const allEvents = [
+    { id:'1', title: 'Frontend Must Knows — Live Code Review', start: '2026-02-14T19:00:00' },
+    { id:'2', title: 'Backend Fireside Chat — With Mr. Chilekesha Kasoka', start: '2026-02-28T19:00:00' },
+    { id:'3', title: 'Backend Fireside Chat Part 2 — With Mr. Chilekesha Kasoka', start: '2026-03-14T19:00:00' }
+  
+  ];
+
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    themeSystem: 'standard',
+    height: 'auto',
+
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,listWeek'
+    },
+
+    events: allEvents, // just give all events directly
+
+    // Only filter for listWeek manually
+    datesSet: function(info) {
+      if (info.view.type === "listWeek") {
+        const today = new Date();
+        const upcoming = allEvents.filter(ev => new Date(ev.start) >= today);
+        calendar.removeAllEvents();
+        calendar.addEventSource(upcoming);
+      } else {
+        calendar.removeAllEvents();
+        calendar.addEventSource(allEvents);
+      }
+    },
+
+    eventDidMount: function(info) {
+      const detail = document.createElement("div");
+      detail.className = "event-details-inline";
+      detail.innerText = info.event.start.toLocaleString();
+      detail.style.display = "none";
+      info.el.appendChild(detail);
+    }
+  });
+
+  calendar.render();
+
+  // Hover / click for inline details
+  calendarEl.addEventListener('mouseover', e => {
+    const detail = e.target.closest('.fc-event')?.querySelector('.event-details-inline');
+    if(detail) detail.style.display='block';
+  });
+
+  calendarEl.addEventListener('mouseout', e => {
+    const detail = e.target.closest('.fc-event')?.querySelector('.event-details-inline');
+    if(detail) detail.style.display='none';
+  });
+
+  calendarEl.addEventListener('click', e => {
+    const eventEl = e.target.closest('.fc-event');
+    if(!eventEl) return;
+    const detail = eventEl.querySelector('.event-details-inline');
+    if(detail) detail.style.display = detail.style.display==='block' ? 'none' : 'block';
+  });
+});
+</script>
+</body>
+</html>

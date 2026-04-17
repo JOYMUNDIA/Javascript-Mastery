@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Mastery Curriculum</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg: #0f172a;
+  --card: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent1: #22d3ee;
+  --accent2: #a78bfa;
+  --accent3: #f472b6;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter', sans-serif;
+  background: radial-gradient(circle at top left, #1e293b, #0f172a 60%);
+  color:var(--text);
+  padding:60px 20px;
+}
+
+h1{
+  font-size:3rem;
+  font-weight:800;
+  text-align:center;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+}
+
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  max-width:700px;
+  margin:0 auto 60px;
+  font-size:1.1rem;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  gap:40px;
+}
+
+.phase{
+  padding:30px;
+  border-radius:20px;
+  background:var(--card);
+  backdrop-filter: blur(14px);
+  border:1px solid var(--border);
+  transition: all .4s ease;
+}
+
+.phase:hover{
+  transform:translateY(-8px);
+  background:var(--glass);
+}
+
+.phase h2{
+  font-size:1.6rem;
+  margin-bottom:20px;
+  font-weight:700;
+}
+
+.section{
+  margin-bottom:25px;
+}
+
+.section h3{
+  font-size:1.1rem;
+  margin-bottom:10px;
+  color:var(--accent1);
+}
+
+ul{
+  list-style:none;
+  padding-left:10px;
+}
+
+ul li{
+  padding:6px 0;
+  font-size:.95rem;
+  color:var(--muted);
+  transition:.3s;
+}
+
+ul li:hover{
+  color:var(--text);
+  transform:translateX(5px);
+}
+
+code{
+  background:rgba(255,255,255,0.08);
+  padding:3px 6px;
+  border-radius:6px;
+  font-size:.85rem;
+}
+
+.table-wrapper{
+  overflow-x:auto;
+  margin-top:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th, td{
+  padding:14px;
+  text-align:left;
+}
+
+th{
+  background:rgba(255,255,255,0.08);
+  font-weight:600;
+}
+
+td{
+  border-top:1px solid var(--border);
+  color:var(--muted);
+}
+
+footer{
+  text-align:center;
+  margin-top:80px;
+  font-size:.9rem;
+  color:var(--muted);
+}
+
+@media(max-width:768px){
+  h1{font-size:2.2rem;}
+}
+
+/* ===== REAL CHALKBOARD HAMBURGER ===== */
+
+/* ===== CHALKBOARD MENU BUTTON ===== */
+.menu-wrapper{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:999;
+  transform:scale(.18); /* shrink full chalkboard */
+  transform-origin:top left;
+}
+
+/* Move chalkboard when sidebar opens */
+.menu-wrapper.shifted{
+  transform:scale(.18) translateX(1100px);
+}
+
+/* Frame */
+.board-frame{
+  width:500px;
+  height:320px;
+  padding:18px;
+  background:linear-gradient(135deg,#8b5a2b,#5c3b1e,#9a6a3a);
+  border-radius:6px;
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.4),
+    inset 0 0 6px rgba(0,0,0,0.5);
+  position:relative;
+  transition:transform .35s ease;
+}
+
+/* Grow board on hover */
+.board-frame:hover{
+  transform:scale(1.08);
+}
+
+/* Blackboard */
+.board{
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 30% 30%, #2b2b2b 0%, #111 60%, #000 100%);
+  border-radius:3px;
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,0.05),
+    inset 0 0 60px rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Hamburger container */
+.hamburger{
+  width:150px;
+  transform:translateY(0) translateZ(0);
+  transition:transform .4s ease;
+}
+
+/* Pop out effect */
+.board-frame:hover .hamburger{
+  transform:translateY(-12px) translateZ(40px);
+}
+
+/* Chalk lines */
+.line{
+  height:16px;
+  background:#f7f7f7;
+  margin:22px 0;
+  border-radius:6px;
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #ddd,
+    0 0 6px rgba(255,255,255,0.6),
+    0 0 12px rgba(255,255,255,0.3);
+  filter:blur(.3px);
+  transition:box-shadow .3s ease;
+  
+  /* hide initially for drawing animation */
+  width:0;
+}
+
+/* Brighter chalk when hovering */
+.board-frame:hover .line{
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #eee,
+    0 0 10px rgba(255,255,255,0.8),
+    0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Chalk tray */
+.tray{
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  height:12px;
+  background:linear-gradient(#8b5a2b,#5c3b1e);
+  border-radius:3px;
+}
+
+/* Chalk piece */
+.chalk{
+  position:absolute;
+  bottom:2px;
+  left:30px;
+  width:40px;
+  height:10px;
+  background:linear-gradient(#ffffff,#e6e6e6);
+  border-radius:3px;
+  transform:rotate(-15deg);
+  transition: all 0.3s ease;
+}
+
+/* ===== DRAWING ANIMATION ===== */
+@keyframes drawLine {
+  from { width:0; }
+  to { width:120px; }
+}
+
+/* Chalk movement keyframes */
+@keyframes chalkMove1 { 0%{transform:rotate(-15deg) translate(0,0);} 100%{transform:rotate(-15deg) translate(0,-48px);} }
+@keyframes chalkMove2 { 0%{transform:rotate(-15deg) translate(0,-48px);} 100%{transform:rotate(-15deg) translate(0,-96px);} }
+@keyframes chalkMove3 { 0%{transform:rotate(-15deg) translate(0,-96px);} 100%{transform:rotate(-15deg) translate(0,-144px);} }
+
+@keyframes chalkReturn {
+  0%   { transform: rotate(-15deg) translate(0,-144px); }
+  60%  { transform: rotate(-10deg) translate(-10px,-70px); }
+  100% { transform: rotate(-15deg) translate(0,0); }
+}
+
+/* X lines */
+.x-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;       /* same as hamburger width */
+  height: 15px;       /* same as line thickness */
+  background: #f7f7f7;
+  border-radius: 4px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Cross rotation */
+.x-line1 {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.x-line2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Show X on active */
+.hamburger.active .x-line {
+  opacity: 1;
+}
+
+/* Hide hamburger lines */
+.hamburger.active .line {
+  opacity: 0;
+}
+
+/* Smooth transition */
+.line {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* Smooth transition */
+.line {
+  transition: all 0.4s ease;
+}
+
+/* ===== SIDE MENU ===== */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:rgba(2, 6, 23, 0.568);
+  border-right:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(20px);
+  transition:left .35s ease;
+  padding:90px 30px;
+  z-index:998;
+}
+
+.side-menu.active{
+  left:0;
+}
+
+.side-menu a{
+  display:block;
+  margin-bottom:20px;
+  text-decoration:none;
+  font-weight:600;
+  color:#f1f5f9;
+  line-height: 2.2;       /* ↑ More vertical spacing */
+  position: relative;      /* Needed for underline effect */
+}
+
+.side-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;           /* Slightly below text */
+  width: 0%;
+  height: 2px;
+  background: #22d3ee;    /* Accent color underline */
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.side-menu a:hover::after {
+  width: 100%;            /* Full width underline on hover */
+}
+
+.side-menu a:hover {
+  color: #22d3ee;         /* Match underline color */
+}
+
+.side-menu a.active {
+  color: #22d3ee;
+}
+
+.side-menu a.active::after {
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<!-- CHALKBOARD HAMBURGER WITH DRAWING -->
+<div class="menu-wrapper" id="menuButton">
+  <div class="board-frame">
+    <div class="board">
+      <div class="hamburger">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+        <!-- Actual chalk X -->
+        <div class="x-line x-line1"></div>
+        <div class="x-line x-line2"></div>
+      </div>
+    </div>
+    <div class="tray">
+      <div class="chalk" id="chalk"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+  <a href="https://joymundia.github.io/Main-Javascript-link/">Home</a>
+  <a href="https://joymundia.github.io/Javascript-Curriculum/" class="active">📘 Curriculum</a>
+  <a href="https://joymundia.github.io/Software-Development-for-Business/">📖 Software Development Guide</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#assignments">📝 Assignments</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#notes">📚 Notes</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#projects">🚀 Guided Projects</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#guide">📖 Expectations</a>
+</div>
+
+<h1>JavaScript Mastery Curriculum</h1>
+<p class="subtitle">
+From complete beginner to professional-level JavaScript developer — structured, modern, and career-focused roadmap.
+</p>
+
+<div class="container">
+
+<div class="phase">
+<h2>🟢 Phase 1 — Foundations</h2>
+
+<div class="section">
+<h3>Programming Basics</h3>
+<ul>
+<li>What is JavaScript?</li>
+<li>How JS runs in the browser</li>
+<li>How JS runs in Node.js</li>
+<li>Linking JS to HTML</li>
+<li>Using DevTools console</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Variables & Data Types</h3>
+<ul>
+<li><code>var</code>, <code>let</code>, <code>const</code></li>
+<li>Primitive types</li>
+<li>Type coercion</li>
+<li><code>typeof</code></li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Control Flow & Functions</h3>
+<ul>
+<li>if / switch / loops</li>
+<li>Function declarations & arrow functions</li>
+<li>Default & rest parameters</li>
+<li>Scope</li>
+</ul>
+</div>
+</div>
+
+<div class="phase">
+<h2>🟡 Phase 2 — Core JavaScript</h2>
+
+<div class="section">
+<h3>Arrays & Objects</h3>
+<ul>
+<li>Array methods (<code>map</code>, <code>filter</code>, <code>reduce</code>)</li>
+<li>Spread & destructuring</li>
+<li><code>this</code> keyword</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>DOM & Events</h3>
+<ul>
+<li>Selecting & modifying elements</li>
+<li>Event listeners</li>
+<li>Event delegation</li>
+<li>Error handling (<code>try...catch</code>)</li>
+</ul>
+</div>
+</div>
+
+<div class="phase">
+<h2>🔵 Phase 3 — Advanced JavaScript</h2>
+
+<div class="section">
+<h3>Async JavaScript</h3>
+<ul>
+<li>Callbacks & Promises</li>
+<li><code>async/await</code></li>
+<li>Fetch API</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Internals & OOP</h3>
+<ul>
+<li>Closures & hoisting</li>
+<li>Event loop</li>
+<li>Prototypes & ES6 classes</li>
+<li>Functional programming</li>
+</ul>
+</div>
+</div>
+
+<div class="phase">
+<h2>🟣 Phase 4–9 — Professional Level</h2>
+
+<div class="section">
+<h3>Modern Ecosystem</h3>
+<ul>
+<li>npm & package.json</li>
+<li>Webpack / Vite / Babel</li>
+<li>Testing with Jest</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Frontend & Backend</h3>
+<ul>
+<li>React / Vue / Angular</li>
+<li>Node.js & Express</li>
+<li>MongoDB & SQL</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>Career Preparation</h3>
+<ul>
+<li>Algorithms & Data Structures</li>
+<li>System Design Basics</li>
+<li>Deployment</li>
+</ul>
+</div>
+
+<div class="table-wrapper">
+<table>
+<tr>
+<th>Level</th>
+<th>Time Required</th>
+</tr>
+<tr>
+<td>Beginner</td>
+<td>4–6 weeks</td>
+</tr>
+<tr>
+<td>Intermediate</td>
+<td>6–8 weeks</td>
+</tr>
+<tr>
+<td>Advanced</td>
+<td>3–6 months</td>
+</tr>
+<tr>
+<td>Job-ready</td>
+<td>6–12 months</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+Designed as a modern roadmap for mastering JavaScript 🚀<br>
+By <a href="https://www.linkedin.com/in/joy-mundia/">Joy Mundia</a>
+</footer>
+
+<script>
+  // ============ Hamburger Menu and Sidebar ========== //
+const menuButton = document.getElementById("menuButton");
+const sideMenu = document.getElementById("sideMenu");
+
+// ===== MENU DRAW ANIMATION =====
+const lines = document.querySelectorAll(".line");
+const chalk = document.getElementById("chalk");
+
+function drawLine(line, chalkMove, delay){
+  setTimeout(() => {
+
+    line.style.animation = `drawLine 0.6s forwards`;
+    chalk.style.animation = `${chalkMove} 0.6s forwards`;
+
+  }, delay);
+}
+
+// Sequence each line
+drawLine(lines[0], "chalkMove1", 0);
+drawLine(lines[1], "chalkMove2", 700);
+drawLine(lines[2], "chalkMove3", 1400);
+
+setTimeout(() => {
+  chalk.style.animation = "chalkReturn 0.5s forwards";
+}, 2100);
+
+// ===== ONLY TOGGLE SIDEBAR ON HAMBURGER CLICK =====
+menuButton.addEventListener("click", () => {
+  // Toggle sidebar
+  sideMenu.classList.toggle("active");
+
+  // Toggle hamburger X
+  const hamburger = menuButton.querySelector(".hamburger");
+  hamburger.classList.toggle("active");
+
+  // move chalkboard outward
+  menuButton.classList.toggle("shifted");
+});
+</script>
+</body>
+</html>

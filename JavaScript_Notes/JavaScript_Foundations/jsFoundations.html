@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Environments & Browser Interaction</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: How JavaScript Runs in the Browser</h2>
+
+<p>
+JavaScript in the browser runs inside the <strong>browser’s engine</strong>. Examples:
+</p>
+
+<ul>
+<li>Chrome → <strong>V8</strong> engine</li>
+<li>Firefox → <strong>SpiderMonkey</strong></li>
+<li>Safari → <strong>JavaScriptCore (Nitro)</strong></li>
+</ul>
+
+<p>
+When you open a webpage, the browser:
+</p>
+<ol>
+<li>Parses the HTML and CSS.</li>
+<li>Finds JavaScript code in <code>&lt;script&gt;</code> tags or linked files.</li>
+<li>Executes the JS line by line in the engine.</li>
+</ol>
+
+<p>
+Think of it like this:
+</p>
+<blockquote>
+“HTML builds the page, CSS styles it, JS adds behavior and interactivity.”
+</blockquote>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Open any website, right-click → Inspect → Console. Type <code>console.log("Hello from JS!")</code>.
+</div>
+</section>
+
+<section>
+<h2>Step 2: How JavaScript Runs in Node.js</h2>
+
+<p>
+Node.js allows JavaScript to run <strong>outside the browser</strong> on your computer.
+</p>
+
+<ul>
+<li>It uses the <strong>V8 engine</strong> (same as Chrome) to execute JS.</li>
+<li>Provides <strong>extra modules</strong> like <code>fs</code> for files, <code>http</code> for servers.</li>
+<li>Perfect for building backend apps, scripts, and command-line tools.</li>
+</ul>
+
+<pre>
+// Save as hello.js
+console.log("Hello from Node.js!");
+// Run in terminal: node hello.js
+</pre>
+
+<p>
+Mental model: Node.js = JavaScript + your computer’s system APIs. Browser JS = JavaScript + browser APIs.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Install Node.js, write a small JS file that prints today's date and run it in terminal.
+</div>
+</section>
+
+<section>
+<h2>Step 3: Linking JavaScript to HTML</h2>
+
+<p>
+There are 3 main ways to include JS in your webpage:
+</p>
+
+<h3>1️⃣ Inline Scripts</h3>
+<pre>
+&lt;button onclick="alert('Clicked!')"&gt;Click Me&lt;/button&gt;
+</pre>
+
+<p>Not recommended for big projects, but useful for tiny interactions.</p>
+
+<h3>2️⃣ Internal Scripts</h3>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Hello&lt;/h1&gt;
+
+&lt;script&gt;
+  console.log("Internal JS runs here!");
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h3>3️⃣ External Scripts</h3>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h1&gt;Hello&lt;/h1&gt;
+
+&lt;script src="script.js"&gt;&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>External scripts keep your HTML clean and easier to maintain.</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Create <code>index.html</code> and <code>script.js</code>, link them, and print “JS is linked!” in the console.
+</div>
+</section>
+
+<section>
+<h2>Step 4: Using DevTools Console</h2>
+
+<p>
+The browser DevTools console is your personal JS playground.
+</p>
+
+<h3>Open DevTools:</h3>
+<ul>
+<li>Chrome / Edge: <kbd>Ctrl+Shift+I</kbd> or <kbd>F12</kbd></li>
+<li>Firefox: <kbd>Ctrl+Shift+K</kbd></li>
+<li>Safari: <kbd>Cmd+Option+C</kbd> (enable Developer menu first)</li>
+</ul>
+
+<h3>Console Uses:</h3>
+<ul>
+<li>Print values: <code>console.log("Hello")</code></li>
+<li>Debug variables: <code>console.log(variable)</code></li>
+<li>Inspect objects: <code>console.table(array)</code></li>
+<li>Check types: <code>console.log(typeof x)</code></li>
+<li>Errors & warnings: <code>console.error()</code>, <code>console.warn()</code></li>
+</ul>
+
+<h3>Example:</h3>
+<pre>
+let age = 25;
+console.log("User age:", age);
+console.warn("This is just a warning!");
+console.error("Something went wrong!");
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Open DevTools, create 3 variables of different types, print them using <code>console.log</code>, and use <code>console.table</code> for an array.
+</div>
+</section>
+
+<section>
+<h2>Step 5: Mental Model – JS Environments</h2>
+
+<p>
+Think of JavaScript as a language that can “plug into” different environments:
+</p>
+
+<ul>
+<li><strong>Browser:</strong> manipulates webpage, DOM, CSS, and handles events</li>
+<li><strong>Node.js:</strong> manipulates files, servers, databases, command-line scripts</li>
+<li><strong>DevTools Console:</strong> testing ground, experiment, debugging tool</li>
+</ul>
+
+<p>
+Key takeaway:
+</p>
+<blockquote>
+“Where JS runs determines what APIs it can use, but the core language works the same everywhere.”
+</blockquote>
+
+<div class="challenge">
+<strong>Mastery Challenge:</strong>  
+Open DevTools console, declare a variable, manipulate it, and compare it to running the same code in Node.js. Observe differences.
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Environment, Linking, & Console";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+  if (forward) {
+    index++;
+    if (index >= text.length) {
+      forward = false;
+      setTimeout(typeLoop, 1500);
+      return;
+    }
+  } else {
+    index--;
+    if (index <= 0) forward = true;
+  }
+
+  typewriter.textContent = text.substring(0, index + 1);
+  setTimeout(typeLoop, forward ? 100 : 50);
+}
+
+typeLoop();
+</script>
+
+</body>
+</html>

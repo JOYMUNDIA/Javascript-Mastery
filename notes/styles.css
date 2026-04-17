@@ -1,0 +1,435 @@
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root{
+  --bg:#0f172a;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.15);
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --accent1:#22d3ee;
+  --accent2:#a78bfa;
+  --accent3:#f472b6;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+
+/* HEADER */
+
+header{
+  text-align:center;
+  padding:90px 20px 40px 20px;
+}
+
+header h1{
+  font-size:3rem;
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+header p{
+  color:var(--muted);
+  max-width:650px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+/* CONTAINER */
+
+.container{
+  width:90%;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* STEP CARD */
+
+.step{
+  background:var(--glass);
+  border:1px solid var(--border);
+  padding:28px;
+  border-radius:18px;
+  margin:30px 0;
+  backdrop-filter:blur(16px);
+  transition:.3s;
+}
+
+.step:hover{
+  transform:translateY(-6px);
+  border-color:var(--accent1);
+}
+
+.step h2{
+  font-size:1.9rem;
+  margin-bottom:15px;
+
+  background:linear-gradient(
+    270deg,
+    #22d3ee,
+    #a78bfa,
+    #f472b6,
+    #22d3ee
+  );
+  background-size:400% 400%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* TEXT */
+
+.step p{
+  margin-bottom:14px;
+  color:var(--muted);
+}
+
+.step ol,
+.step ul{
+  margin-left:20px;
+}
+
+.step li{
+  margin-bottom:10px;
+}
+
+/* EXAMPLE GUIDE */
+
+.example-guide{
+  margin-top:25px;
+  padding:20px;
+  border-radius:14px;
+
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+}
+
+.example-guide h3{
+  font-size:1.4rem;
+  margin-bottom:10px;
+  color:var(--accent1);
+}
+
+.example-guide h4{
+  margin-top:10px;
+  margin-bottom:5px;
+  color:var(--accent2);
+}
+
+.example-guide p{
+  color:var(--muted);
+}
+
+.example-image{
+  width:100%;
+  max-width:600px;
+  margin-top:15px;
+  border-radius:10px;
+}
+
+/* PAGINATION */
+
+.pagination-controls{
+  display:flex;
+  justify-content:space-between;
+  margin:40px 0;
+}
+
+.pagination-btn{
+  padding:14px 24px;
+  border-radius:14px;
+  border:none;
+  font-weight:600;
+  color:white;
+  cursor:pointer;
+
+  background:linear-gradient(
+    135deg,
+    var(--accent1),
+    var(--accent2)
+  );
+
+  transition:.3s;
+}
+
+.pagination-btn:hover{
+  transform:translateY(-3px) scale(1.05);
+}
+
+.pagination-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+header h1{
+  font-size:2.2rem;
+}
+
+.step h2{
+  font-size:1.5rem;
+}
+
+}
+
+/* ===== CHALKBOARD MENU BUTTON ===== */
+.menu-wrapper{
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:999;
+  transform:scale(.18); /* shrink full chalkboard */
+  transform-origin:top left;
+}
+
+/* Move chalkboard when sidebar opens */
+.menu-wrapper.shifted{
+  transform:scale(.18) translateX(1100px);
+}
+
+/* Frame */
+.board-frame{
+  width:500px;
+  height:320px;
+  padding:18px;
+  background:linear-gradient(135deg,#8b5a2b,#5c3b1e,#9a6a3a);
+  border-radius:6px;
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.4),
+    inset 0 0 6px rgba(0,0,0,0.5);
+  position:relative;
+  transition:transform .35s ease;
+}
+
+/* Grow board on hover */
+.board-frame:hover{
+  transform:scale(1.08);
+}
+
+/* Blackboard */
+.board{
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 30% 30%, #2b2b2b 0%, #111 60%, #000 100%);
+  border-radius:3px;
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,0.05),
+    inset 0 0 60px rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Hamburger container */
+.hamburger{
+  width:150px;
+  transform:translateY(0) translateZ(0);
+  transition:transform .4s ease;
+}
+
+/* Pop out effect */
+.board-frame:hover .hamburger{
+  transform:translateY(-12px) translateZ(40px);
+}
+
+/* Chalk lines */
+.line{
+  height:16px;
+  background:#f7f7f7;
+  margin:22px 0;
+  border-radius:6px;
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #ddd,
+    0 0 6px rgba(255,255,255,0.6),
+    0 0 12px rgba(255,255,255,0.3);
+  filter:blur(.3px);
+  transition:box-shadow .3s ease;
+  
+  /* hide initially for drawing animation */
+  width:0;
+}
+
+/* Brighter chalk when hovering */
+.board-frame:hover .line{
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #eee,
+    0 0 10px rgba(255,255,255,0.8),
+    0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Chalk tray */
+.tray{
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  height:12px;
+  background:linear-gradient(#8b5a2b,#5c3b1e);
+  border-radius:3px;
+}
+
+/* Chalk piece */
+.chalk{
+  position:absolute;
+  bottom:2px;
+  left:30px;
+  width:40px;
+  height:10px;
+  background:linear-gradient(#ffffff,#e6e6e6);
+  border-radius:3px;
+  transform:rotate(-15deg);
+  transition: all 0.3s ease;
+}
+
+/* ===== DRAWING ANIMATION ===== */
+@keyframes drawLine {
+  from { width:0; }
+  to { width:120px; }
+}
+
+/* Chalk movement keyframes */
+@keyframes chalkMove1 { 0%{transform:rotate(-15deg) translate(0,0);} 100%{transform:rotate(-15deg) translate(0,-48px);} }
+@keyframes chalkMove2 { 0%{transform:rotate(-15deg) translate(0,-48px);} 100%{transform:rotate(-15deg) translate(0,-96px);} }
+@keyframes chalkMove3 { 0%{transform:rotate(-15deg) translate(0,-96px);} 100%{transform:rotate(-15deg) translate(0,-144px);} }
+
+@keyframes chalkReturn {
+  0%   { transform: rotate(-15deg) translate(0,-144px); }
+  60%  { transform: rotate(-10deg) translate(-10px,-70px); }
+  100% { transform: rotate(-15deg) translate(0,0); }
+}
+
+/* X lines */
+.x-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;       /* same as hamburger width */
+  height: 15px;       /* same as line thickness */
+  background: #f7f7f7;
+  border-radius: 4px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Cross rotation */
+.x-line1 {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.x-line2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Show X on active */
+.hamburger.active .x-line {
+  opacity: 1;
+}
+
+/* Hide hamburger lines */
+.hamburger.active .line {
+  opacity: 0;
+}
+
+/* Smooth transition */
+.line {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+/* Smooth transition */
+.line {
+  transition: all 0.4s ease;
+}
+
+/* ===== SIDE MENU ===== */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:rgba(2, 6, 23, 0.568);
+  border-right:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(20px);
+  transition:left .35s ease;
+  padding:90px 30px;
+  z-index:998;
+}
+
+.side-menu.active{
+  left:0;
+}
+
+.side-menu a{
+  display:block;
+  margin-bottom:20px;
+  text-decoration:none;
+  font-weight:600;
+  color:#f1f5f9;
+  line-height: 2.2;       /* ↑ More vertical spacing */
+  position: relative;      /* Needed for underline effect */
+}
+
+.side-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;           /* Slightly below text */
+  width: 0%;
+  height: 2px;
+  background: #22d3ee;    /* Accent color underline */
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.side-menu a:hover::after {
+  width: 100%;            /* Full width underline on hover */
+}
+
+.side-menu a:hover {
+  color: #22d3ee;         /* Match underline color */
+}
+
+.side-menu a.active {
+  color: #22d3ee;
+}
+
+.side-menu a.active::after {
+  width: 100%;
+}

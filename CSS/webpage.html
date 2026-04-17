@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Crash Course</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* HERO */
+    .hero {
+      height: 80vh;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url('https://picsum.photos/1600/900');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 50px 30px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #a6bacf;
+    }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+    }
+
+    table th, table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table th {
+      background: #3498db;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+
+    /* FORM */
+    form {
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    form button:hover {
+      background: #2980b9;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+    }
+
+    /* FORM CONTAINER */
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    /* FIELDSET & LEGEND */
+    fieldset {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    legend {
+      font-weight: bold;
+      color: #3498db;
+      padding: 0 10px;
+    }
+
+    /* LABELS */
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    /* INPUTS / SELECT / TEXTAREA */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="url"],
+    input[type="date"],
+    select,
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    /* RADIO & CHECKBOX GROUPS */
+    input[type="radio"],
+    input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+
+    fieldset p {
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    /* BUTTONS */
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    button[type="reset"] {
+      background: #e74c3c;
+    }
+
+    button[type="reset"]:hover {
+      background: #c0392b;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      form {
+        padding: 20px;
+      }
+
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>HTML Crash Course</h1>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#table-section">Table</a>
+      <a href="#form-section">Form</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div>
+      <h2>Learn HTML the Simple Way</h2>
+      <p>Master the basics of web development with practical examples.</p>
+      <img src="" alt="">
+    </div>
+  </section>
+
+  <!-- TABLE SECTION -->
+  <section id="table-section">
+    <h2>Student Table</h2>
+    <p>This table shows sample student data:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Course</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Alice</td>
+          <td>Web Dev</td>
+          <td>85</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bob</td>
+          <td>HTML Basics</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Charlie</td>
+          <td>CSS</td>
+          <td>78</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section id="form-section">
+  <h2>Complete Student Registration Form</h2>
+  <p>Please fill in all required fields:</p>
+
+  <form>
+
+    <!-- PERSONAL INFO -->
+    <fieldset>
+      <legend>Personal Information</legend>
+
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" minlength="6" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="+260..." pattern="[0-9+ ]{7,15}">
+    </fieldset>
+
+    <!-- DEMOGRAPHICS -->
+    <fieldset>
+      <legend>Demographics</legend>
+
+      <p>Gender:</p>
+      <input type="radio" id="male" name="gender" value="male">
+      <label for="male">Male</label>
+
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label>
+
+      <input type="radio" id="other" name="gender" value="other">
+      <label for="other">Other</label>
+
+      <br><br>
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob">
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="10" max="100">
+    </fieldset>
+
+    <!-- COURSE INFO -->
+    <fieldset>
+      <legend>Course Selection</legend>
+
+      <label for="course">Choose a Course</label>
+      <select id="course" name="course" required>
+        <option value="">--Select--</option>
+        <option value="html">HTML Basics</option>
+        <option value="css">CSS Fundamentals</option>
+        <option value="js">JavaScript</option>
+      </select>
+
+      <label for="skills">Select Your Skills</label>
+      <select id="skills" name="skills" multiple size="3">
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>JavaScript</option>
+        <option>Python</option>
+      </select>
+    </fieldset>
+
+    <!-- PREFERENCES -->
+    <fieldset>
+      <legend>Preferences</legend>
+
+      <p>Preferred Learning Mode:</p>
+
+      <input type="checkbox" id="online" name="mode" value="online">
+      <label for="online">Online</label>
+
+      <input type="checkbox" id="offline" name="mode" value="offline">
+      <label for="offline">In-person</label>
+
+      <input type="checkbox" id="hybrid" name="mode" value="hybrid">
+      <label for="hybrid">Hybrid</label>
+    </fieldset>
+
+    <!-- FILE UPLOAD -->
+    <fieldset>
+      <legend>Upload Documents</legend>
+
+      <label for="resume">Upload Resume</label>
+      <input type="file" id="resume" name="resume">
+
+      <label for="photo">Upload Profile Photo</label>
+      <input type="file" id="photo" name="photo" accept="image/*">
+    </fieldset>
+
+    <!-- ADDITIONAL INFO -->
+    <fieldset>
+      <legend>Additional Information</legend>
+
+      <label for="bio">Short Bio</label>
+      <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+
+      <label for="website">Personal Website</label>
+      <input type="url" id="website" name="website" placeholder="https://example.com">
+    </fieldset>
+
+    <!-- TERMS -->
+    <fieldset>
+      <legend>Agreement</legend>
+
+      <input type="checkbox" id="terms" name="terms" required>
+      <label for="terms">I agree to the terms and conditions</label>
+    </fieldset>
+
+    <br>
+
+    <!-- BUTTONS -->
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+
+  </form>
+</section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 HTML Crash Course</p>
+  </footer>
+
+</body>
+</html>

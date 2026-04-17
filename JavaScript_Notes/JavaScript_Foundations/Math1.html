@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Math - Deep Dive (Part 1)</title>
+
+<style>
+
+/* Layout */
+
+body{
+  font-family: Arial, sans-serif;
+  line-height:1.7;
+  margin:0;
+  padding:0;
+  background:#0f172a;
+  color:#e2e8f0;
+}
+
+main{
+  max-width:900px;
+  margin:auto;
+  padding:40px;
+}
+
+h1,h2,h3{
+  color:#38bdf8;
+}
+
+pre{
+  background:#020617;
+  padding:15px;
+  border-radius:10px;
+  overflow:auto;
+}
+
+.challenge{
+  background:#1e293b;
+  padding:20px;
+  border-left:4px solid #38bdf8;
+  margin-top:20px;
+}
+
+/* Visual number boxes */
+
+.number-box{
+  display:flex;
+  gap:20px;
+  margin:30px 0;
+}
+
+.box{
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  width:120px;
+  font-weight:bold;
+}
+
+.int{background:#0ea5e9;}
+.float{background:#22c55e;}
+.nan{background:#ef4444;}
+
+</style>
+</head>
+
+<body>
+
+<main>
+
+<h1>JavaScript Math — Deep Foundations (Part 1)</h1>
+
+<p>
+Before jumping into formulas, functions, or the <code>Math</code> object, you need something more important:
+</p>
+
+<h2>👉 A Mental Model of Numbers in JavaScript</h2>
+
+<p>
+If you skip this part, everything later will feel confusing.
+</p>
+
+<p>
+If you understand this part, everything becomes predictable.
+</p>
+
+<hr>
+
+<h2>Step 1: What is a Number in JavaScript?</h2>
+
+<p>
+In JavaScript, a <strong>number</strong> is not just “a number”.
+</p>
+
+<p>
+It is a value stored inside memory that can be:
+</p>
+
+<ul>
+<li>Whole (integer)</li>
+<li>Decimal (floating point)</li>
+<li>Very large</li>
+<li>Very small</li>
+<li>Even… invalid (NaN)</li>
+</ul>
+
+<div class="number-box">
+
+<div class="box int">
+Integer<br>5
+</div>
+
+<div class="box float">
+Decimal<br>3.14
+</div>
+
+<div class="box nan">
+NaN
+</div>
+
+</div>
+
+<hr>
+
+<h2>Step 2: The "Box in Memory" Model</h2>
+
+<p>
+Every number lives inside a variable (your “cube” concept).
+</p>
+
+<pre>
+let score = 10;
+</pre>
+
+<p>
+JavaScript does this:
+</p>
+
+<ul>
+<li>Create a box labeled <strong>score</strong></li>
+<li>Store the number <strong>10</strong> inside</li>
+</ul>
+
+<p>
+When math happens, JavaScript:
+</p>
+
+<ul>
+<li>Reads values from boxes</li>
+<li>Performs an operation</li>
+<li>Stores a result (new or updated box)</li>
+</ul>
+
+---
+
+<h3>Example</h3>
+
+<pre>
+let a = 10;
+let b = 3;
+
+let result = a + b;
+</pre>
+
+<p>
+Step-by-step:
+</p>
+
+<ul>
+<li>Read value inside <strong>a → 10</strong></li>
+<li>Read value inside <strong>b → 3</strong></li>
+<li>Add them → <strong>13</strong></li>
+<li>Store inside <strong>result</strong></li>
+</ul>
+
+---
+
+<h2>Step 3: Types of Numbers</h2>
+
+<h3>1. Integers (Whole Numbers)</h3>
+
+<pre>
+let count = 5;
+let temperature = -10;
+</pre>
+
+<p>
+No decimal points.
+</p>
+
+---
+
+<h3>2. Floating Point Numbers (Decimals)</h3>
+
+<pre>
+let price = 19.99;
+let pi = 3.14;
+</pre>
+
+<p>
+These are NOT exact (important later).
+</p>
+
+---
+
+<h3>⚠️ Hidden Truth (VERY IMPORTANT)</h3>
+
+<p>
+JavaScript stores ALL numbers using something called:
+</p>
+
+<pre>
+64-bit floating point (IEEE 754)
+</pre>
+
+<p>
+Meaning:
+</p>
+
+<ul>
+<li>Even integers are stored like decimals internally</li>
+<li>Some numbers cannot be represented exactly</li>
+</ul>
+
+---
+
+<h3>Example Problem</h3>
+
+<pre>
+console.log(0.1 + 0.2);
+</pre>
+
+Output:
+
+<pre>
+0.30000000000000004
+</pre>
+
+<p>
+This is NOT a bug.
+</p>
+
+<p>
+This is how computers represent decimals.
+</p>
+
+---
+
+<h2>Step 4: Special Number Values</h2>
+
+<h3>NaN (Not a Number)</h3>
+
+<pre>
+"hello" * 5
+</pre>
+
+Result:
+
+<pre>
+NaN
+</pre>
+
+<p>
+Means:
+</p>
+
+<p>
+❌ JavaScript tried to do math, but failed.
+</p>
+
+---
+
+<h3>Infinity</h3>
+
+<pre>
+10 / 0
+</pre>
+
+Result:
+
+<pre>
+Infinity
+</pre>
+
+<p>
+JavaScript does NOT crash.
+</p>
+
+<p>
+It returns a special value.
+</p>
+
+---
+
+<h3>Negative Infinity</h3>
+
+<pre>
+-10 / 0
+</pre>
+
+Result:
+
+<pre>
+-Infinity
+</pre>
+
+---
+
+<h2>Step 5: Checking Numbers</h2>
+
+<h3>isNaN()</h3>
+
+<pre>
+isNaN("hello") // true
+isNaN(5)       // false
+</pre>
+
+---
+
+<h3>Number.isFinite()</h3>
+
+<pre>
+Number.isFinite(10)       // true
+Number.isFinite(Infinity) // false
+</pre>
+
+---
+
+<h2>Step 6: Basic Math Operators (Revisited Deeply)</h2>
+
+<pre>
+let a = 10;
+let b = 3;
+
+a + b   // 13
+a - b   // 7
+a * b   // 30
+a / b   // 3.333...
+a % b   // 1
+a ** b  // 1000
+</pre>
+
+---
+
+<h3>Deep Understanding of % (Modulo)</h3>
+
+<p>
+Modulo is NOT just “remainder”.
+</p>
+
+<p>
+It answers:
+</p>
+
+<blockquote>
+“What is LEFT after full division?”
+</blockquote>
+
+Example:
+
+<pre>
+10 % 3
+</pre>
+
+<p>
+3 goes into 10 → 3 times
+</p>
+
+<p>
+Remaining:
+</p>
+
+<pre>
+1
+</pre>
+
+---
+
+<h3>Real Use Cases</h3>
+
+<ul>
+<li>Even / odd check → <code>n % 2</code></li>
+<li>Cycling values (games, UI)</li>
+<li>Pagination systems</li>
+</ul>
+
+---
+
+<h2>Step 7: Precision Problems (CRITICAL)</h2>
+
+<p>
+Floating point math can break expectations.
+</p>
+
+<pre>
+0.1 + 0.2 !== 0.3
+</pre>
+
+<p>
+Solution approach:
+</p>
+
+<pre>
+let result = (0.1 + 0.2).toFixed(2);
+</pre>
+
+---
+
+<h2>Step 8: Mental Model Summary</h2>
+
+<ul>
+
+<li>Numbers are stored in memory boxes</li>
+<li>All numbers are floating point internally</li>
+<li>Math operations read → compute → store</li>
+<li>Some numbers are imprecise</li>
+<li>Special values exist (NaN, Infinity)</li>
+
+</ul>
+
+---
+
+<div class="challenge">
+
+<strong>Mini Challenges</strong>
+
+1️⃣ What is:
+
+<pre>
+15 % 4
+</pre>
+
+---
+
+2️⃣ Predict:
+
+<pre>
+0.2 + 0.1
+</pre>
+
+---
+
+3️⃣ What will this return?
+
+<pre>
+10 / 0
+</pre>
+
+---
+
+4️⃣ Check if this is valid:
+
+<pre>
+isNaN("123")
+</pre>
+
+</div>
+
+</main>
+
+</body>
+</html>

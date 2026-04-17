@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APGAR Calculator Assignment</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f0f0f3;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+h1 { color: #4f46e5; margin-bottom: 10px; }
+
+.panel {
+  background: #f0f0f3;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
+  max-width: 1000px;
+  width: 100%;
+}
+
+pre {
+  background: #e0e0e0;
+  padding: 15px;
+  border-radius: 15px;
+  overflow-x: auto;
+  position: relative;
+}
+
+code { white-space: pre-wrap; }
+
+.highlight {
+  background: #eef2ff;
+  border-left: 6px solid #4f46e5;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.copy-btn.copied { background: green; }
+</style>
+</head>
+
+<body>
+
+<h1>APGAR Calculator Assignment</h1>
+
+<div class="panel">
+<h2>📘 Instructions</h2>
+<ol>
+<li>Go to <strong>CodePen.io</strong></li>
+<li>Create a new Pen</li>
+<li>Copy each section into the correct panel:
+  <ul>
+    <li>HTML → HTML panel</li>
+    <li>CSS → CSS panel</li>
+    <li>JavaScript → JS panel</li>
+  </ul>
+</li>
+<li>Complete ONLY the parts marked <strong>**** STUDENT TASK ****</strong></li>
+<li>Test your app</li>
+<li>Submit your CodePen link</li>
+</ol>
+</div>
+
+<!-- HTML -->
+<div class="panel highlight">
+<h3>HTML Panel</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;title&gt;Modern APGAR Calculator&lt;/title&gt;
+
+&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div class="container"&gt;
+&lt;div class="card"&gt;
+
+&lt;!-- STEP 1 --&gt;
+&lt;div class="step active"&gt;
+  &lt;h2&gt;Appearance (Skin Color)&lt;/h2&gt;
+  &lt;p&gt;What is the baby’s overall skin color?&lt;/p&gt;
+  &lt;img src="https://images.unsplash.com/photo-1618847472790-0ca60378235e?q=80&amp;w=800"&gt;
+
+  &lt;div class="options"&gt;
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="appearance" value="0"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Blue or pale all over&lt;/strong&gt; — No oxygenation&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="appearance" value="1"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Pink body, blue extremities&lt;/strong&gt; — Partial oxygenation&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="appearance" value="2"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Completely pink&lt;/strong&gt; — Normal&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="buttons"&gt;
+    &lt;button disabled&gt;Back&lt;/button&gt;
+    &lt;button onclick="nextStep()"&gt;Next&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- STEP 2 --&gt;
+&lt;div class="step"&gt;
+  &lt;h2&gt;Pulse (Heart Rate)&lt;/h2&gt;
+  &lt;p&gt;What is the baby’s heart rate?&lt;/p&gt;
+  &lt;img src="https://images.unsplash.com/photo-1618939304347-e91b1f33d2ab?q=80&amp;w=800"&gt;
+
+  &lt;div class="options"&gt;
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="pulse" value="0"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;No heartbeat&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="pulse" value="1"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Below 100 bpm&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="pulse" value="2"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Above 100 bpm&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="buttons"&gt;
+    &lt;button onclick="prevStep()"&gt;Back&lt;/button&gt;
+    &lt;button onclick="nextStep()"&gt;Next&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- STEP 3 --&gt;
+&lt;div class="step"&gt;
+  &lt;h2&gt;Grimace (Reflex)&lt;/h2&gt;
+  &lt;p&gt;How does the baby respond to stimulation?&lt;/p&gt;
+  &lt;img src="https://images.unsplash.com/photo-1480985041486-c65b20c01d1f?q=80&amp;w=800"&gt;
+
+  &lt;div class="options"&gt;
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="grimace" value="0"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;No response&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="grimace" value="1"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Weak grimace&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="grimace" value="2"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Strong response (cry, cough)&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="buttons"&gt;
+    &lt;button onclick="prevStep()"&gt;Back&lt;/button&gt;
+    &lt;button onclick="nextStep()"&gt;Next&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- STEP 4 --&gt;
+&lt;div class="step"&gt;
+  &lt;h2&gt;Activity (Muscle Tone)&lt;/h2&gt;
+  &lt;p&gt;What is the baby’s muscle tone?&lt;/p&gt;
+  &lt;img src="https://images.unsplash.com/photo-1693247168883-eaf1165afce8?q=80&amp;w=800"&gt;
+
+  &lt;div class="options"&gt;
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="activity" value="0"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Limp&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="activity" value="1"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Some flexion&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="activity" value="2"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Active movement&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="buttons"&gt;
+    &lt;button onclick="prevStep()"&gt;Back&lt;/button&gt;
+    &lt;button onclick="nextStep()"&gt;Next&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- STEP 5 --&gt;
+&lt;div class="step"&gt;
+  &lt;h2&gt;Respiration (Breathing)&lt;/h2&gt;
+  &lt;p&gt;How is the baby breathing?&lt;/p&gt;
+  &lt;img src="https://images.unsplash.com/photo-1662624914069-a5cb84d7c386?q=80&amp;w=800"&gt;
+
+  &lt;div class="options"&gt;
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="respiration" value="0"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;No breathing&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="respiration" value="1"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Weak breathing&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+
+    &lt;label class="option"&gt;
+      &lt;input type="radio" name="respiration" value="2"&gt;
+      &lt;div class="radio"&gt;&lt;/div&gt;
+      &lt;span&gt;&lt;strong&gt;Strong cry&lt;/strong&gt;&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="buttons"&gt;
+    &lt;button onclick="prevStep()"&gt;Back&lt;/button&gt;
+    &lt;button onclick="calculate()"&gt;Calculate&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- RESULT --&gt;
+&lt;div class="step"&gt;
+  &lt;div class="result"&gt;
+    &lt;h2&gt;APGAR Score&lt;/h2&gt;
+    &lt;div class="score" id="score"&gt;0&lt;/div&gt;
+    &lt;p id="resultText"&gt;&lt;/p&gt;
+    &lt;button onclick="restart()"&gt;Restart&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+
+<!-- CSS -->
+<div class="panel highlight">
+<h3>CSS Panel</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 900px;
+  padding: 30px;
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+}
+
+/* Steps */
+.step { display: none; }
+.step.active { display: block; }
+
+/* Image */
+.step img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+/* Text */
+h2 { margin-bottom: 10px; }
+p { margin-bottom: 15px; color: #cbd5f5; }
+
+/* OPTIONS */
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #1e293b;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  transform: scale(1.02);
+  background: #334155;
+}
+
+/* Hide default radio */
+.option input {
+  display: none;
+}
+
+/* SKEUOMORPHIC RADIO */
+.radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  box-shadow:
+    inset 2px 2px 5px rgba(0,0,0,0.6),
+    inset -2px -2px 5px rgba(255,255,255,0.05);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radio::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.25s ease;
+}
+
+.option input:checked + .radio::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.option:has(input:checked) {
+  border-color: #22c55e;
+  background: #14532d;
+}
+
+/* Text */
+.option span { display: block; }
+.option strong { display: block; }
+
+/* Buttons */
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #6366f1;
+}
+
+/* Result */
+.result { text-align: center; }
+
+.score {
+  font-size: 3rem;
+  margin: 20px 0;
+}
+
+.good { color: #22c55e; }
+.mid { color: #facc15; }
+.bad { color: #ef4444; }
+</code></pre>
+</div>
+
+<!-- JavaScript -->
+<div class="panel highlight">
+<h3>JavaScript Panel</h3>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>
+let currentStep = 0;
+const steps = document.querySelectorAll(".step");
+
+function showStep(i) {
+  steps.forEach(s => s.classList.remove("active"));
+  steps[i].classList.add("active");
+}
+
+/* =========================
+   STEP NAVIGATION
+   STUDENT TASK: Understand how nextStep() and prevStep() work
+   - nextStep(): go to the next step
+   - prevStep(): go back a step
+========================= */
+
+/* =========================
+   STEP NAVIGATION
+   STUDENT TASK: Complete the nextStep() and prevStep() functions
+   - Think about how to keep track of the current step
+   - To move forward: increase the step number by 1
+   - To move backward: decrease the step number by 1
+   - After updating the step number, display the correct step using showStep()
+   - Optional: prevent moving past the first or last step
+========================= */
+
+// 1. Create a function called nextStep()
+// 2. Inside nextStep(), increase currentStep by 1
+// 3. Call showStep() with the updated currentStep
+
+// 1. Create a function called prevStep()
+// 2. Inside prevStep(), decrease currentStep by 1
+// 3. Call showStep() with the updated currentStep
+
+/* =========================
+   CALCULATE APGAR SCORE
+   STUDENT TASK: Observe how total score is computed
+   - Loops through appearance, pulse, grimace, activity, respiration
+   - Adds selected values
+   - Updates the score display and result text with classes
+========================= */
+
+function calculate() {
+  let total = 0;
+
+  ["appearance","pulse","grimace","activity","respiration"].forEach(name => {
+    let selected = document.querySelector(`input[name="${name}"]:checked`);
+    if (selected) total += parseInt(selected.value);
+  });
+
+  document.getElementById("score").textContent = total;
+
+  let resultText = document.getElementById("resultText");
+
+  /* =========================
+   INTERPRETING APGAR SCORE
+   STUDENT TASK: Display result text and style based on the total score
+   - total is already calculated from the selected options
+   - Decide what message to show for high, medium, and low scores
+   - Assign the appropriate CSS class to style the result
+========================= */
+
+// 1. Check if total score is 7 or higher
+//    - If yes, set the result text to indicate "Healthy (Normal)"
+//    - Assign the CSS class for a positive/healthy result
+
+// 2. Otherwise, check if total score is 4 or higher
+//    - If yes, set the result text to indicate "Moderate distress"
+//    - Assign the CSS class for a warning/medium result
+
+// 3. Otherwise (total score is below 4)
+//    - Set the result text to indicate "Severe distress (Emergency)"
+//    - Assign the CSS class for a critical/severe result
+
+  currentStep = steps.length - 1; // go to result step
+  showStep(currentStep);
+}
+
+/* =========================
+   RESTART FUNCTION
+   STUDENT TASK: See how restart resets the app
+   - Clears all selections
+   - Resets step to the beginning
+========================= */
+
+function restart() {
+  document.querySelectorAll("input").forEach(i => i.checked = false);
+  currentStep = 0;
+  showStep(currentStep);
+}
+</code></pre>
+</div>
+
+<div class="panel highlight">
+<h3>✅ Submission</h3>
+<p>Submit your CodePen link after completing the missing logic.</p>
+</div>
+
+<!-- Working APGAR Application Link -->
+<div class="panel highlight">
+  <h3>👀 Example of Completed APGAR Calculator</h3>
+  <p>This is what your working application should look like. You can interact with it directly using the link below:</p>
+
+  <div style="margin-top:20px; text-align:center;">
+    <a href="apgar_calculator.html" target="_blank">
+      <button style="padding:12px 20px; border:none; border-radius:8px; background:#4f46e5; color:white; cursor:pointer; font-size:16px;">
+        Open Working APGAR App
+      </button>
+    </a>
+  </div>
+</div>
+
+<!-- Button to APGAR Info Page -->
+<div style="margin-top:20px; text-align:center;">
+  <a href="index.html" target="_blank">
+    <button style="padding:10px 18px; border:none; border-radius:8px; background:#6366f1; color:white; cursor:pointer; font-size:15px;">
+      &larr; To APGAR Info Page
+    </button>
+  </a>
+</div>
+
+<script>
+function copyCode(button) {
+  const code = button.nextElementSibling.innerText;
+  navigator.clipboard.writeText(code);
+  button.innerText = "Copied!";
+  button.classList.add("copied");
+  setTimeout(() => {
+    button.innerText = "Copy";
+    button.classList.remove("copied");
+  }, 1500);
+}
+</script>
+
+</body>
+</html>

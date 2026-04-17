@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Tables Mastery</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 50px 30px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #3498db;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+    }
+
+    table th, table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table th {
+      background: #3498db;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+
+    table tr:hover {
+      background: #d1e7fd;
+    }
+
+    footer {
+      text-align: center;
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>HTML Tables Mastery</h1>
+    <nav>
+      <a href="#basic-table">Basic</a>
+      <a href="#colspan-table">Colspan</a>
+      <a href="#rowspan-table">Rowspan</a>
+      <a href="#combined-table">Combined</a>
+    </nav>
+  </header>
+
+  <!-- BASIC TABLE -->
+  <section id="basic-table">
+    <h2>1. Basic Table</h2>
+    <p>A simple table showing student data:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Course</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Alice</td>
+          <td>Web Dev</td>
+          <td>85</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bob</td>
+          <td>HTML Basics</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Charlie</td>
+          <td>CSS</td>
+          <td>78</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- COLSPAN TABLE -->
+  <section id="colspan-table">
+    <h2>2. Table with Colspan</h2>
+    <p>Grouping headers using <code>colspan</code>:</p>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th colspan="2">Name & Course</th>
+        <th>Score</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Alice</td>
+        <td>Web Dev</td>
+        <td>85</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Bob</td>
+        <td>HTML Basics</td>
+        <td>90</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ROWSPAN TABLE -->
+  <section id="rowspan-table">
+    <h2>3. Table with Rowspan</h2>
+    <p>Sharing ID across multiple rows using <code>rowspan</code>:</p>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Score</th>
+      </tr>
+      <tr>
+        <td rowspan="2">1</td>
+        <td>Alice</td>
+        <td>Web Dev</td>
+        <td>85</td>
+      </tr>
+      <tr>
+        <td>Bob</td>
+        <td>HTML Basics</td>
+        <td>90</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Charlie</td>
+        <td>CSS</td>
+        <td>78</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- COMBINED TABLE -->
+  <section id="combined-table">
+    <h2>4. Combined Table (Colspan + Rowspan)</h2>
+    <p>Advanced example combining <code>rowspan</code> and <code>colspan</code>:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">ID</th>
+          <th colspan="2">Student Info</th>
+          <th rowspan="2">Score</th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th>Course</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Alice</td>
+          <td>Web Dev</td>
+          <td>85</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bob</td>
+          <td>HTML Basics</td>
+          <td>90</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Charlie</td>
+          <td>CSS</td>
+          <td>78</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <p>© 2026 HTML Tables Mastery</p>
+  </footer>
+
+</body>
+</html>

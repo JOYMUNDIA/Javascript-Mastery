@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes Coming Soon</title>
+
+<style>
+/* --------------- RESET --------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  background: linear-gradient(120deg,#0f172a,#1c1c1c,#0f172a);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* --------------- BACKGROUND ANIMATION --------------- */
+@keyframes gradientMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+/* --------------- CARD --------------- */
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(25px);
+  padding: 3rem;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  max-width: 500px;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0,255,255,0.3);
+}
+
+/* --------------- TEXT --------------- */
+.card h1 {
+  font-size: 2.5rem;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #ff00ff;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  color: #ff00ff;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* --------------- BUTTON --------------- */
+.button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg,#00f0ff,#ff00ff);
+  transition: 0.3s;
+}
+
+.button:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* --------------- FOOTER --------------- */
+footer {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* --------------- RESPONSIVE --------------- */
+@media(max-width:600px) {
+  .card h1 {
+    font-size: 2rem;
+  }
+  .card h2 {
+    font-size: 1.2rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Coming Soon ⏳</h1>
+  <h2>Move from Noob → Pro</h2>
+  <p>Exciting JavaScript notes and tutorials are on the way! Learn step by step from basic concepts like variables and operators to advanced interactive animations.</p>
+  <a href="../index.html" class="button">Back to Home</a>
+</div>
+
+<footer>
+  © 2026 JavaScript Notes Hub | Keep Learning
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

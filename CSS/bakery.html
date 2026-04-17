@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delicious Bakery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Roboto', sans-serif; background-color: #fff8f0; color: #333; }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: #ff6f61;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      color: white;
+    }
+    .sidebar h2 { padding-left: 20px; margin-bottom: 20px; }
+    .sidebar ul { list-style: none; padding-left: 20px; }
+    .sidebar ul li a { display: block; color: white; text-decoration: none; padding: 10px 0; transition: 0.2s; }
+    .sidebar ul li a:hover { color: #fff3ef; }
+    .close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; background: none; border: none; color: white; cursor: pointer; }
+
+    /* Hamburger */
+    .hamburger {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 1001;
+    }
+
+    /* Hero Section */
+    header .hero {
+      position: relative;
+      height: 400px;
+      background-image: url('https://images.unsplash.com/photo-1583338917451-face2751d8d5?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    header .hero-overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+    }
+    header .hero h1 { font-family: 'Pacifico', cursive; font-size: 3rem; margin-bottom: 0.5rem; }
+    header .hero p { font-size: 1.2rem; }
+    @media (max-width: 600px) {
+      header .hero h1 { font-size: 2.2rem; }
+      header .hero-overlay { padding: 1rem 2rem; }
+    }
+
+    /* Products Section */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card-content { padding: 1.5rem; text-align: center; }
+    .card-content h3 { margin-bottom: 0.5rem; color: #ff6f61; }
+    .card-content p { font-size: 0.95rem; margin-bottom: 1rem; color: #666; }
+    .card-content button {
+      background-color: #ff6f61;
+      border: none;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .card-content button:hover { background-color: #e55b50; }
+
+    /* Footer */
+    footer { text-align: center; padding: 2rem; background-color: #fff3ef; margin-top: 2rem; color: #555; }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <button class="close-btn" onclick="toggleSidebar()">×</button>
+  <h2>Menu</h2>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Hamburger Button -->
+<button id="hamburger" class="hamburger" onclick="toggleSidebar()">☰</button>
+
+<!-- Header Hero -->
+<header>
+  <div class="hero">
+    <div class="hero-overlay">
+      <h1>Delicious Bakery</h1>
+      <p>Freshly baked goodies delivered with love</p>
+    </div>
+  </div>
+</header>
+
+<!-- Products Section -->
+<section class="products">
+  <div id="chocolateCake" class="card product-card">
+    <img src="https://images.unsplash.com/photo-1709195902163-7eee13e78970?q=80&w=1046&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Chocolate Cake">
+    <div class="card-content">
+      <h3>Chocolate Cake</h3>
+      <p>Rich, creamy chocolate cake topped with luscious ganache.</p>
+      <button>Order Now</button>
+    </div>
+  </div>
+
+  <div id="vanillaCupcakes" class="card product-card">
+    <img src="https://images.unsplash.com/photo-1599785209707-a456fc1337bb?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Vanilla Cupcakes">
+    <div class="card-content">
+      <h3>Vanilla Cupcakes</h3>
+      <p>Soft vanilla cupcakes with a swirl of buttercream frosting.</p>
+      <button>Order Now</button>
+    </div>
+  </div>
+
+  <div id="butteryCroissants" class="card product-card">
+    <img src="https://images.unsplash.com/photo-1691480162735-9b91238080f6?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Buttery Croissants">
+    <div class="card-content">
+      <h3>Buttery Croissants</h3>
+      <p>Flaky, golden croissants perfect for breakfast or snack time.</p>
+      <button>Order Now</button>
+    </div>
+  </div>
+
+  <div id="colorfulMacarons" class="card product-card">
+    <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?q=80&w=759&auto=format&fit=crop&ixlib=rb-4.1.0" alt="Colorful Macarons">
+    <div class="card-content">
+      <h3>Colorful Macarons</h3>
+      <p>Delicate French macarons in an assortment of flavors and colors.</p>
+      <button>Order Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  &copy; 2026 Delicious Bakery. All rights reserved.
+</footer>
+
+<script>
+  // Sidebar toggle
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById('hamburger');
+    if (sidebar.style.width === '250px') {
+      sidebar.style.width = '0';
+      hamburger.style.display = 'block';
+    } else {
+      sidebar.style.width = '250px';
+      hamburger.style.display = 'none';
+    }
+  }
+
+  // --- Teaching DOM Selection ---
+  console.log('--- Teaching DOM Selection ---');
+
+  // a) By ID
+  let chocolate = document.getElementById('chocolateCake');
+  chocolate.addEventListener('click', () => {
+    console.log('By ID: Chocolate Cake clicked!');
+  });
+
+  // b) By Class
+  let productCards = document.getElementsByClassName('product-card');
+  productCards[1].addEventListener('click', () => {
+    console.log('By Class: Vanilla Cupcakes clicked!');
+  });
+
+  // c) By Tag
+  let divs = document.getElementsByTagName('div');
+  console.log('By Tag: Total div elements on page:', divs.length);
+
+  // d) Query Selector
+  let firstCard = document.querySelector('.product-card'); // First match
+  firstCard.addEventListener('click', () => {
+    console.log('By Query Selector: First product card clicked!');
+  });
+
+  let allCards = document.querySelectorAll('.product-card'); // NodeList of all
+  allCards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      console.log(`By QuerySelectorAll: Card ${index + 1} clicked (${card.querySelector('h3').innerText})`);
+    });
+  });
+
+  // --- Order Button Logic with 30s reset ---
+  const orderButtons = document.querySelectorAll('.card-content button');
+
+  orderButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent triggering card click events
+      const originalText = button.innerText;
+      button.innerText = 'Order Placed';
+      button.disabled = true;
+      button.style.backgroundColor = '#4CAF50';
+      button.style.cursor = 'default';
+
+      // Reset after 3 seconds
+      setTimeout(() => {
+        button.innerText = originalText;
+        button.disabled = false;
+        button.style.backgroundColor = '#ff6f61';
+        button.style.cursor = 'pointer';
+      }, 3000); // 3000ms = 3 seconds
+    });
+  });
+
+  // Getting elements by their class name and index position
+  let cardItemz = document.getElementsByClassName('card');
+  let FirstCardItem = cardItemz[0];
+  console.log('The first card item is the following:', FirstCardItem);
+
+  let ThirdCardItem = cardItemz[2];
+  console.log('The third card item is the following:', ThirdCardItem);
+
+  let LastCardItem = cardItemz[3];
+  console.log('The last card item is the following:', LastCardItem);
+</script>
+
+</body>
+</html>

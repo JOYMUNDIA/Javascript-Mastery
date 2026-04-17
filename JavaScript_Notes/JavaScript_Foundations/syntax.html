@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Inputs, Outputs, and Comments - Complete Guide</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: Console Output with <code>console.log()</code></h2>
+
+<p>
+The easiest way to see what your code is doing is to print messages to the console.
+</p>
+
+<pre>
+console.log("Hello, world!");
+console.log(42);
+console.log(true);
+</pre>
+
+<p>
+- Think of <code>console.log()</code> as a “debug window” where your program tells you what’s happening.<br>
+- You can print strings, numbers, booleans, and even variables:
+</p>
+
+<pre>
+let name = "Alice";
+console.log("Hello " + name);
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Print your favorite color and your age in two separate <code>console.log()</code> statements.
+</div>
+</section>
+
+<section>
+<h2>Step 2: User Input with <code>prompt()</code></h2>
+
+<p>
+JavaScript can ask the user to type something using <code>prompt()</code>.
+</p>
+
+<pre>
+let name = prompt("What is your name?");
+console.log("Hello, " + name + "!");
+</pre>
+
+<p>
+- The value returned by <code>prompt</code> is always a string.<br>
+- You can store it in a variable and use it later.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Ask the user for their favorite number and print it back with <code>console.log()</code>.
+</div>
+</section>
+
+<section>
+<h2>Step 3: Converting Input</h2>
+
+<p>
+Since <code>prompt()</code> always returns a string, you need to convert it for calculations.
+</p>
+
+<pre>
+let num1 = Number(prompt("Enter a number:"));
+let num2 = Number(prompt("Enter another number:"));
+console.log("The sum is: " + (num1 + num2));
+</pre>
+
+<p>
+- <code>Number()</code> converts a string to a number.<br>
+- Other conversions: <code>String()</code>, <code>Boolean()</code>.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Ask the user for their birth year and calculate their age.
+</div>
+</section>
+
+<section>
+<h2>Step 4: Comments</h2>
+
+<p>
+Comments are notes you leave in your code. They don’t run, but help you and others understand the code.
+</p>
+
+<h3>Single-Line Comments</h3>
+<pre>
+// This is a single-line comment
+console.log("Hello"); // Comment after code
+</pre>
+
+<h3>Multi-Line Comments</h3>
+<pre>
+/*
+This is a multi-line comment.
+You can write multiple lines here.
+*/
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Add a comment above each <code>console.log</code> statement explaining what it does.
+</div>
+</section>
+
+<section>
+<h2>Step 5: Doc Strings / Documentation Comments</h2>
+
+<p>
+Doc strings are special multi-line comments that explain functions, parameters, and purpose.
+</p>
+
+<pre>
+/**
+ * Adds two numbers and returns the result
+ * @param {number} a - first number
+ * @param {number} b - second number
+ * @returns {number} sum of a and b
+ */
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(5, 7)); // 12
+</pre>
+
+<p>
+- Useful for teams or when writing libraries.<br>
+- Many IDEs (VS Code, WebStorm) can read doc strings and show hints.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a doc string for a function that multiplies two numbers.
+</div>
+</section>
+
+<section>
+<h2>Step 6: Mental Model – Inputs and Outputs</h2>
+
+<p>
+Think of your program as a machine:
+</p>
+
+<ul>
+<li><strong>Inputs:</strong> <code>prompt()</code> or function parameters</li>
+<li><strong>Engine:</strong> your code logic</li>
+<li><strong>Outputs:</strong> <code>console.log()</code> or <code>return</code></li>
+</ul>
+
+<p>
+Comments are like labels on the machine — they don’t affect how it works but help you and others understand it.
+</p>
+
+<div class="challenge">
+<strong>Mastery Challenge:</strong>  
+Write a small program that:
+<ul>
+<li>Asks the user for their name and birth year</li>
+<li>Calculates their age</li>
+<li>Prints a greeting with their name and age</li>
+<li>Add comments explaining each step</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Inputs, Outputs, and Comments";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+  if (forward) {
+    index++;
+    if (index >= text.length) {
+      forward = false;
+      setTimeout(typeLoop, 1500);
+      return;
+    }
+  } else {
+    index--;
+    if (index <= 0) forward = true;
+  }
+
+  typewriter.textContent = text.substring(0, index + 1);
+  setTimeout(typeLoop, forward ? 100 : 50);
+}
+
+typeLoop();
+</script>
+
+</body>
+</html>

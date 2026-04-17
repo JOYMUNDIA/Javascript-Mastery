@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Display Interactive Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background: #f0f4f8;
+  color: #333;
+}
+.container { width: 90%; max-width: 1200px; margin: auto; padding: 50px 0; }
+
+/* About */
+.about-section {
+  display: flex;
+  gap: 40px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  margin-bottom: 50px;
+}
+.about-section img { width: 50%; border-radius: 12px; }
+.about-text { width: 50%; }
+
+/* Controls */
+.controls button {
+  padding: 10px;
+  margin: 5px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.controls .active { background: #0d3a8c; }
+
+/* Demo */
+.demo-content {
+  border: 2px dashed red;
+  padding: 10px;
+  background: #fafafa;
+}
+.demo-content img { width: 100%; }
+
+/* Displays */
+.block { display:block; }
+.inline { display:inline; }
+.inline-block { display:inline-block; width:400px; }
+.flex { display:flex; }
+.inline-flex { display:inline-flex; }
+.grid { display:grid; grid-template-columns:1fr; }
+.inline-grid { display:inline-grid; grid-template-columns:1fr; }
+
+/* UI */
+.additional-properties {
+  background:#e8f0fe;
+  padding:15px;
+  margin:15px 0;
+  border-radius:8px;
+}
+.explanation {
+  background:#e8f0fe;
+  padding:15px;
+  border-radius:8px;
+  margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ABOUT -->
+<section class="about-section">
+<img src="https://images.unsplash.com/photo-1665214057529-81877a586dda?q=80&w=1197&auto=format&fit=crop">
+<div class="about-text">
+<h1>About Gymnastics</h1>
+<p>Gymnastics is a captivating sport that combines strength, flexibility, balance, and grace. Each movement demonstrates remarkable control and athletic artistry.</p>
+<p>Whether practiced for competition or fitness, gymnastics challenges both the mind and the body, enhancing coordination, posture, and overall physical health.</p>
+<p>From flips and handstands to floor routines and apparatus work, gymnastics offers endless opportunities for growth and achievement.</p>
+</div>
+</section>
+
+<!-- DEMO -->
+<section>
+<h2>CSS Display Demo</h2>
+
+<div class="controls">
+<button data-display="block" class="active">Block</button>
+<button data-display="inline">Inline</button>
+<button data-display="inline-block">Inline-Block</button>
+<button data-display="flex">Flex</button>
+<button data-display="inline-flex">Inline-Flex</button>
+<button data-display="grid">Grid</button>
+<button data-display="inline-grid">Inline-Grid</button>
+</div>
+
+<div class="additional-properties" id="props">
+<label id="dir"><input type="checkbox" id="flexDirection"> flex-direction: column</label>
+<label id="wrap"><input type="checkbox" id="flexWrap"> flex-wrap: wrap</label>
+<label id="gap"><input type="checkbox" id="gapCheck"> gap: 20px</label>
+<label id="cols"><input type="checkbox" id="gridCols"> 2 columns</label>
+<label id="gGap"><input type="checkbox" id="gridGap"> gap: 20px</label>
+</div>
+
+<div class="demo-content block" id="demo">
+<img src="https://images.unsplash.com/photo-1665214057529-81877a586dda?q=80&w=1197&auto=format&fit=crop">
+<h1>About Gymnastics</h1>
+<p>Gymnastics is a captivating sport that combines strength, flexibility, balance, and grace. Each movement demonstrates remarkable control and athletic artistry.</p>
+<p>Whether practiced for competition or fitness, gymnastics challenges both the mind and the body, enhancing coordination, posture, and overall physical health.</p>
+<p>From flips and handstands to floor routines and apparatus work, gymnastics offers endless opportunities for growth and achievement.</p>
+</div>
+
+<div class="explanation" id="explanation"></div>
+
+</section>
+
+</div>
+
+<script>
+const demo = document.getElementById("demo");
+const explanation = document.getElementById("explanation");
+
+const flexDirection = document.getElementById("flexDirection");
+const flexWrap = document.getElementById("flexWrap");
+const gapCheck = document.getElementById("gapCheck");
+const gridCols = document.getElementById("gridCols");
+const gridGap = document.getElementById("gridGap");
+
+const labels = {
+dir: document.getElementById("dir"),
+wrap: document.getElementById("wrap"),
+gap: document.getElementById("gap"),
+cols: document.getElementById("cols"),
+gGap: document.getElementById("gGap")
+};
+
+const explanations = {
+block: `
+<strong>BLOCK:</strong><br><br>
+- Elements stack vertically (top to bottom)<br>
+- Each element takes FULL width of the container<br>
+- You can control width, height, margin, padding easily<br><br>
+👉 This is the default behavior of divs, paragraphs, headings.<br>
+👉 Notice how the image and text sit one under another.
+`,
+
+inline: `
+<strong>INLINE:</strong><br><br>
+- Elements behave like TEXT in a sentence<br>
+- They sit SIDE BY SIDE horizontally<br>
+- They IGNORE width and height settings<br><br>
+👉 The container shrinks tightly around content<br>
+👉 You cannot push elements vertically with margin-top<br><br>
+💡 Think of inline like words in a paragraph.
+`,
+
+"inline-block": `
+<strong>INLINE-BLOCK:</strong><br><br>
+- Sits INLINE (side by side like text)<br>
+- BUT respects width and height<br><br>
+👉 This is the “best of both worlds”<br>
+👉 Used for buttons, cards, nav items<br><br>
+💡 Difference from inline:
+inline = no size control ❌<br>
+inline-block = full size control ✅
+`,
+
+flex: `
+<strong>FLEX:</strong><br><br>
+- Default direction = ROW (left → right)<br>
+- Items sit side by side automatically<br><br>
+👉 You can change direction using checkbox<br>
+👉 You can wrap items onto new lines<br><br>
+💡 This is the most important layout system in modern CSS.
+`,
+
+"inline-flex": `
+<strong>INLINE-FLEX:</strong><br><br>
+- Same as flex internally<br>
+- BUT the container behaves like inline<br><br>
+👉 Rarely used, but useful in tight layouts
+`,
+
+grid: `
+<strong>GRID:</strong><br><br>
+- Works in ROWS and COLUMNS<br>
+- You define structure explicitly<br><br>
+👉 Perfect for layouts like galleries, dashboards<br>
+👉 Much more control than flex
+`,
+
+"inline-grid": `
+<strong>INLINE-GRID:</strong><br><br>
+- Same as grid<br>
+- But container behaves inline<br><br>
+👉 Rare, but useful for compact layouts
+`
+};
+
+const propertyMap = {
+flex:["dir","wrap","gap"],
+"inline-flex":["dir","wrap","gap"],
+grid:["cols","gGap"],
+"inline-grid":["cols","gGap"]
+};
+
+function updateUI(type){
+Object.values(labels).forEach(l=>l.style.display="none");
+
+if(propertyMap[type]){
+propertyMap[type].forEach(k=>labels[k].style.display="block");
+document.getElementById("props").style.display="block";
+}else{
+document.getElementById("props").style.display="none";
+}
+}
+
+document.querySelectorAll("button").forEach(btn=>{
+btn.onclick=()=>{
+const type=btn.dataset.display;
+
+demo.className="demo-content "+type;
+explanation.innerHTML=explanations[type];
+
+demo.style="";
+[flexDirection,flexWrap,gapCheck,gridCols,gridGap].forEach(c=>c.checked=false);
+
+updateUI(type);
+
+document.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+};
+});
+
+/* Live updates */
+flexDirection.onchange=e=>demo.style.flexDirection=e.target.checked?"column":"";
+flexWrap.onchange=e=>demo.style.flexWrap=e.target.checked?"wrap":"";
+gapCheck.onchange=e=>demo.style.gap=e.target.checked?"20px":"";
+gridCols.onchange=e=>demo.style.gridTemplateColumns=e.target.checked?"1fr 1fr":"";
+gridGap.onchange=e=>demo.style.gap=e.target.checked?"20px":"";
+
+updateUI("block");
+explanation.innerHTML = explanations["block"];
+</script>
+
+</body>
+</html>

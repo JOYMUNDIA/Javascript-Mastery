@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS Learning Hub</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+        display: flex;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e1e2f, #2b5876);
+        color: white;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        position: fixed;
+        height: 100%;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .sidebar button {
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .sidebar button:hover {
+        background: #00c6ff;
+        transform: scale(1.05);
+    }
+
+    /* Main content */
+    .content {
+        margin-left: 260px;
+        padding: 40px;
+        flex: 1;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.08);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        margin-bottom: 20px;
+    }
+
+    .card h1 {
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background: #00c6ff;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: #1e1e2f;
+        padding: 30px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .close {
+        float: right;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+        .sidebar {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+
+        .content {
+            margin-left: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>JS Lessons</h2>
+    <button onclick="showLesson('onclick')">onclick</button>
+    <button onclick="showLesson('listener')">addEventListener</button>
+    <button onclick="showLesson('getid')">getElementById</button>
+    <button onclick="openModal()">Open Modal</button>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+    <div class="card" id="display">
+        <h1>Welcome 👋</h1>
+        <p>Click a topic from the sidebar to learn JavaScript basics interactively.</p>
+    </div>
+
+    <div class="card">
+        <h2>Try Interaction</h2>
+        <button class="btn" onclick="changeText()">Click Me (onclick)</button>
+        <button class="btn" id="listenerBtn">Click Me (eventListener)</button>
+        <p id="output">Result appears here...</p>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>🎉 Modal Popup</h2>
+        <p>This is a modern modal using JavaScript!</p>
+    </div>
+</div>
+
+<script>
+    // Change text using onclick
+    function changeText() {
+        document.getElementById("output").innerText = "Changed using onclick!";
+    }
+
+    // addEventListener example
+    document.getElementById("listenerBtn").addEventListener("click", function() {
+        document.getElementById("output").innerText = "Changed using addEventListener!";
+    });
+
+    // Sidebar lesson switch
+    function showLesson(type) {
+        let content = document.getElementById("display");
+
+        if (type === "onclick") {
+            content.innerHTML = `
+                <h1>onclick</h1>
+                <p>Used directly in HTML to trigger functions.</p>
+                <code>&lt;button onclick="myFunction()"&gt;</code>
+            `;
+        }
+
+        if (type === "listener") {
+            content.innerHTML = `
+                <h1>addEventListener</h1>
+                <p>Best practice for handling events.</p>
+                <code>element.addEventListener("click", function(){})</code>
+            `;
+        }
+
+        if (type === "getid") {
+            content.innerHTML = `
+                <h1>getElementById</h1>
+                <p>Select elements by ID.</p>
+                <code>document.getElementById("idName")</code>
+            `;
+        }
+    }
+
+    // Modal controls
+    function openModal() {
+        document.getElementById("myModal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    // Close modal on outside click
+    window.onclick = function(e) {
+        let modal = document.getElementById("myModal");
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

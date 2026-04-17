@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Step-by-step guide to creating a software product with societal impact">
+    <title>Software Product Development Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- CHALKBOARD HAMBURGER WITH DRAWING -->
+<div class="menu-wrapper" id="menuButton">
+  <div class="board-frame">
+    <div class="board">
+      <div class="hamburger">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+        <!-- Actual chalk X -->
+        <div class="x-line x-line1"></div>
+        <div class="x-line x-line2"></div>
+      </div>
+    </div>
+    <div class="tray">
+      <div class="chalk" id="chalk"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="side-menu">
+  <a href="https://joymundia.github.io/Main-Javascript-link/">Home</a>
+  <a href="https://joymundia.github.io/Javascript-Curriculum/">📘 Curriculum</a>
+  <a href="https://joymundia.github.io/Software-Development-for-Business/" class="active">📖 Software Development Guide</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#assignments">📝 Assignments</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#notes">📚 Notes</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#projects">🚀 Guided Projects</a>
+  <a href="https://joymundia.github.io/Main-Javascript-link/#guide">📖 Expectations</a>
+</div>
+
+    <header>
+        <div class="container">
+            <h1>Software Product Development: A Step-by-Step Guide</h1>
+            <p>Transform your ideas into a product that generates revenue and creates societal impact.</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <section class="step" id="step1">
+                <h2>Step 1: Define Your Objective and Purpose</h2>
+                <p><strong>Objective:</strong> Before diving into idea generation, ask yourself some important foundational questions:</p>
+                <ol>
+                    <li><strong>What do I want to achieve with this software product?</strong><br>
+                        Revenue generation is key, but also, how do you want this product to affect society? Do you want it to solve a specific problem, reduce inefficiency, or help underserved communities?</li>
+                    <li><strong>What market or industry am I most interested in?</strong><br>
+                        It could be healthcare, education, sustainability, finance, etc. Aligning your passion or expertise with a particular market will increase your chances of success.</li>
+                    <li><strong>What value will my product provide to customers?</strong><br>
+                        Think about what problems you want to solve and how your product will make a difference in people’s lives.</li>
+                </ol>
+
+                <!-- Example Guide Section Below Step 1 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Personal Productivity & Mental Health App</h3>
+                    <p><strong>Objective:</strong> Create a software product that helps individuals reflect on their daily experiences, boost personal productivity, improve mental health, and track progress toward goals. Users will journal their day, rate their feelings and activities, and receive personalized insights and suggestions for improvement.</p>
+
+                    <p><strong>Revenue and Societal Impact:</strong></p>
+                    <ul>
+                        <li><strong>Revenue:</strong> Monetize the app through a subscription model (e.g., premium features, personalized insights, etc.).</li>
+                        <li><strong>Societal Impact:</strong> Encourage mental health awareness, help users practice mindfulness, and foster positive daily habits. The app can include features like gratitude journaling, emotional well-being tracking, and reminders for self-care, which will contribute to users' overall happiness and resilience.</li>
+                    </ul>
+
+                    <p><strong>Target Audience:</strong> People interested in self-improvement, mindfulness, mental health, or personal development. This could include students, professionals, parents, and anyone looking to reflect on their day and track emotional progress over time.</p>
+                    
+                    <!-- Example Image -->
+                    <img src="example-product-image.jpg" alt="App interface showcasing journaling and emotional tracking" class="example-image">
+                </section>
+            </section>
+
+            
+            <section class="step" id="step2">
+                <h2>Step 2: Conduct Market Research</h2>
+                <p>Market research is essential to identify potential ideas and assess their viability.</p>
+                <ol>
+                    <li><strong>Identify Problems in the Market:</strong><br>
+                        Talk to people in different industries, including potential customers, subject matter experts, and entrepreneurs. Use surveys, focus groups, or online forums to understand the problems people face in their daily lives or in their work environments.</li>
+                    <li><strong>Analyze Trends and Opportunities:</strong><br>
+                        Look at current trends and future predictions in different sectors (e.g., healthcare, AI, remote work, climate tech). Tools like Google Trends, Gartner’s Hype Cycle, and social media can help spot emerging areas where software products can have an impact.</li>
+                    <li><strong>Research Existing Solutions:</strong><br>
+                        Investigate what solutions are currently available. Understand their strengths and weaknesses. This will help you discover gaps that you can potentially fill with your product.</li>
+                    <li><strong>Assess the Market Size:</strong><br>
+                        You want to ensure the market is big enough to support your business. Tools like Statista, industry reports, and even LinkedIn insights can give you data on market size and potential.</li>
+                    <li><strong>Understand Your Target Audience:</strong><br>
+                        Develop user personas: who are the people you are targeting? What do they do? What are their pain points? This helps refine your product’s design and functionality to meet their specific needs.</li>
+                </ol>
+
+                <!-- Example Guide for Step 2 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Market Research for Mental Health App</h3>
+                    
+                    <h4>Identify Problems in the Market</h4>
+                    <p>Many people struggle with reflecting on their day or have trouble tracking their emotions and mental well-being.</p>
+                    <p>There are many productivity apps, but few focus specifically on daily emotional reflection, personal growth, or mental health tracking.</p>
+
+                    <h4>Analyze Trends and Opportunities</h4>
+                    <p>The rise of wellness apps and mental health tools is a growing trend. Apps like Daylio (a micro-diary), Reflectly (AI-based journal), and Gratitude Journal are seeing success in this space.</p>
+                    <p>There's a trend towards self-care, mindfulness, and emotional awareness, especially among millennials and Gen Z.</p>
+
+                    <h4>Research Existing Solutions</h4>
+                    <p><strong>Existing Products:</strong></p>
+                    <ul>
+                        <li><strong>Daylio:</strong> A micro-diary app that tracks moods and activities but doesn’t provide much analysis or goal setting.</li>
+                        <li><strong>Reflectly:</strong> An AI-powered journal that asks questions to help users reflect but lacks in-depth goal tracking or daily insights.</li>
+                        <li><strong>Gratitude Journal:</strong> Focuses on gratitude but not a comprehensive daily reflection tool.</li>
+                    </ul>
+                    <p><strong>Gap:</strong> There’s a gap in apps that offer structured journaling, goal tracking, and personalized insights that connect emotional well-being with goal progress.</p>
+
+                    <h4>Assess the Market Size</h4>
+                    <p>Mental health and wellness apps are booming, with an increasing number of users seeking tools for mindfulness and self-reflection.</p>
+                    <p>According to Statista, the global market for wellness apps is growing steadily, and the mental health app market was valued at over $4 billion in 2021 and is expected to expand rapidly.</p>
+                    <p>This suggests a significant market opportunity.</p>
+
+                    <h4>Understand Your Target Audience</h4>
+                    <p><strong>Primary Users:</strong> People interested in mindfulness, mental health, and personal growth (students, professionals, adults struggling with stress, etc.).</p>
+                    <p><strong>User Persona:</strong> Sarah, a 28-year-old professional, uses a day review app to reflect on her work-life balance, track her mental health, and stay on top of her personal goals. She values insights into how her emotions impact her productivity and wants guidance on managing her well-being.</p>
+                    
+                    <!-- Example Image -->
+                    <img src="market-research-image.jpg" alt="Market research analysis for wellness apps" class="example-image">
+                </section>
+            </section>
+
+            <section class="step" id="step3">
+                <h2>Step 3: Ideation and Validation</h2>
+                <p>Once you have enough market research, it’s time to brainstorm ideas.</p>
+                <ol>
+                    <li><strong>Brainstorm Ideas:</strong><br>
+                        Start by listing potential solutions to the problems you’ve identified. Think creatively, don’t limit yourself just yet. Try tools like mind mapping or affinity diagrams to group ideas.</li>
+                    <li><strong>Evaluate Feasibility:</strong><br>
+                        <strong>Technical feasibility:</strong> Do you have access to the skills needed to build the product? Can you find a team to help, or do you need to hire developers? <br>
+                        <strong>Financial feasibility:</strong> How much will it cost to develop and maintain the product? Does the revenue potential justify the investment?</li>
+                    <li><strong>Rapid Validation:</strong><br>
+                        Create a <strong>Minimum Viable Product (MVP):</strong> Build a simplified version of your product to test whether it solves the target problem effectively. Use platforms like Product Hunt, Reddit, or Facebook groups to get feedback on your MVP from your target audience.</li>
+                    <li><strong>Seek Feedback:</strong><br>
+                        Talk to potential customers and ask if your solution addresses their needs. Collect feedback on pricing, features, and usability. The goal is to validate your assumptions and improve the product accordingly.</li>
+                </ol>
+
+                <!-- Example Guide for Step 3 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Ideation and Validation for Mental Health App</h3>
+
+                    <h4>Brainstorm Ideas</h4>
+                    <p>Users can:</p>
+                    <ul>
+                        <li>Journal their daily activities and emotions.</li>
+                        <li>Rate their mood and productivity levels at the end of the day.</li>
+                        <li>Track progress toward long-term goals.</li>
+                        <li>Receive personalized insights (e.g., “You’re more productive when you sleep 7+ hours”).</li>
+                        <li>Set reminders for self-care and mindfulness practices.</li>
+                        <li>Include mood-based journaling prompts for deeper reflection (e.g., “What went well today?”, “How did you feel during your commute?”).</li>
+                    </ul>
+
+                    <h4>Evaluate Feasibility</h4>
+                    <p><strong>Technical Feasibility:</strong> The app could be built using a cross-platform tool (e.g., Flutter or React Native) to support both iOS and Android users. The core functionalities—journaling, mood tracking, and goal setting—are relatively simple to implement.</p>
+                    <p><strong>Financial Feasibility:</strong> Initial development costs could be kept low with a small team (developer, designer, mental health consultant). Revenue potential comes from a freemium model—users get basic journaling for free, but premium features like personalized insights and goal tracking are behind a paywall.</p>
+
+                    <h4>Rapid Validation</h4>
+                    <p>Build an MVP (Minimum Viable Product) with basic journaling, mood tracking, and goal-setting features.</p>
+                    <p>Launch a beta version to collect user feedback. Platforms like Reddit, Product Hunt, or Facebook groups can help connect with early adopters.</p>
+                    <p>Collect feedback on which features users find most helpful and adjust accordingly.</p>
+
+                    <h4>Seek Feedback</h4>
+                    <p>Send out surveys or directly ask beta testers:</p>
+                    <ul>
+                        <li>What do they like about the app?</li>
+                        <li>What features are missing?</li>
+                        <li>Would they pay for premium features?</li>
+                    </ul>
+                    <p>Use the feedback to iterate and improve the product before scaling.</p>
+
+                    <!-- Example Image -->
+                    <img src="ideation-image.jpg" alt="Brainstorming ideas for mental health app" class="example-image">
+                </section>
+            </section>
+
+            <section class="step" id="step4">
+                <h2>Step 4: Business Model Development</h2>
+                <p>Now, let’s talk about how you can generate revenue from your idea.</p>
+                <ol>
+                    <li><strong>Identify Revenue Streams:</strong><br>
+                        There are several ways to monetize software:
+                        <ul>
+                            <li><strong>Subscription Model:</strong> Charge customers on a recurring basis (e.g., monthly, annually).</li>
+                            <li><strong>Freemium:</strong> Offer a free version with limited features and charge for premium features.</li>
+                            <li><strong>One-Time Payment:</strong> Charge a one-time fee for lifetime access.</li>
+                            <li><strong>Advertising:</strong> Offer the software for free and monetize through ads.</li>
+                            <li><strong>Affiliate Marketing:</strong> Earn revenue by promoting other products/services within your software.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pricing Strategy:</strong><br>
+                        Research what your competitors charge and analyze if your product provides more value, which can justify a higher price. If you’re targeting an underserved market or a niche, consider pricing strategies that are accessible but sustainable for you.</li>
+                    <li><strong>Profitability:</strong><br>
+                        Calculate how many customers you need to reach breakeven and how you’ll scale up. Consider your acquisition costs, customer lifetime value (CLV), and churn rate.</li>
+                    <li><strong>Sustainable Impact:</strong><br>
+                        To have a societal impact, ensure your business model supports long-term sustainability. Think about how you can balance profit and positive societal impact (e.g., through ethical practices, environmental sustainability, etc.).</li>
+                </ol>
+
+                <!-- Example Guide for Step 4 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Business Model Development for Mental Health App</h3>
+
+                    <h4>Identify Revenue Streams</h4>
+                    <ul>
+                        <li><strong>Freemium Model:</strong> Offer basic journaling and mood tracking for free. Charge users a subscription fee for advanced features like:
+                            <ul>
+                                <li>Personalized insights (e.g., emotional trends, productivity advice).</li>
+                                <li>Goal tracking with visual progress reports.</li>
+                                <li>Premium journaling prompts.</li>
+                                <li>Customizable reminders for mindfulness or self-care.</li>
+                            </ul>
+                        </li>
+                        <li><strong>One-Time Purchases:</strong> Option for users to buy specialized journaling packs (e.g., guided journaling for specific mental health needs, productivity challenges, etc.).</li>
+                    </ul>
+
+                    <h4>Pricing Strategy</h4>
+                    <ul>
+                        <li><strong>Basic features are free.</strong></li>
+                        <li><strong>Premium Subscription:</strong> $5–$10 per month for personalized insights, advanced features, and unlimited journaling history.</li>
+                        <li><strong>One-Time Purchases:</strong> $4.99 for guided journaling packs.</li>
+                        <li><strong>Trial Period:</strong> Offer a 7-day free trial for premium features.</li>
+                    </ul>
+
+                    <h4>Profitability</h4>
+                    <p>The app should aim to convert at least 5-10% of free users into paying subscribers. With the growing wellness market, there’s room to scale. Let’s say 10,000 active users, with 5% converting to paying subscribers, generating $25,000–$50,000 per month in recurring revenue.</p>
+
+                    <h4>Sustainable Impact</h4>
+                    <p>Incorporate mental health resources or links to professional help, creating a safe space for users to explore their emotions.</p>
+                    <p>Consider integrating charitable elements, such as donating a portion of the profits to mental health initiatives or offering free access to users in need.</p>
+
+                    <!-- Example Image -->
+                    <img src="business-model-image.jpg" alt="Business model strategies for mental health app" class="example-image">
+                </section>
+            </section>
+
+            <section class="step" id="step5">
+                <h2>Step 5: Technical Development and Design</h2>
+                <p>Now, let’s dive into the actual development and design of your software product.</p>
+                <ol>
+                    <li><strong>Technical Architecture:</strong><br>
+                        Choose the right technology stack. Should you go for a web app, mobile app, or a cross-platform product? Consider cloud infrastructure, scalability, security, and data privacy.</li>
+                    <li><strong>Build a Prototype:</strong><br>
+                        Work with a developer or a team of developers to create a prototype of your software. If you're learning to code, tools like Figma (for UI/UX design) and Bubble (for no-code development) can be helpful to build prototypes. The prototype should demonstrate your product’s core features and functionality.</li>
+                    <li><strong>Iterative Testing:</strong><br>
+                        Test your product regularly with real users. This iterative process will help you refine the design and functionality to meet customer needs.</li>
+                    <li><strong>User Experience (UX) Design:</strong><br>
+                        Keep the design simple and intuitive. A positive user experience is key to customer retention. Tools like Adobe XD and Sketch can help you prototype UI/UX effectively.</li>
+                </ol>
+
+                <!-- Example Guide for Step 5 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Technical Development and Design for Mental Health App</h3>
+
+                    <h4>Technical Architecture</h4>
+                    <p>The app will be a mobile-first application, built with a framework like <strong>Flutter</strong> to support both iOS and Android.</p>
+                    <p>The app will have:</p>
+                    <ul>
+                        <li>A simple, clean UI/UX (users should feel calm and encouraged to journal).</li>
+                        <li>Cloud storage for journal entries (secure and private).</li>
+                        <li>Basic mood-tracking functionality.</li>
+                        <li>A backend to handle premium feature subscriptions.</li>
+                    </ul>
+
+                    <h4>Build a Prototype</h4>
+                    <p>Use <strong>Figma</strong> for UI/UX design and create low-fidelity wireframes.</p>
+                    <p>Develop a prototype with core features (journaling and mood tracking) and collect feedback from initial users.</p>
+
+                    <h4>Iterative Testing</h4>
+                    <p>Test the prototype with a small group of users. Ensure the journal interface is intuitive and the insights are helpful.</p>
+                    <p>Refine based on feedback and iterate regularly.</p>
+
+                    <h4>User Experience (UX) Design</h4>
+                    <p>Keep the design clean, simple, and calming. The color scheme could use soothing pastels.</p>
+                    <p>Include prompts that encourage users to reflect without feeling overwhelmed.</p>
+
+                    <!-- Example Image -->
+                    <img src="technical-development-image.jpg" alt="Technical design for mental health app" class="example-image">
+                </section>
+            </section>
+
+
+            <section class="step" id="step6">
+                <h2>Step 6: Go-to-Market Strategy</h2>
+                <p>Once your product is developed, it’s time to introduce it to the world.</p>
+                <ol>
+                    <li><strong>Branding and Positioning:</strong><br>
+                        Develop a brand identity: logo, tone, and positioning. Ensure it resonates with your target market and reflects your values. Position your product based on the value it provides—how is it different from existing solutions?</li>
+                    <li><strong>Marketing and Sales Strategy:</strong><br>
+                        Develop a marketing plan: content marketing, social media, influencer partnerships, SEO, etc. Identify early adopters who are likely to spread the word and generate buzz.</li>
+                    <li><strong>Launch Plan:</strong><br>
+                        Plan a soft launch (beta testing phase) and use the feedback to improve. After incorporating feedback, go for a larger launch, and focus on PR, digital marketing, and email campaigns.</li>
+                </ol>
+
+                <!-- Example Guide for Step 6 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Go-to-Market Strategy for Mental Health App</h3>
+
+                    <h4>Branding and Positioning</h4>
+                    <p><strong>Brand Identity:</strong> The app could be called “<strong>DayReflect</strong>,” with a calming, minimalist logo and a soft, friendly tone.</p>
+                    <p><strong>Positioning:</strong> Market as a tool for self-improvement and mindfulness that helps users track their emotions and productivity in a meaningful way.</p>
+
+                    <h4>Marketing and Sales Strategy</h4>
+                    <p><strong>Social Media Campaigns:</strong> Focus on Instagram, TikTok, and YouTube, targeting wellness and productivity influencers.</p>
+                    <p><strong>Content Marketing:</strong> Create blog posts about the benefits of journaling, emotional well-being, and productivity.</p>
+                    <p><strong>Influencer Partnerships:</strong> Collaborate with influencers in the wellness, mental health, and productivity niches.</p>
+
+                    <h4>Launch Plan</h4>
+                    <p><strong>Beta Launch:</strong> Release to a select group of users for initial feedback.</p>
+                    <p><strong>Full Launch:</strong> Once feedback is incorporated, launch publicly with an app store optimization (ASO) strategy.</p>
+                    <p><strong>Email Campaign:</strong> Engage users with email sequences offering journaling tips, exclusive insights, and discounts for premium features.</p>
+
+                    <!-- Example Image -->
+                    <img src="go-to-market-strategy-image.jpg" alt="Go-to-market strategy for mental health app" class="example-image">
+                </section>
+            </section>
+
+
+            <section class="step" id="step7">
+                <h2>Step 7: Scaling and Growing</h2>
+                <p>Once you’ve launched and have initial traction, the next step is scaling up.</p>
+                <ol>
+                    <li><strong>Monitor Key Metrics:</strong><br>
+                        Track key performance indicators (KPIs) like user acquisition, retention rates, churn rate, and lifetime value (LTV) to understand your growth trajectory.</li>
+                    <li><strong>Expand Your Features:</strong><br>
+                        Continuously iterate based on customer feedback. Add value with new features that address more customer needs, and stay ahead of competitors.</li>
+                    <li><strong>Marketing Expansion:</strong><br>
+                        Increase marketing spend on digital ads, optimize SEO, and explore new channels for customer acquisition.</li>
+                    <li><strong>Build a Team:</strong><br>
+                        Hire more people to support product development, customer service, sales, and marketing to help scale the business.</li>
+                    <li><strong>Global Expansion:</strong><br>
+                        As you gain traction locally, consider expanding to international markets. Localize your software and marketing to fit new regions.</li>
+                </ol>
+
+                <!-- Example Guide for Step 7 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Scaling and Growing for Mental Health App</h3>
+
+                    <h4>Monitor Key Metrics</h4>
+                    <p>Track user retention, churn rate, and conversion from free to paid subscribers.</p>
+                    <p>Use analytics tools to track in-app activity (e.g., how often users journal, how they rate their moods, etc.).</p>
+
+                    <h4>Enhance Features and Iterate</h4>
+                    <p>Add new journaling prompts, integrate with wearable devices for mood tracking, and introduce new personalized insights based on AI.</p>
+
+                    <h4>Expand Marketing Channels</h4>
+                    <p>Start leveraging paid advertising (e.g., Facebook ads, Google ads) to reach a broader audience.</p>
+
+                    <h4>Build a Team</h4>
+                    <p>As the user base grows, hire customer support staff, content creators, and developers for continued app improvement.</p>
+
+                    <h4>Global Expansion</h4>
+                    <p>Once the app is successful in one region, consider localizing it for other languages and cultures.</p>
+
+                    <!-- Example Image -->
+                    <img src="scaling-and-growing-image.jpg" alt="Scaling and growing strategy for mental health app" class="example-image">
+                </section>
+            </section>
+
+
+            <section class="step" id="step8">
+                <h2>Step 8: Long-Term Strategy and Societal Impact</h2>
+                <p>In the long run, your product should continue benefiting both users and society.</p>
+                <ol>
+                    <li><strong>Long-Term Societal Impact:</strong><br>
+                        Consider partnering with nonprofits or social initiatives. Use a portion of the profits to support a social cause related to your product.</li>
+                    <li><strong>Continuous Feedback Loop:</strong><br>
+                        Stay engaged with users and refine the product over time. Keep your product evolving based on both market changes and customer feedback.</li>
+                </ol>
+
+                <!-- Example Guide for Step 8 -->
+                <section class="example-guide">
+                    <h3>Example Guide: Long-Term Strategy and Societal Impact for Mental Health App</h3>
+
+                    <h4>Social Responsibility</h4>
+                    <p>The app could partner with mental health organizations and offer free access to individuals who are struggling financially.</p>
+
+                    <h4>Feedback Loop</h4>
+                    <p>Continue engaging with users and collecting feedback to make the app more valuable.</p>
+
+                    <!-- Example Image -->
+                    <img src="long-term-strategy-image.jpg" alt="Long-term strategy for societal impact" class="example-image">
+                </section>
+            </section>
+
+
+            <!-- Pagination Controls -->
+            <div class="pagination-controls">
+                <button id="prev" class="pagination-btn" disabled>← Previous</button>
+                <button id="next" class="pagination-btn">Next →</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                &copy; 2026 Software Product Development Guide. All rights reserved.<br>
+                By <a href="https://www.linkedin.com/in/joy-mundia/">Joy Mundia</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+
+        // ============ Hamburger Menu and Sidebar ========== //
+        const menuButton = document.getElementById("menuButton");
+        const sideMenu = document.getElementById("sideMenu");
+
+        // ===== MENU DRAW ANIMATION =====
+        const lines = document.querySelectorAll(".line");
+        const chalk = document.getElementById("chalk");
+
+        function drawLine(line, chalkMove, delay){
+        setTimeout(() => {
+
+            line.style.animation = `drawLine 0.6s forwards`;
+            chalk.style.animation = `${chalkMove} 0.6s forwards`;
+
+        }, delay);
+        }
+
+        // Sequence each line
+        drawLine(lines[0], "chalkMove1", 0);
+        drawLine(lines[1], "chalkMove2", 700);
+        drawLine(lines[2], "chalkMove3", 1400);
+
+        setTimeout(() => {
+        chalk.style.animation = "chalkReturn 0.5s forwards";
+        }, 2100);
+
+        // ===== ONLY TOGGLE SIDEBAR ON HAMBURGER CLICK =====
+        menuButton.addEventListener("click", () => {
+        // Toggle sidebar
+        sideMenu.classList.toggle("active");
+
+        // Toggle hamburger X
+        const hamburger = menuButton.querySelector(".hamburger");
+        hamburger.classList.toggle("active");
+
+        // move chalkboard outward
+        menuButton.classList.toggle("shifted");
+        });
+
+        // JavaScript for pagination functionality
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
+        const nextButton = document.getElementById('next');
+        const prevButton = document.getElementById('prev');
+
+        // Function to show the current step and hide others
+        function updateStepVisibility() {
+            steps.forEach((step, index) => {
+                step.style.display = (index === currentStep) ? 'block' : 'none';
+            });
+
+            // Enable/Disable pagination buttons
+            prevButton.disabled = currentStep === 0;
+            nextButton.disabled = currentStep === steps.length - 1;
+        }
+
+        // Event listeners for pagination buttons
+        nextButton.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateStepVisibility();
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStepVisibility();
+            }
+        });
+
+        // Initialize the page
+        updateStepVisibility();
+    </script>
+</body>
+</html>

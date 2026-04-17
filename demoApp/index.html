@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mental Health and Productivity App">
+    <title>MindReflect - Mental Health & Productivity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MindReflect</h1>
+            <p>Your personal journey to mindfulness and productivity</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="journal-entry" class="card">
+            <div class="container">
+                <h2>Today's Reflection</h2>
+                <textarea id="journalText" placeholder="Write about your day..."></textarea>
+                <div class="mood-rating">
+                    <label for="mood">How are you feeling today?</label>
+                    <input type="range" id="mood" name="mood" min="1" max="5" step="1">
+                    <div class="mood-description">
+                        <span>1 - Very Low</span>
+                        <span>5 - Very High</span>
+                    </div>
+                </div>
+                <button id="saveEntry">Save Entry</button>
+            </div>
+        </section>
+
+        <section id="insights" class="card">
+            <div class="container">
+                <h2>Your Insights</h2>
+                <div id="insightsContent">
+                    <p>No insights available yet.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 MindReflect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

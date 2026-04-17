@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Control Flow - Complete Guide</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: What Is Control Flow?</h2>
+
+<p>
+Control flow is the order in which JavaScript executes code. 
+By default, JS reads code line by line from top to bottom.
+</p>
+
+<p>
+Sometimes we want to make decisions, repeat code, or skip lines — that’s where control flow comes in.
+</p>
+
+<pre>
+console.log("Start");
+console.log("Middle");
+console.log("End");
+</pre>
+
+<p>
+This outputs in order: <strong>Start → Middle → End</strong>.
+</p>
+
+<p>
+But what if we want to skip "Middle" sometimes? That’s where <strong>conditions</strong> come in.
+</p>
+</section>
+
+<section>
+<h2>Step 2: Conditional Statements</h2>
+
+<h3>1️⃣ <code>if</code> Statement</h3>
+
+<p>
+The <code>if</code> statement tells JavaScript: “Do something only if a condition is true.”
+</p>
+
+<pre>
+let age = 20;
+
+if (age >= 18) {
+  console.log("You are an adult.");
+}
+</pre>
+
+<p>
+- The condition <code>age >= 18</code> is evaluated.<br>
+- If it’s true, the code inside the braces <code>{ }</code> runs.<br>
+- Otherwise, JS skips it.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Check if a number is positive. If yes, print “Positive number”.
+</div>
+
+<h3>2️⃣ <code>if…else</code> Statement</h3>
+
+<p>
+Sometimes we want to do one thing if the condition is true, and another if it’s false.
+</p>
+
+<pre>
+let age = 16;
+
+if (age >= 18) {
+  console.log("You are an adult.");
+} else {
+  console.log("You are a minor.");
+}
+</pre>
+
+<p>
+Now JS chooses between two paths based on the condition.
+</p>
+
+<h3>3️⃣ <code>else if</code> Chain</h3>
+
+<p>
+Use <code>else if</code> when you have multiple possibilities.
+</p>
+
+<pre>
+let score = 85;
+
+if (score >= 90) {
+  console.log("Grade A");
+} else if (score >= 75) {
+  console.log("Grade B");
+} else if (score >= 60) {
+  console.log("Grade C");
+} else {
+  console.log("Fail");
+}
+</pre>
+
+<p>
+JS checks conditions in order and executes the first one that is true.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write an <code>if…else if…else</code> to categorize age groups: child, teen, adult, senior.
+</div>
+</section>
+
+<section>
+<h2>Step 3: Switch Statement</h2>
+
+<p>
+The <code>switch</code> statement is a cleaner way to check multiple discrete values.
+</p>
+
+<pre>
+let day = "Tuesday";
+
+switch(day) {
+  case "Monday":
+    console.log("Start of the week");
+    break;
+  case "Tuesday":
+    console.log("Second day");
+    break;
+  case "Friday":
+    console.log("Almost weekend");
+    break;
+  default:
+    console.log("Some other day");
+}
+</pre>
+
+<p>
+- JS compares <code>day</code> with each <code>case</code>.<br>
+- <code>break</code> stops JS from checking the next cases.<br>
+- <code>default</code> runs if none of the cases match.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Use a switch statement to print a message for each season: "Winter", "Spring", "Summer", "Fall".
+</div>
+</section>
+
+<section>
+<h2>Step 4: Loops – Repeating Code</h2>
+
+<h3>1️⃣ <code>for</code> Loop</h3>
+
+<p>
+The <code>for</code> loop repeats code a fixed number of times.
+</p>
+
+<pre>
+for (let i = 1; i <= 5; i++) {
+  console.log("Iteration " + i);
+}
+</pre>
+
+<p>
+- <code>i = 1</code> → start value<br>
+- <code>i <= 5</code> → condition to continue<br>
+- <code>i++</code> → increment after each loop
+</p>
+
+<h3>2️⃣ <code>while</code> Loop</h3>
+
+<p>
+Repeats code as long as a condition is true.
+</p>
+
+<pre>
+let count = 1;
+
+while (count <= 5) {
+  console.log("Count is " + count);
+  count++;
+}
+</pre>
+
+<h3>3️⃣ <code>do…while</code> Loop</h3>
+
+<p>
+Runs the code at least once, then checks the condition.
+</p>
+
+<pre>
+let count = 1;
+
+do {
+  console.log("Count is " + count);
+  count++;
+} while (count <= 5);
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Print numbers 1–10 using <code>for</code>, <code>while</code>, and <code>do…while</code>.
+</div>
+</section>
+
+<section>
+<h2>Step 5: Loop Control – break & continue</h2>
+
+<h3><code>break</code></h3>
+<p>Stops the loop completely:</p>
+
+<pre>
+for (let i = 1; i <= 10; i++) {
+  if (i === 5) break;
+  console.log(i);
+}
+// Prints 1 2 3 4
+</pre>
+
+<h3><code>continue</code></h3>
+<p>Skips current iteration, continues with next:</p>
+
+<pre>
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) continue;
+  console.log(i);
+}
+// Prints 1 2 4 5
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Print numbers 1–10 but skip multiples of 3 using <code>continue</code>.
+</div>
+</section>
+
+<section>
+<h2>Step 6: Nested Control Flow</h2>
+
+<p>
+You can put conditions and loops inside each other to create complex logic.
+</p>
+
+<pre>
+let num = 7;
+
+if (num > 0) {
+  for (let i = 1; i <= num; i++) {
+    if (i % 2 === 0) {
+      console.log(i + " is even");
+    } else {
+      console.log(i + " is odd");
+    }
+  }
+}
+</pre>
+
+<p>
+- Outer <code>if</code> checks positivity.<br>
+- Inner <code>for</code> loops through numbers.<br>
+- Nested <code>if</code> checks odd/even.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a nested loop that prints a multiplication table for numbers 1–5.
+</div>
+</section>
+
+<section>
+<h2>Step 7: Mental Model – The Roadmap</h2>
+
+<p>
+Think of control flow as traffic lights and road signs for your code:
+</p>
+
+<ul>
+<li><strong>if / else:</strong> make decisions at intersections.</li>
+<li><strong>switch:</strong> choose one of many roads quickly.</li>
+<li><strong>loops:</strong> drive in a circle repeatedly.</li>
+<li><strong>break / continue:</strong> skip or stop certain streets.</li>
+</ul>
+
+<hr/>
+
+<div class="challenge">
+<strong>Mastery Challenge:</strong>  
+Write a small program that asks the user for their age (<code>prompt</code>), then prints:
+<ul>
+<li>Child if < 13</li>
+<li>Teen if 13–19</li>
+<li>Adult if 20–64</li>
+<li>Senior if 65+</li>
+</ul>
+Use <code>if…else if…else</code> statements.
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Control Flow";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+  if (forward) {
+    index++;
+    if (index >= text.length) {
+      forward = false;
+      setTimeout(typeLoop, 1500);
+      return;
+    }
+  } else {
+    index--;
+    if (index <= 0) forward = true;
+  }
+
+  typewriter.textContent = text.substring(0, index + 1);
+  setTimeout(typeLoop, forward ? 100 : 50);
+}
+
+typeLoop();
+</script>
+
+</body>
+</html>

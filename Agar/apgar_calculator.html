@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern APGAR Calculator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 900px;
+  padding: 30px;
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+}
+
+/* Steps */
+.step { display: none; }
+.step.active { display: block; }
+
+/* Image */
+.step img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+/* Text */
+h2 { margin-bottom: 10px; }
+p { margin-bottom: 15px; color: #cbd5f5; }
+
+/* OPTIONS */
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #1e293b;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  transform: scale(1.02);
+  background: #334155;
+}
+
+/* Hide default radio */
+.option input {
+  display: none;
+}
+
+/* SKEUOMORPHIC RADIO */
+.radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  box-shadow:
+    inset 2px 2px 5px rgba(0,0,0,0.6),
+    inset -2px -2px 5px rgba(255,255,255,0.05);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radio::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.25s ease;
+}
+
+.option input:checked + .radio::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.option:has(input:checked) {
+  border-color: #22c55e;
+  background: #14532d;
+}
+
+/* Text */
+.option span { display: block; }
+.option strong { display: block; }
+
+/* Buttons */
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #6366f1;
+}
+
+/* Result */
+.result { text-align: center; }
+
+.score {
+  font-size: 3rem;
+  margin: 20px 0;
+}
+
+.good { color: #22c55e; }
+.mid { color: #facc15; }
+.bad { color: #ef4444; }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+<!-- STEP 1 -->
+<div class="step active">
+  <h2>Appearance (Skin Color)</h2>
+  <p>What is the baby’s overall skin color?</p>
+  <img src="https://images.unsplash.com/photo-1618847472790-0ca60378235e?q=80&w=800">
+
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="appearance" value="0">
+      <div class="radio"></div>
+      <span><strong>Blue or pale all over</strong> — No oxygenation</span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="appearance" value="1">
+      <div class="radio"></div>
+      <span><strong>Pink body, blue extremities</strong> — Partial oxygenation</span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="appearance" value="2">
+      <div class="radio"></div>
+      <span><strong>Completely pink</strong> — Normal</span>
+    </label>
+  </div>
+
+  <div class="buttons">
+    <button disabled>Back</button>
+    <button onclick="nextStep()">Next</button>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step">
+  <h2>Pulse (Heart Rate)</h2>
+  <p>What is the baby’s heart rate?</p>
+  <img src="https://images.unsplash.com/photo-1618939304347-e91b1f33d2ab?q=80&w=800">
+
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="pulse" value="0">
+      <div class="radio"></div>
+      <span><strong>No heartbeat</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="pulse" value="1">
+      <div class="radio"></div>
+      <span><strong>Below 100 bpm</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="pulse" value="2">
+      <div class="radio"></div>
+      <span><strong>Above 100 bpm</strong></span>
+    </label>
+  </div>
+
+  <div class="buttons">
+    <button onclick="prevStep()">Back</button>
+    <button onclick="nextStep()">Next</button>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step">
+  <h2>Grimace (Reflex)</h2>
+  <p>How does the baby respond to stimulation?</p>
+  <img src="https://images.unsplash.com/photo-1480985041486-c65b20c01d1f?q=80&w=800">
+
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="grimace" value="0">
+      <div class="radio"></div>
+      <span><strong>No response</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="grimace" value="1">
+      <div class="radio"></div>
+      <span><strong>Weak grimace</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="grimace" value="2">
+      <div class="radio"></div>
+      <span><strong>Strong response (cry, cough)</strong></span>
+    </label>
+  </div>
+
+  <div class="buttons">
+    <button onclick="prevStep()">Back</button>
+    <button onclick="nextStep()">Next</button>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step">
+  <h2>Activity (Muscle Tone)</h2>
+  <p>What is the baby’s muscle tone?</p>
+  <img src="https://images.unsplash.com/photo-1693247168883-eaf1165afce8?q=80&w=800">
+
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="activity" value="0">
+      <div class="radio"></div>
+      <span><strong>Limp</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="activity" value="1">
+      <div class="radio"></div>
+      <span><strong>Some flexion</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="activity" value="2">
+      <div class="radio"></div>
+      <span><strong>Active movement</strong></span>
+    </label>
+  </div>
+
+  <div class="buttons">
+    <button onclick="prevStep()">Back</button>
+    <button onclick="nextStep()">Next</button>
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step">
+  <h2>Respiration (Breathing)</h2>
+  <p>How is the baby breathing?</p>
+  <img src="https://images.unsplash.com/photo-1662624914069-a5cb84d7c386?q=80&w=800">
+
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="respiration" value="0">
+      <div class="radio"></div>
+      <span><strong>No breathing</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="respiration" value="1">
+      <div class="radio"></div>
+      <span><strong>Weak breathing</strong></span>
+    </label>
+
+    <label class="option">
+      <input type="radio" name="respiration" value="2">
+      <div class="radio"></div>
+      <span><strong>Strong cry</strong></span>
+    </label>
+  </div>
+
+  <div class="buttons">
+    <button onclick="prevStep()">Back</button>
+    <button onclick="calculate()">Calculate</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="step">
+  <div class="result">
+    <h2>APGAR Score</h2>
+    <div class="score" id="score">0</div>
+    <p id="resultText"></p>
+    <button onclick="restart()">Restart</button>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll(".step");
+
+function showStep(i) {
+  steps.forEach(s => s.classList.remove("active"));
+  steps[i].classList.add("active");
+}
+
+function nextStep() {
+  currentStep++;
+  showStep(currentStep);
+}
+
+function prevStep() {
+  currentStep--;
+  showStep(currentStep);
+}
+
+function calculate() {
+  let total = 0;
+
+  ["appearance","pulse","grimace","activity","respiration"].forEach(name => {
+    let selected = document.querySelector(`input[name="${name}"]:checked`);
+    if (selected) total += parseInt(selected.value);
+  });
+
+  document.getElementById("score").textContent = total;
+
+  let resultText = document.getElementById("resultText");
+
+  if (total >= 7) {
+    resultText.textContent = "Healthy (Normal)";
+    resultText.className = "good";
+  } else if (total >= 4) {
+    resultText.textContent = "Moderate distress";
+    resultText.className = "mid";
+  } else {
+    resultText.textContent = "Severe distress (Emergency)";
+    resultText.className = "bad";
+  }
+
+  currentStep = 5;
+  showStep(5);
+}
+
+function restart() {
+  document.querySelectorAll("input").forEach(i => i.checked = false);
+  currentStep = 0;
+  showStep(0);
+}
+</script>
+
+</body>
+</html>

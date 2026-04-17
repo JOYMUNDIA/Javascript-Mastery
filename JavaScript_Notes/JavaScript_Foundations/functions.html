@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Functions - Complete Guide</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: What Are Functions?</h2>
+
+<p>
+A function is a reusable block of code that performs a task. 
+Instead of writing the same code multiple times, you can put it inside a function and call it whenever needed.
+</p>
+
+<pre>
+function greet() {
+  console.log("Hello, world!");
+}
+
+greet(); // Calls the function
+</pre>
+
+<p>
+Think of a function as a machine: you press the button (call it), and it does something for you.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a function that prints your name and call it.
+</div>
+</section>
+
+<section>
+<h2>Step 2: Function Parameters</h2>
+
+<p>
+Parameters are inputs you give to a function so it can work with different values.
+</p>
+
+<pre>
+function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+
+greet("Alice");
+greet("Bob");
+</pre>
+
+<p>
+- Here <code>name</code> is a parameter.<br>
+- When we call the function, we provide an argument like "Alice".<br>
+- This makes the function dynamic and reusable.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a function that takes two numbers and prints their sum.
+</div>
+</section>
+
+<section>
+<h2>Step 3: Return Values</h2>
+
+<p>
+Functions can return a value so you can use it later in your code.
+</p>
+
+<pre>
+function add(a, b) {
+  return a + b;
+}
+
+let result = add(5, 3);
+console.log(result); // 8
+</pre>
+
+<p>
+- <code>return</code> gives the result back.<br>
+- Without <code>return</code>, the function just performs an action but doesn’t give anything back.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Create a function that multiplies two numbers and returns the result.
+</div>
+</section>
+
+<section>
+<h2>Step 4: Function Expressions</h2>
+
+<p>
+Functions can also be stored in variables. These are called function expressions.
+</p>
+
+<pre>
+const greet = function(name) {
+  console.log("Hello, " + name + "!");
+};
+
+greet("Charlie");
+</pre>
+
+<p>
+- Functions are first-class citizens in JavaScript — they can live in variables, arrays, or even objects.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Store a function that subtracts two numbers in a variable and call it.
+</div>
+</section>
+
+<section>
+<h2>Step 5: Arrow Functions</h2>
+
+<p>
+Arrow functions are a shorter syntax for writing functions.
+</p>
+
+<pre>
+const add = (a, b) => a + b;
+
+console.log(add(4, 7)); // 11
+</pre>
+
+<p>
+- If there’s only one expression, it automatically returns the result.<br>
+- You can also write multi-line arrow functions with braces and <code>return</code>.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write an arrow function that squares a number.
+</div>
+</section>
+
+<section>
+<h2>Step 6: Default Parameters</h2>
+
+<p>
+You can give default values to parameters if no argument is passed.
+</p>
+
+<pre>
+function greet(name = "Guest") {
+  console.log("Hello, " + name + "!");
+}
+
+greet();       // Hello, Guest!
+greet("Alice"); // Hello, Alice!
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Create a function that raises a number to a power, defaulting the exponent to 2.
+</div>
+</section>
+
+<section>
+<h2>Step 7: Functions Inside Functions</h2>
+
+<p>
+Functions can call other functions or even be nested.
+</p>
+
+<pre>
+function square(x) {
+  return x * x;
+}
+
+function sumOfSquares(a, b) {
+  return square(a) + square(b);
+}
+
+console.log(sumOfSquares(2, 3)); // 13
+</pre>
+
+<p>
+- Nested or called functions make your code modular and easier to maintain.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a function that calculates the area of a rectangle using a helper function to calculate perimeter.
+</div>
+</section>
+
+<section>
+<h2>Step 8: Mental Model – Functions as Machines</h2>
+
+<p>
+Visualize functions as 3D cubes in your code world:  
+- **Input ports** → parameters  
+- **Engine** → the code inside  
+- **Output port** → return value  
+
+Every time you call the function, the cube processes the inputs and gives you outputs.
+</p>
+
+<hr/>
+
+<div class="challenge">
+<strong>Mastery Challenge:</strong>  
+Write a program that:
+<ul>
+<li>Asks the user for two numbers</li>
+<li>Asks the user for an operation (+, -, *, /)</li>
+<li>Performs the operation using separate functions for each</li>
+<li>Prints the result</li>
+</ul>
+Use <code>prompt</code> and <code>if…else</code> for the operation choice.
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Functions";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+  if (forward) {
+    index++;
+    if (index >= text.length) {
+      forward = false;
+      setTimeout(typeLoop, 1500);
+      return;
+    }
+  } else {
+    index--;
+    if (index <= 0) forward = true;
+  }
+
+  typewriter.textContent = text.substring(0, index + 1);
+  setTimeout(typeLoop, forward ? 100 : 50);
+}
+
+typeLoop();
+</script>
+
+</body>
+</html>

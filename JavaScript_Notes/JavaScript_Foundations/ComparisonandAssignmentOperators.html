@@ -1,0 +1,3262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Operators - Complete Guide</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .step-2-container {
+  display: flex;
+  flex-direction: column; /* Stack image above text */
+  align-items: center;    /* Center the image horizontally */
+  gap: 20px;              /* Space between image and text */
+  margin-bottom: 40px;    /* Space after Step 2 section */
+}
+
+.step-2-image {
+  width: 150px;   /* Adjust size as needed */
+  height: auto;
+}
+
+.step-2-content {
+  max-width: 800px; /* Optional: limit text width */
+  width: 100%;
+}
+
+.pos{
+  width:280px;
+  height:360px;
+  background:linear-gradient(145deg,#3c4049,#22262e);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 25px 50px rgba(0,0,0,0.7);
+  position:relative;
+}
+
+/* SCREEN */
+
+.screen{
+  height:110px;
+  background:#061a24;
+  border-radius:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:#9dfcff;
+  font-size:18px;
+  padding:10px;
+  box-shadow:inset 0 0 20px black;
+}
+
+/* DEFAULT TEXT */
+
+.idle{
+  position:absolute;
+  animation:idleText 6s infinite;
+}
+
+/* DECLINED MESSAGE */
+
+.message{
+  position:absolute;
+  color:#ff6b6b;
+  opacity:0;
+  animation:showMsg 6s infinite;
+}
+
+@keyframes idleText{
+
+0%,45%{opacity:1}
+
+55%,100%{opacity:0}
+
+}
+
+@keyframes showMsg{
+
+0%,45%{opacity:0}
+
+55%,90%{opacity:1}
+
+100%{opacity:0}
+
+}
+
+/* TAP AREA */
+
+.tap{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:3px dashed #aaa;
+  margin:25px auto;
+  position:relative;
+}
+
+.signal{
+  position:absolute;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border:3px solid #7df9ff;
+  top:15px;
+  left:15px;
+  opacity:0;
+  animation:signal 1.5s infinite;
+}
+
+@keyframes signal{
+
+0%{transform:scale(.6);opacity:.8}
+100%{transform:scale(1.6);opacity:0}
+
+}
+
+/* CARD */
+
+.card{
+  width:120px;
+  height:75px;
+  background:linear-gradient(135deg,#4a8bff,#1f49b6);
+  border-radius:8px;
+  position:absolute;
+  left:80px;
+  top:-140px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.6);
+  animation:tapCard 6s infinite;
+}
+
+.chip{
+  width:18px;
+  height:14px;
+  background:gold;
+  margin:12px;
+  border-radius:2px;
+}
+
+@keyframes tapCard{
+
+0%{top:-140px}
+
+40%{top:135px}
+
+55%{top:135px}
+
+70%{top:-140px}
+
+100%{top:-140px}
+
+}
+
+/* KEYPAD */
+
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  width:160px;
+  margin:0 auto;
+}
+
+.key{
+  height:32px;
+  background:linear-gradient(#ddd,#aaa);
+  border-radius:5px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+  font-size:13px;
+}
+
+/* Scene container */
+.scene {
+  width: 700px;
+  height: auto; /* let height adjust naturally */
+  padding-top: 100px;
+  padding-bottom: 100px; /* accommodates legs without extra top space */
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+/* Stick figure base */
+.person, .officer {
+  position: relative;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Head with shading */
+.head {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffddbb, #cc9966);
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.3);
+  z-index: 2;
+  position: relative;
+}
+
+/* Officer hat */
+.officer .hat {
+  width: 50px;
+  height: 15px;
+  background: linear-gradient(to bottom, #222, #555);
+  border-radius: 8px 8px 0 0;
+  position: absolute;
+  top: -10px;
+  z-index: 3;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Body with gradient and subtle curves */
+.body {
+  width: 20px;
+  height: 120px;
+  border-radius: 12px;
+  margin-top: -5px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Person uniform */
+.person .body {
+  background: linear-gradient(to bottom, #ff6666 0%, #cc4444 100%);
+}
+
+/* Officer uniform */
+.officer .body {
+  background: repeating-linear-gradient(
+    to bottom,
+    #4169e1, /* royal blue */
+    #4169e1 20px,
+    #ffffff 20px,
+    #ffffff 25px
+  );
+}
+
+/* Arms attached to body */
+.arms {
+  display: flex;
+  justify-content: space-between;
+  width: 60px;
+  margin-top: 5px;
+}
+.arm-left, .arm-right {
+  width: 12px;
+  height: 70px;
+  border-radius: 8px;
+}
+.person .arm-left, .person .arm-right {
+  background: linear-gradient(to bottom, #ffcc99, #cc9966);
+}
+.officer .arm-left, .officer .arm-right {
+  background: linear-gradient(to bottom, #ffddbb, #cccccc);
+}
+
+/* Legs attached to body */
+.legs {
+  display: flex;
+  justify-content: space-between;
+  width: 40px;
+  margin-top: 2px;
+}
+.leg-left, .leg-right {
+  width: 14px;
+  height: 80px;
+  border-radius: 10px;
+}
+.person .leg-left, .person .leg-right {
+  background: linear-gradient(to bottom, #ff6666, #aa3333);
+}
+.officer .leg-left, .officer .leg-right {
+  background: linear-gradient(to bottom, #4169e1, #27408b);
+}
+
+/* ID card */
+.id-card {
+  width: 28px;
+  height: 18px;
+  background: linear-gradient(135deg, #fff, #eee);
+  border: 2px solid #333;
+  border-radius: 4px;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  transform: rotate(-30deg);
+  opacity: 0;
+  animation: moveID 8s infinite;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  z-index: 4;
+}
+
+/* Speech bubbles */
+.tooltip {
+  position: absolute;
+  max-width: 18ch;
+  padding: 0.8em;
+  border-radius: 1em;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0;
+  z-index: 5;
+}
+
+/* Officer bubble gradients */
+.officer-bubble {
+  background: linear-gradient(45deg,#490A3D,#F8CA00);
+  bottom: 180px;
+  left: -10px;
+  animation-fill-mode: forwards;
+}
+
+/* Person bubble gradients */
+.person-bubble {
+  background: linear-gradient(-45deg,#5E412F,#78C0A8);
+  bottom: 180px;
+  right: -10px;
+  animation-fill-mode: forwards;
+}
+
+/* Bubble animation sequences */
+@keyframes dialogueSequence {0%,14% { opacity:0; } 15%,29% { opacity:1; } 30%,100% { opacity:0; }}
+@keyframes dialogueSequence2 {0%,29% { opacity:0; } 30%,44% { opacity:1; } 45%,100% { opacity:0; }}
+@keyframes dialogueSequence3 {0%,44% { opacity:0; } 45%,59% { opacity:1; } 60%,100% { opacity:0; }}
+@keyframes dialogueSequence4 {0%,59% { opacity:0; } 60%,74% { opacity:1; } 75%,100% { opacity:0; }}
+
+/* Move ID card from person to officer */
+@keyframes moveID {
+  0%,59% { opacity: 0; transform: rotate(-30deg) translate(0,0); }
+  60%,74% { opacity: 1; transform: rotate(0deg) translate(180px,-30px); }
+  75%,100% { opacity: 0; transform: rotate(-30deg) translate(0,0); }
+}
+
+/* Assign animations */
+.officer-bubble.age { animation: dialogueSequence 8s infinite; }
+.person-bubble.age { animation: dialogueSequence2 8s infinite; }
+.officer-bubble.id { animation: dialogueSequence3 8s infinite; }
+.person-bubble.id { animation: dialogueSequence4 8s infinite; }
+
+svg{
+  width:760px;
+}
+
+.slice path{
+  stroke:white;
+  stroke-width:2;
+}
+
+/* toppings */
+
+.pepperoni{
+  fill:#b22222;
+}
+
+.olive{
+  fill:none;
+  stroke:#111;
+  stroke-width:3;
+}
+
+.cheese{
+  stroke:#ffd86a;
+  stroke-width:3;
+}
+
+.pepper{
+  fill:none;
+  stroke:#2e8b57 !important;
+  stroke-width:3;
+}
+
+.plate{
+  fill:white;
+  stroke:#ddd;
+  stroke-width:6;
+}
+
+/* tooltip-mod bubble styling */
+
+.tooltip-mod {
+  color: #fff;
+  font-size: 18px;
+  max-width: 28ch;
+  text-align: center;
+  position:absolute;
+  left:50%;
+  top:40px;
+  transform:translateX(-50%);
+  opacity:0;
+}
+
+.tooltip-mod {
+  --s: 1.5em;
+  --p: 50%;
+  --r: 1em;
+
+  padding: 1em;
+  border: var(--s) solid #0000;
+  border-radius: calc(var(--r) + var(--s));
+  background: border-box linear-gradient(60deg,#818181,#036a63);
+  --_m: 100%/var(--s) var(--s) no-repeat;
+  --_p: clamp(var(--r) + 3*var(--s)/2,var(--p),100% - var(--r) - 3*var(--s)/2);
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    radial-gradient(100% 100% at 100% 100%,#0000 99%,#000 102%) calc(var(--_p) + var(--s)/2) var(--_m),
+    radial-gradient(100% 100% at 0 100%,#0000 99%,#000 102%) calc(var(--_p) - var(--s)/2) var(--_m);
+
+    mask:
+    linear-gradient(#000 0 0) padding-box,
+    radial-gradient(100% 100% at 100% 100%,#0000 99%,#000 102%) calc(var(--_p) + var(--s)/2) var(--_m),
+    radial-gradient(100% 100% at 0 100%,#0000 99%,#000 102%) calc(var(--_p) - var(--s)/2) var(--_m);
+
+}
+
+.pizza-demo{
+  position:relative;
+  width:100%;
+  max-width:760px;
+  margin:40px auto;
+}
+
+/* first explanation bubble */
+
+.intro-mod{
+  animation:intro-modBubble 11s forwards;
+}
+
+/* modulus bubble */
+
+.modulus{
+  top:100px;
+  animation:modBubble 4s 11s forwards;
+}
+
+@keyframes intro-modBubble{
+  0%{opacity:0}
+  5%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0}
+}
+
+@keyframes modBubble{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: What Are Operators?</h2>
+
+<p>
+Think of operators as instructions for your variables. They tell JavaScript to perform a specific action on one or more values.
+</p>
+
+<p>
+Just like math in real life, JavaScript has operators to:
+</p>
+
+<ul>
+<li>Compare values</li>
+<li>Do calculations</li>
+<li>Combine logic</li>
+<li>Store or update values</li>
+</ul>
+
+<pre>
+let a = 5;
+let b = 10;
+let sum = a + b; // + is the addition operator
+</pre>
+
+<p>
+Here, <strong>+</strong> tells JavaScript to add the numbers stored in <code>a</code> and <code>b</code>.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Try using <code>-</code>, <code>*</code>, and <code>/</code> with two numbers and see the results in the console.
+</div>
+
+</section>
+
+<section class="step-2-container">
+
+  <img src="images/scales.png" alt="Scales Image" class="step-2-image">
+
+  <div class="step-2-content">
+
+<h2>Step 2: Comparison Operators</h2>
+
+<p>
+Comparison operators ask questions about relationships between two values.
+</p>
+
+<p>
+Every comparison always returns a <strong>boolean value</strong>:
+</p>
+
+<pre>
+true
+false
+</pre>
+
+<p>
+Think of comparison operators like a <strong>security guard asking questions before allowing entry</strong>.
+</p>
+
+<p>
+Example questions a program might ask:
+</p>
+
+<ul>
+<li>Is the user old enough?</li>
+<li>Is the password correct?</li>
+<li>Does the account have enough money?</li>
+<li>Is the score high enough to pass?</li>
+</ul>
+
+<p>
+These questions are answered using comparison operators.
+</p>
+
+---
+
+<h3>Loose Equality (==)</h3>
+
+<p>
+The <code>==</code> operator checks if two values are equal, but JavaScript may convert data types automatically.
+</p>
+
+<pre>
+5 == "5"
+</pre>
+
+<p>
+JavaScript converts the string into a number and compares them.
+</p>
+
+<pre>
+true
+</pre>
+
+<p><strong> Analogy:</strong></p>
+
+<p>
+Imagine a teacher grading homework.
+</p>
+
+<ul>
+<li>Student A writes <code>5</code></li>
+<li>Student B writes <code>"5"</code></li>
+</ul>
+
+<p>
+The teacher says: "Both answers represent five", so they are considered equal.
+</p>
+
+---
+
+<h3>Strict Equality (===)</h3>
+
+<p>
+Strict equality checks both <strong>value AND type</strong>.
+</p>
+
+<pre>
+5 === "5"
+</pre>
+
+<p>
+Now JavaScript asks two questions:
+</p>
+
+<ul>
+<li>Are the values the same?</li>
+<li>Are the types the same?</li>
+</ul>
+
+<p>
+Because one is a number and the other is a string, the result is:
+</p>
+
+<pre>
+false
+</pre>
+
+<p><strong> Analogy:</strong></p>
+
+<p>
+Airport security checks both:
+</p>
+
+<ul>
+<li>The person's identity</li>
+<li>The authenticity of their passport</li>
+</ul>
+
+<p>
+If anything doesn't match, entry is denied.
+</p>
+
+---
+
+<h3>Not Equal (!=)</h3>
+
+<p>
+The <code>!=</code> operator checks if two values are different.
+</p>
+
+<pre>
+5 != 3
+</pre>
+
+<p>
+Result:
+</p>
+
+<pre>
+true
+</pre>
+
+<p>
+Because 5 and 3 are not the same.
+</p>
+
+<p><strong> Analogy:</strong></p>
+
+<p>
+A teacher checks if a student's name is on the absent list.
+</p>
+
+<pre>
+studentName != absentList
+</pre>
+
+---
+
+<h3>Strict Not Equal (!==)</h3>
+
+<p>
+Strict not equal checks both value and type.
+</p>
+
+<pre>
+5 !== "5"
+</pre>
+
+<p>
+Result:
+</p>
+
+<pre>
+true
+</pre>
+
+<p>
+Because one is a number and the other is a string.
+</p>
+
+---
+
+<h3>Greater Than (&gt;)</h3>
+
+<p>
+Checks if the value on the left is larger than the value on the right.
+</p>
+
+<pre>
+10 > 5
+</pre>
+
+<p>
+Result:
+</p>
+
+<pre>
+true
+</pre>
+
+<p><strong> Analogy:</strong></p>
+
+<p>
+A bank checks if you have enough money before a withdrawal.
+</p>
+
+<pre>
+balance > withdrawalAmount
+</pre>
+
+---
+
+<h3>Less Than (&lt;)</h3>
+
+<p>
+Checks if the value on the left is smaller.
+</p>
+
+<pre>
+3 < 7
+</pre>
+
+<p>
+Result:
+</p>
+
+<pre>
+true
+</pre>
+
+<p><strong> Analogy:</strong></p>
+
+<p>
+A police officer checking if a driver is under the speed limit.
+</p>
+
+<pre>
+speed < limit
+</pre>
+
+---
+
+<h3>Greater Than or Equal (&gt;=)</h3>
+
+<p>
+This checks if a value is either greater than OR equal to another value.
+</p>
+
+<pre>
+5 >= 5
+</pre>
+
+<p>
+Result:
+</p>
+
+<pre>
+true
+</pre>
+
+<p><strong> Analogy:</strong></p>
+
+<p>
+A job posting may require:
+</p>
+
+<pre>
+experience >= 3 years
+</pre>
+
+---
+
+<h3>Less Than or Equal (&lt;=)</h3>
+
+<p>
+Checks if a value is smaller than OR equal to another value.
+</p>
+
+<pre>
+age <= 12
+</pre>
+
+<p>
+Used for child tickets or age limits.
+</p>
+
+---
+
+<h3>Real Program Example</h3>
+
+<p>
+Comparison operators are most powerful when used with decision making.
+</p>
+
+<pre>
+let age = 16;
+
+if (age >= 18) {
+console.log("You can watch the movie");
+} else {
+console.log("You are too young");
+}
+</pre>
+
+---
+
+<h3>Another Real World Example</h3>
+
+<p>
+Online store purchase check.
+</p>
+
+<pre>
+let price = 70;
+let money = 50;
+
+if (money >= price) {
+console.log("Purchase successful");
+} else {
+console.log("Not enough money");
+}
+</pre>
+
+<div class="pos">
+
+<div class="screen">
+<div class="idle">Tap Card</div>
+<div class="message">Card Declined!<br>Insufficient Funds</div>
+</div>
+
+<div class="tap">
+<div class="signal"></div>
+</div>
+
+<div class="keypad">
+<div class="key">1</div>
+<div class="key">2</div>
+<div class="key">3</div>
+<div class="key">4</div>
+<div class="key">5</div>
+<div class="key">6</div>
+<div class="key">7</div>
+<div class="key">8</div>
+<div class="key">9</div>
+</div>
+
+<div class="card">
+<div class="chip"></div>
+</div>
+
+</div>
+
+---
+
+<div class="challenge">
+
+<strong>Practice Experiments:</strong>
+
+Open your browser console and try:
+
+<pre>
+console.log(10 > 5);
+console.log(7 < 3);
+console.log(5 === "5");
+console.log(5 == "5");
+console.log(20 >= 20);
+console.log(4 !== "4");
+</pre>
+
+Observe which return <code>true</code> or <code>false</code>.
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Step 3: Logical Operators</h2>
+
+<p>
+Logical operators combine multiple conditions to make smarter decisions in programs.
+</p>
+
+<p>
+Think of logical operators like combining multiple questions together.
+</p>
+
+<p>
+Example real-life questions:
+</p>
+
+<ul>
+<li>Is the person an adult AND do they have an ID?</li>
+<li>Is the password correct OR does the user have recovery access?</li>
+<li>Is the user NOT banned?</li>
+</ul>
+
+<p>
+Logical operators combine these conditions and return a boolean value:
+</p>
+
+<pre>
+true
+false
+</pre>
+
+---
+
+<h3>The Three Logical Operators</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Operator</th>
+<th>Name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>&&</td>
+<td>AND</td>
+<td>Both conditions must be true</td>
+</tr>
+
+<tr>
+<td>||</td>
+<td>OR</td>
+<td>At least one condition must be true</td>
+</tr>
+
+<tr>
+<td>!</td>
+<td>NOT</td>
+<td>Reverses a boolean value</td>
+</tr>
+
+</tbody>
+
+</table>
+
+---
+
+<h3>Logical AND (&&)</h3>
+
+<p>
+The AND operator returns <strong>true only if BOTH conditions are true</strong>.
+</p>
+
+<pre>
+true && true
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+But if one condition fails:
+
+<pre>
+true && false
+</pre>
+
+Result:
+
+<pre>
+false
+</pre>
+
+---
+
+<h4> Analogy: Club Entrance</h4>
+
+<p>
+A security guard allows entry only if:
+</p>
+
+<ul>
+<li>You are 18 or older</li>
+<li>You have valid ID</li>
+</ul>
+
+Both conditions must be satisfied.
+</p>
+
+<div class="scene">
+  <!-- Person -->
+  <div class="person">
+    <div class="head"></div>
+    <div class="body">
+      <div class="arms">
+        <div class="arm-left"></div>
+        <div class="arm-right"></div>
+      </div>
+      <div class="legs">
+        <div class="leg-left"></div>
+        <div class="leg-right"></div>
+      </div>
+    </div>
+    <div class="id-card"></div>
+    <div class="tooltip person-bubble age">21</div>
+    <div class="tooltip person-bubble id">Here is my ID</div>
+  </div>
+
+  <!-- Officer -->
+  <div class="officer">
+    <div class="hat"></div>
+    <div class="head"></div>
+    <div class="body">
+      <div class="arms">
+        <div class="arm-left"></div>
+        <div class="arm-right"></div>
+      </div>
+      <div class="legs">
+        <div class="leg-left"></div>
+        <div class="leg-right"></div>
+      </div>
+    </div>
+    <div class="tooltip officer-bubble age">Please tell me your age?</div>
+    <div class="tooltip officer-bubble id">Show me your ID!</div>
+  </div>
+</div>
+
+<pre>
+age >= 18 && hasID === true
+</pre>
+
+Example:
+
+<pre>
+let age = 22;
+let hasID = true;
+
+console.log(age >= 18 && hasID);
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+But if ID is missing:
+
+<pre>
+let age = 22;
+let hasID = false;
+
+console.log(age >= 18 && hasID);
+</pre>
+
+Result:
+
+<pre>
+false
+</pre>
+
+---
+
+<h3>Logical OR (||)</h3>
+
+<p>
+The OR operator returns true if <strong>at least one condition is true</strong>.
+</p>
+
+<pre>
+true || false
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+---
+
+<h4> Analogy: Login System</h4>
+
+<p>
+A website may allow login if you provide:
+</p>
+
+<ul>
+<li>Password</li>
+<li>OR fingerprint</li>
+</ul>
+
+Only one is required.
+
+</p>
+
+<pre>
+passwordCorrect || fingerprintMatch
+</pre>
+
+Example:
+
+<pre>
+let passwordCorrect = false;
+let fingerprintMatch = true;
+
+console.log(passwordCorrect || fingerprintMatch);
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+Because one condition is true.
+
+---
+
+<h3>Logical NOT (!)</h3>
+
+<p>
+The NOT operator reverses a boolean value.
+</p>
+
+<table>
+
+<thead>
+<tr>
+<th>Original</th>
+<th>NOT Result</th>
+</tr>
+</thead>
+
+<tr>
+<td>true</td>
+<td>false</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>true</td>
+</tr>
+
+</table>
+
+Example:
+
+<pre>
+!true
+</pre>
+
+Result:
+
+<pre>
+false
+</pre>
+
+---
+
+<h4> Analogy: Banned Users</h4>
+
+<p>
+A website allows login only if the user is NOT banned.
+</p>
+
+<pre>
+!isBanned
+</pre>
+
+Example:
+
+<pre>
+let isBanned = false;
+
+console.log(!isBanned);
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+User is allowed because they are not banned.
+
+---
+
+<h3>Combining Logical Operators</h3>
+
+Programs often combine multiple logical operators together.
+
+Example: Movie ticket system.
+
+Requirements:
+
+<ul>
+<li>User must be an adult</li>
+<li>User must have money</li>
+</ul>
+
+Code:
+
+<pre>
+let age = 20;
+let money = 15;
+
+if (age >= 18 && money >= 10) {
+console.log("Ticket purchased");
+}
+</pre>
+
+Both conditions must be true.
+
+---
+
+<h3>Another Real Program Example</h3>
+
+Online store discount.
+
+User gets a discount if:
+
+<ul>
+<li>They are a member</li>
+<li>OR they have a coupon</li>
+</ul>
+
+<pre>
+let isMember = false;
+let hasCoupon = true;
+
+if (isMember || hasCoupon) {
+console.log("Discount applied");
+}
+</pre>
+
+---
+
+<h3>Combining AND + OR</h3>
+
+Programs often mix logical operators.
+
+Example: Special event entry.
+
+Rules:
+
+<ul>
+<li>Must be 18+</li>
+<li>AND must have ID</li>
+<li>OR must be staff</li>
+</ul>
+
+Code:
+
+<pre>
+let age = 16;
+let hasID = false;
+let isStaff = true;
+
+if ((age >= 18 && hasID) || isStaff) {
+console.log("Entry allowed");
+}
+</pre>
+
+Because the person is staff, entry is allowed.
+
+---
+
+<h3>Logical Operator Truth Tables</h3>
+
+<h4>AND Table</h4>
+
+<table>
+
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>A && B</th>
+</tr>
+</thead>
+
+<tr>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+
+</table>
+
+---
+
+<h4>OR Table</h4>
+
+<table>
+
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>A || B</th>
+</tr>
+</thead>
+
+<tr>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>true</td>
+<td>false</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>true</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+
+</table>
+
+---
+
+<h3>Real World Systems Using Logical Operators</h3>
+
+Logical operators power many real applications:
+
+<ul>
+
+<li>Login systems</li>
+
+<li>Bank transaction checks</li>
+
+<li>Age restrictions</li>
+
+<li>Game rules</li>
+
+<li>Search filters</li>
+
+<li>Security checks</li>
+
+<li>Shopping carts</li>
+
+</ul>
+
+Example: ATM withdrawal.
+
+<pre>
+let balance = 500;
+let withdraw = 200;
+let cardValid = true;
+
+if (balance >= withdraw && cardValid) {
+console.log("Withdrawal approved");
+}
+</pre>
+
+---
+
+<div class="challenge">
+
+<strong>Practice Experiments</strong>
+
+Try these in your browser console:
+
+<pre>
+console.log(true && false);
+console.log(true || false);
+console.log(!true);
+
+let age = 20;
+let hasLicense = true;
+
+console.log(age >= 18 && hasLicense);
+
+let isMember = false;
+let hasCoupon = true;
+
+console.log(isMember || hasCoupon);
+</pre>
+
+Observe the results.
+
+</div>
+
+---
+
+<div class="challenge">
+
+<strong>Mini Challenges</strong>
+
+1️⃣ Check if someone can drive.
+
+Requirements:
+<ul>
+<li>Age must be 18+</li>
+<li>Must have a license</li>
+</ul>
+
+2️⃣ Check if a student passes.
+
+Rules:
+<ul>
+<li>Score ≥ 50</li>
+<li>OR teacher approval</li>
+</ul>
+
+3️⃣ Allow login only if user is NOT banned.
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Step 4: Arithmetic Operators</h2>
+
+<p>
+Arithmetic operators are used to perform mathematical calculations in JavaScript.
+</p>
+
+<p>
+Just like in everyday math, programs constantly perform calculations:
+</p>
+
+<ul>
+<li>Calculating prices in an online store</li>
+<li>Computing scores in games</li>
+<li>Determining bank balances</li>
+<li>Calculating taxes</li>
+<li>Measuring distances or time</li>
+</ul>
+
+<p>
+Arithmetic operators take numbers as input and return a new number as the result.
+</p>
+
+---
+
+<h3>The Main Arithmetic Operators</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Operator</th>
+<th>Name</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+
+<tr>
+<td>+</td>
+<td>Addition</td>
+<td>5 + 3</td>
+<td>8</td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>Subtraction</td>
+<td>10 - 4</td>
+<td>6</td>
+</tr>
+
+<tr>
+<td>*</td>
+<td>Multiplication</td>
+<td>6 * 7</td>
+<td>42</td>
+</tr>
+
+<tr>
+<td>/</td>
+<td>Division</td>
+<td>12 / 3</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>%</td>
+<td>Remainder (Modulo)</td>
+<td>10 % 3</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>**</td>
+<td>Exponentiation</td>
+<td>2 ** 3</td>
+<td>8</td>
+</tr>
+
+</table>
+
+---
+
+# Addition (+)
+
+<p>
+The addition operator adds two numbers together.
+</p>
+
+<pre>
+let result = 5 + 3;
+console.log(result);
+</pre>
+
+Output:
+
+<pre>
+8
+</pre>
+
+---
+
+<h4>Real Life Analogy: Shopping Cart</h4>
+
+<p>
+Imagine buying two items in a store.
+</p>
+
+<ul>
+<li>Milk = $4</li>
+<li>Bread = $3</li>
+</ul>
+
+Total cost:
+
+<pre>
+4 + 3
+</pre>
+
+Result:
+
+<pre>
+7
+</pre>
+
+Example program:
+
+<pre>
+let milk = 4;
+let bread = 3;
+
+let total = milk + bread;
+
+console.log(total);
+</pre>
+
+---
+
+# Important: Addition Also Joins Strings
+
+In JavaScript, `+` can also **concatenate strings**.
+
+Example:
+
+<pre>
+"Hello" + " World"
+</pre>
+
+Result:
+
+<pre>
+"Hello World"
+</pre>
+
+Example:
+
+<pre>
+let firstName = "John";
+let greeting = "Hello " + firstName;
+
+console.log(greeting);
+</pre>
+
+Output:
+
+<pre>
+Hello John
+</pre>
+
+---
+
+# Subtraction (-)
+
+<p>
+The subtraction operator subtracts one number from another.
+</p>
+
+<pre>
+10 - 4
+</pre>
+
+Result:
+
+<pre>
+6
+</pre>
+
+---
+
+<h4>Real Life Analogy: Bank Withdrawal</h4>
+
+Imagine a bank account.
+
+<ul>
+<li>Balance = $100</li>
+<li>Withdraw = $30</li>
+</ul>
+
+Remaining balance:
+
+<pre>
+100 - 30
+</pre>
+
+Example program:
+
+<pre>
+let balance = 100;
+let withdraw = 30;
+
+let remaining = balance - withdraw;
+
+console.log(remaining);
+</pre>
+
+---
+
+# Multiplication (*)
+
+<p>
+Multiplication multiplies numbers together.
+</p>
+
+<pre>
+6 * 7
+</pre>
+
+Result:
+
+<pre>
+42
+</pre>
+
+---
+
+<h4>Real Life Analogy: Buying Multiple Items</h4>
+
+If one notebook costs:
+
+<pre>
+$5
+</pre>
+
+And you buy:
+
+<pre>
+4 notebooks
+</pre>
+
+Total cost:
+
+<pre>
+5 * 4
+</pre>
+
+Example:
+
+<pre>
+let price = 5;
+let quantity = 4;
+
+let total = price * quantity;
+
+console.log(total);
+</pre>
+
+---
+
+# Division (/)
+
+Division splits numbers into equal parts.
+
+Example:
+
+<pre>
+12 / 3
+</pre>
+
+Result:
+
+<pre>
+4
+</pre>
+
+---
+
+<h4>Real Life Analogy: Sharing Pizza</h4>
+
+Imagine 12 pizza slices shared among 3 people.
+
+<pre>
+12 / 3
+</pre>
+
+Each person gets:
+
+<pre>
+4 slices
+</pre>
+
+Example:
+
+<pre>
+let slices = 12;
+let people = 3;
+
+let perPerson = slices / people;
+
+console.log(perPerson);
+</pre>
+
+---
+
+<h3>Remainder / Modulo (%)</h3>
+
+<p>
+The modulo operator returns the <strong>remainder</strong> after division.
+</p>
+
+Example:
+
+<pre>
+10 % 3
+</pre>
+
+Division result:
+
+<pre>
+3 remainder 1
+</pre>
+
+So JavaScript returns:
+
+<pre>
+1
+</pre>
+
+---
+
+<h4> Analogy: Pizza Leftovers</h4>
+
+<p>
+Imagine a pizza cut into slices.
+</p>
+
+<ul>
+<li>You have <strong>10 pizza slices</strong></li>
+<li>You want to share them between <strong>3 people</strong></li>
+</ul>
+
+<div class="pizza-demo">
+<!-- intro-mod bubble -->
+
+<div class="tooltip-mod intro-mod">
+Suppose you want to share a 10 sliced pizza among 3 people
+</div>
+
+<!-- modulus bubble -->
+
+<div class="tooltip-mod modulus">
+This remainder is what we call the modulus. Modulus is simply the remainder after division.
+</div>
+
+<svg viewBox="0 0 760 420">
+
+<defs>
+  <radialGradient id="pizzaGradient" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#f5d29c"/>
+    <stop offset="70%" stop-color="#d88b4a"/>
+    <stop offset="100%" stop-color="#a45c2b"/>
+  </radialGradient>
+</defs>
+
+<!-- plates -->
+
+<circle class="plate" cx="150" cy="300" r="60"/>
+<circle class="plate" cx="380" cy="300" r="60"/>
+<circle class="plate" cx="610" cy="300" r="60"/>
+
+<!-- pizza -->
+
+<g transform="translate(380 140) scale(2.3)">
+
+<!-- slice 1 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L0 -50 A50 50 0 0 1 29 -40 Z"/>
+<circle class="pepperoni" cx="8" cy="-25" r="5"/>
+<circle class="olive" cx="16" cy="-18" r="3"/>
+<line class="cheese" x1="5" y1="-15" x2="20" y2="-30"/>
+<path class="pepper" d="M15 -10 Q20 -5 25 -10"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; -100 85" begin="1s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 2 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L29 -40 A50 50 0 0 1 47 -15 Z"/>
+<circle class="pepperoni" cx="25" cy="-18" r="5"/>
+<circle class="olive" cx="18" cy="-10" r="3"/>
+<line class="cheese" x1="20" y1="-25" x2="35" y2="-12"/>
+<path class="pepper" d="M30 -5 Q35 0 40 -5"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; 0 85" begin="2s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 3 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L47 -15 A50 50 0 0 1 47 15 Z"/>
+<circle class="pepperoni" cx="32" cy="0" r="5"/>
+<circle class="olive" cx="20" cy="5" r="3"/>
+<line class="cheese" x1="10" y1="-5" x2="35" y2="5"/>
+<path class="pepper" d="M25 10 Q35 12 40 5"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; 100 85" begin="3s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 4 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L47 15 A50 50 0 0 1 29 40 Z"/>
+<circle class="pepperoni" cx="28" cy="20" r="5"/>
+<circle class="olive" cx="15" cy="15" r="3"/>
+<line class="cheese" x1="20" y1="10" x2="30" y2="25"/>
+<path class="pepper" d="M30 30 Q25 25 20 30"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; -100 80" begin="4s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 5 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L29 40 A50 50 0 0 1 0 50 Z"/>
+<circle class="pepperoni" cx="10" cy="28" r="5"/>
+<circle class="olive" cx="15" cy="18" r="3"/>
+<line class="cheese" x1="5" y1="20" x2="20" y2="35"/>
+<path class="pepper" d="M10 40 Q15 35 20 40"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; 0 80" begin="5s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 6 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L0 50 A50 50 0 0 1 -29 40 Z"/>
+<circle class="pepperoni" cx="-10" cy="28" r="5"/>
+<circle class="olive" cx="-15" cy="18" r="3"/>
+<line class="cheese" x1="-5" y1="25" x2="-20" y2="40"/>
+<path class="pepper" d="M-10 40 Q-15 35 -20 40"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; 100 80" begin="6s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 7 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L-29 40 A50 50 0 0 1 -47 15 Z"/>
+<circle class="pepperoni" cx="-30" cy="20" r="5"/>
+<circle class="olive" cx="-18" cy="15" r="3"/>
+<line class="cheese" x1="-10" y1="15" x2="-35" y2="25"/>
+<path class="pepper" d="M-30 30 Q-35 25 -40 30"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; -100 75" begin="7s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 8 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L-47 15 A50 50 0 0 1 -47 -15 Z"/>
+<circle class="pepperoni" cx="-32" cy="0" r="5"/>
+<circle class="olive" cx="-20" cy="-5" r="3"/>
+<line class="cheese" x1="-10" y1="-5" x2="-35" y2="5"/>
+<path class="pepper" d="M-25 10 Q-35 12 -40 5"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; 0 75" begin="8s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- slice 9 -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L-47 -15 A50 50 0 0 1 -29 -40 Z"/>
+<circle class="pepperoni" cx="-25" cy="-18" r="5"/>
+<circle class="olive" cx="-18" cy="-10" r="3"/>
+<line class="cheese" x1="-20" y1="-25" x2="-35" y2="-12"/>
+<path class="pepper" d="M-30 -5 Q-35 0 -40 -5"/>
+<animateTransform attributeName="transform" type="translate"
+values="0 0; 100 75" begin="9s" dur="1s" fill="freeze"/>
+</g>
+
+<!-- remainder slice -->
+<g class="slice">
+<path fill="url(#pizzaGradient)" d="M0 0 L-29 -40 A50 50 0 0 1 0 -50 Z"/>
+<circle class="pepperoni" cx="-10" cy="-30" r="5"/>
+<circle class="olive" cx="-5" cy="-20" r="3"/>
+<line class="cheese" x1="-15" y1="-25" x2="-2" y2="-40"/>
+<path class="pepper" d="M-8 -15 Q-3 -10 5 -15"/>
+</g>
+
+</g>
+
+</svg>
+
+</div>
+<br>
+
+Each person receives:
+
+<pre>
+10 / 3 = 3 slices each
+</pre>
+
+But after sharing, there is still:
+
+<pre>
+1 slice left
+</pre>
+
+That leftover slice is what the <strong>modulo operator</strong> returns.
+</p>
+
+Example in JavaScript:
+
+<pre>
+let slices = 10;
+let people = 3;
+
+let leftovers = slices % people;
+
+console.log(leftovers);
+</pre>
+
+Output:
+
+<pre>
+1
+</pre>
+
+<p>
+So the modulo operator tells us how many slices remain after evenly dividing them.
+</p>
+
+---
+
+<h4>Another Pizza Example</h4>
+
+<pre>
+12 % 4
+</pre>
+
+If 12 slices are shared between 4 people:
+
+<pre>
+12 / 4 = 3 each
+</pre>
+
+There are:
+
+<pre>
+0 slices left
+</pre>
+
+Result:
+
+<pre>
+0
+</pre>
+
+---
+
+# Exponentiation (**)
+
+Exponentiation raises a number to a power.
+
+Example:
+
+<pre>
+2 ** 3
+</pre>
+
+Means:
+
+<pre>
+2 × 2 × 2
+</pre>
+
+Result:
+
+<pre>
+8
+</pre>
+
+---
+
+<h4>Real Life Analogy: Compound Growth</h4>
+
+Example:
+
+<pre>
+3 ** 4
+</pre>
+
+Means:
+
+<pre>
+3 × 3 × 3 × 3
+</pre>
+
+Result:
+
+<pre>
+81
+</pre>
+
+Example program:
+
+<pre>
+let result = 2 ** 5;
+
+console.log(result);
+</pre>
+
+Output:
+
+<pre>
+32
+</pre>
+
+---
+
+# Order of Operations (Very Important)
+
+When multiple arithmetic operators appear together, JavaScript follows **order of operations**.
+
+The order is:
+
+1. Parentheses `()`
+2. Exponents `**`
+3. Multiplication `*` and Division `/`
+4. Addition `+` and Subtraction `-`
+
+---
+
+Example:
+
+<pre>
+5 + 3 * 2
+</pre>
+
+Multiplication happens first.
+
+Step 1:
+
+<pre>
+3 * 2 = 6
+</pre>
+
+Step 2:
+
+<pre>
+5 + 6 = 11
+</pre>
+
+Result:
+
+<pre>
+11
+</pre>
+
+---
+
+Example using parentheses:
+
+<pre>
+(5 + 3) * 2
+</pre>
+
+Step 1:
+
+<pre>
+5 + 3 = 8
+</pre>
+
+Step 2:
+
+<pre>
+8 * 2 = 16
+</pre>
+
+---
+
+# Special Arithmetic Cases
+
+## Division by Zero
+
+Example:
+
+<pre>
+10 / 0
+</pre>
+
+Result:
+
+<pre>
+Infinity
+</pre>
+
+JavaScript returns **Infinity**.
+
+---
+
+## Invalid Math (NaN)
+
+Example:
+
+<pre>
+"hello" * 5
+</pre>
+
+Result:
+
+<pre>
+NaN
+</pre>
+
+NaN means:
+
+<pre>
+Not a Number
+</pre>
+
+---
+
+# Increment Operator (++)
+
+Adds **1** to a variable.
+
+Example:
+
+<pre>
+let score = 10;
+
+score++;
+
+console.log(score);
+</pre>
+
+Result:
+
+<pre>
+11
+</pre>
+
+---
+
+# Decrement Operator (--)
+
+Subtracts **1**.
+
+Example:
+
+<pre>
+let lives = 5;
+
+lives--;
+
+console.log(lives);
+</pre>
+
+Result:
+
+<pre>
+4
+</pre>
+
+---
+
+# Real World Example: Online Store Total
+
+Example program:
+
+<pre>
+let price = 20;
+let quantity = 3;
+let tax = 5;
+
+let subtotal = price * quantity;
+let total = subtotal + tax;
+
+console.log(total);
+</pre>
+
+Output:
+
+<pre>
+65
+</pre>
+
+---
+
+# Real World Example: Game Score
+
+<pre>
+let score = 0;
+
+score += 10;
+score += 5;
+
+console.log(score);
+</pre>
+
+Result:
+
+<pre>
+15
+</pre>
+
+---
+
+# Practice Experiments
+
+Try these in the browser console:
+
+<pre>
+console.log(5 + 7);
+console.log(20 - 8);
+console.log(6 * 9);
+console.log(15 / 3);
+console.log(10 % 4);
+console.log(2 ** 4);
+</pre>
+
+---
+
+<div class="challenge">
+
+<strong>Mini Challenges</strong>
+
+1️⃣ Calculate the total price of 4 items that cost $12 each.
+
+2️⃣ Divide 25 candies among 4 kids and find the remainder.
+
+3️⃣ Raise 5 to the power of 3.
+
+4️⃣ Start with:
+
+<pre>
+let score = 10;
+</pre>
+
+Increase it using `++`.
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Step 5: Assignment Operators — Updating the Cube</h2>
+
+<p>
+Earlier we learned that a variable is like a <strong>cube in memory</strong>.
+</p>
+
+<p>
+The cube has:
+</p>
+
+<ul>
+<li>a <strong>label</strong> (the variable name)</li>
+<li>a <strong>value inside it</strong></li>
+</ul>
+
+<p>
+Example:
+</p>
+
+<pre>
+let score = 10;
+</pre>
+
+<p>
+JavaScript creates a cube labeled <strong>score</strong> and puts the value <strong>10</strong> inside.
+</p>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">score</div>
+      <div class="number">10</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<br/>
+
+<p>
+Assignment operators are simply <strong>shortcuts for updating what is inside the cube</strong>.
+</p>
+
+<hr/>
+
+<h3>The Basic Assignment Operator (=)</h3>
+
+<p>
+The <code>=</code> operator replaces whatever is inside the cube.
+</p>
+
+<pre>
+score = 20;
+</pre>
+
+<p>
+JavaScript does this:
+</p>
+
+<ul>
+<li>1️⃣ Find the cube labeled <strong>score</strong></li>
+<li>2️⃣ Remove the value <strong>10</strong></li>
+<li>3️⃣ Place <strong>20</strong> inside</li>
+</ul>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">score</div>
+      <div class="number">20</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Addition Assignment (<code>+=</code>)</h3>
+
+<p>
+The <code>+=</code> operator means:
+</p>
+
+<blockquote>
+“Take the value already inside the cube, add something to it, and store the result back in the same cube.”
+</blockquote>
+
+Example:
+
+<pre>
+let score = 10;
+
+score += 5;
+</pre>
+
+<p>
+JavaScript interprets this as:
+</p>
+
+<pre>
+score = score + 5;
+</pre>
+
+<p>
+Step by step:
+</p>
+
+<ul>
+<li>1️⃣ Read the value inside the cube → <strong>10</strong></li>
+<li>2️⃣ Add <strong>5</strong></li>
+<li>3️⃣ Store the result <strong>15</strong> back in the cube</li>
+</ul>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">score</div>
+      <div class="number">15</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Subtraction Assignment (<code>-=</code>)</h3>
+
+<p>
+The <code>-=</code> operator subtracts a value from the cube.
+</p>
+
+Example:
+
+<pre>
+let lives = 5;
+
+lives -= 1;
+</pre>
+
+Equivalent to:
+
+<pre>
+lives = lives - 1;
+</pre>
+
+<p>
+JavaScript:
+</p>
+
+<ul>
+<li>1️⃣ Reads the value inside the cube → <strong>5</strong></li>
+<li>2️⃣ Subtracts <strong>1</strong></li>
+<li>3️⃣ Stores the result <strong>4</strong> back in the cube</li>
+</ul>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">lives</div>
+      <div class="number">4</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Multiplication Assignment (<code>*=</code>)</h3>
+
+<p>
+This multiplies the cube's value and stores the result.
+</p>
+
+Example:
+
+<pre>
+let money = 50;
+
+money *= 2;
+</pre>
+
+Equivalent to:
+
+<pre>
+money = money * 2;
+</pre>
+
+<p>
+Cube update:
+</p>
+
+<ul>
+<li>50 × 2 = 100</li>
+<li>The cube now contains <strong>100</strong></li>
+</ul>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">money</div>
+      <div class="number">100</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Division Assignment (<code>/=</code>)</h3>
+
+Example:
+
+<pre>
+let pizza = 12;
+
+pizza /= 3;
+</pre>
+
+Equivalent to:
+
+<pre>
+pizza = pizza / 3;
+</pre>
+
+<p>
+The cube updates from <strong>12</strong> to <strong>4</strong>.
+</p>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">pizza</div>
+      <div class="number">4</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Remainder Assignment (<code>%=</code>)</h3>
+
+This stores the <strong>remainder after division</strong>.
+
+Example:
+
+<pre>
+let candies = 10;
+
+candies %= 3;
+</pre>
+
+Equivalent to:
+
+<pre>
+candies = candies % 3;
+</pre>
+
+<p>
+Result stored in cube:
+</p>
+
+<pre>
+1
+</pre>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">candies</div>
+      <div class="number">1</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Exponent Assignment (<code>**=</code>)</h3>
+
+Raises the cube value to a power.
+
+Example:
+
+<pre>
+let number = 2;
+
+number **= 3;
+</pre>
+
+Equivalent to:
+
+<pre>
+number = number ** 3;
+</pre>
+
+<p>
+Result stored in the cube:
+</p>
+
+<pre>
+8
+</pre>
+
+<br/>
+
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">number</div>
+      <div class="number">8</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<hr/>
+
+<h3>Complete Assignment Operator Table</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+<th>Equivalent Code</th>
+</tr>
+</thead>
+
+<tr>
+<td>=</td>
+<td>Assign value</td>
+<td>x = 5</td>
+</tr>
+
+<tr>
+<td>+=</td>
+<td>Add and store</td>
+<td>x = x + 5</td>
+</tr>
+
+<tr>
+<td>-=</td>
+<td>Subtract and store</td>
+<td>x = x - 5</td>
+</tr>
+
+<tr>
+<td>*=</td>
+<td>Multiply and store</td>
+<td>x = x * 5</td>
+</tr>
+
+<tr>
+<td>/=</td>
+<td>Divide and store</td>
+<td>x = x / 5</td>
+</tr>
+
+<tr>
+<td>%=</td>
+<td>Remainder and store</td>
+<td>x = x % 5</td>
+</tr>
+
+<tr>
+<td>**=</td>
+<td>Power and store</td>
+<td>x = x ** 5</td>
+</tr>
+
+</table>
+
+<hr/>
+
+<div class="challenge">
+
+<strong>Mini Challenges</strong>
+
+1️⃣ Start with:
+
+<pre>
+let score = 10;
+</pre>
+
+Add 20 using <code>+=</code>.
+
+---
+
+2️⃣ Start with:
+
+<pre>
+let money = 100;
+</pre>
+
+Double it using <code>*=</code>.
+
+---
+
+3️⃣ Start with:
+
+<pre>
+let lives = 5;
+</pre>
+
+Lose one life using <code>-=</code>.
+
+---
+
+4️⃣ Start with:
+
+<pre>
+let candies = 17;
+</pre>
+
+Share them among 5 kids using <code>%=</code>.
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Step 6: Combining Operators</h2>
+
+<p>
+In real programs, we rarely use just one type of operator.  
+Most decisions require combining <strong>comparison operators</strong>, <strong>logical operators</strong>, and <strong>variables</strong>.
+</p>
+
+<p>
+This is how programs make intelligent decisions.
+</p>
+
+<hr>
+
+<h3>Example Program</h3>
+
+<pre>
+let age = 20;
+let hasLicense = true;
+
+let canDrive = (age >= 18) && hasLicense;
+
+console.log(canDrive);
+</pre>
+
+<p>
+This program checks whether someone is allowed to drive.
+</p>
+
+<hr>
+
+<h3>Step 1: Create Variables (Cubes in Memory)</h3>
+
+<pre>
+let age = 20;
+let hasLicense = true;
+</pre>
+
+<p>
+JavaScript creates two cubes in memory.
+</p>
+
+<ul>
+<li>A cube labeled <strong>age</strong> containing <strong>20</strong></li>
+<li>A cube labeled <strong>hasLicense</strong> containing <strong>true</strong></li>
+</ul>
+
+<p>
+These cubes store information about a person.
+</p>
+
+<hr>
+
+<h3>Step 2: Comparison Operator</h3>
+
+Inside our expression we see:
+
+<pre>
+age >= 18
+</pre>
+
+<p>
+This uses the <strong>greater than or equal</strong> operator.
+</p>
+
+<p>
+JavaScript asks the question:
+</p>
+
+<blockquote>
+Is the value inside the <strong>age cube</strong> greater than or equal to 18?
+</blockquote>
+
+<p>
+The value is:
+</p>
+
+<pre>
+20 >= 18
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+<p>
+So the first condition becomes:
+</p>
+
+<pre>
+true
+</pre>
+
+<hr>
+
+<h3>Step 3: Logical Operator</h3>
+
+Now look at the full expression:
+
+<pre>
+(age >= 18) && hasLicense
+</pre>
+
+After the comparison is evaluated, JavaScript effectively sees:
+
+<pre>
+true && true
+</pre>
+
+<p>
+The logical AND operator <code>&&</code> checks if <strong>both conditions are true</strong>.
+</p>
+
+Truth table reminder:
+
+<table>
+
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>A && B</th>
+</tr>
+</thead>
+
+<tr>
+<td>true</td>
+<td>true</td>
+<td>true</td>
+</tr>
+
+<tr>
+<td>true</td>
+<td>false</td>
+<td>false</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>true</td>
+<td>false</td>
+</tr>
+
+<tr>
+<td>false</td>
+<td>false</td>
+<td>false</td>
+</tr>
+
+</table>
+
+Since both values are true:
+
+<pre>
+true && true
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+<hr>
+
+<h3>Step 4: Assignment Operator</h3>
+
+Now the result is stored in a new variable:
+
+<pre>
+let canDrive = true;
+</pre>
+
+JavaScript creates another cube labeled:
+
+<strong>canDrive</strong>
+
+And places the value:
+
+<strong>true</strong>
+
+inside it.
+
+<hr>
+
+<h3>Step 5: Output the Result</h3>
+
+Finally we run:
+
+<pre>
+console.log(canDrive);
+</pre>
+
+The console prints:
+
+<pre>
+true
+</pre>
+
+Meaning:
+
+<blockquote>
+The person is allowed to drive.
+</blockquote>
+
+<hr>
+
+<h3>How JavaScript Evaluates the Expression</h3>
+
+JavaScript evaluates the expression step by step.
+
+Original expression:
+
+<pre>
+(age >= 18) && hasLicense
+</pre>
+
+Step 1 — comparison:
+
+<pre>
+true && hasLicense
+</pre>
+
+Step 2 — replace variable:
+
+<pre>
+true && true
+</pre>
+
+Step 3 — logical operation:
+
+<pre>
+true
+</pre>
+
+<hr>
+
+<h3>Real World Analogy</h3>
+
+Imagine a driving school checking if someone can drive.
+
+The instructor asks two questions:
+
+<ul>
+<li>Is the person at least 18?</li>
+<li>Do they have a license?</li>
+</ul>
+
+If the answer to both questions is yes:
+
+<pre>
+true && true
+</pre>
+
+The instructor says:
+
+<blockquote>
+"You are allowed to drive."
+</blockquote>
+
+<hr>
+
+<h3>Changing the Values</h3>
+
+Let's change the inputs.
+
+Example:
+
+<pre>
+let age = 16;
+let hasLicense = true;
+
+let canDrive = (age >= 18) && hasLicense;
+</pre>
+
+Now JavaScript evaluates:
+
+<pre>
+16 >= 18
+</pre>
+
+Result:
+
+<pre>
+false
+</pre>
+
+So the expression becomes:
+
+<pre>
+false && true
+</pre>
+
+Result:
+
+<pre>
+false
+</pre>
+
+Meaning:
+
+<blockquote>
+The person cannot drive because they are too young.
+</blockquote>
+
+<hr>
+
+<h3>Another Scenario</h3>
+
+<pre>
+let age = 22;
+let hasLicense = false;
+</pre>
+
+Evaluation:
+
+<pre>
+22 >= 18
+</pre>
+
+Result:
+
+<pre>
+true
+</pre>
+
+Expression becomes:
+
+<pre>
+true && false
+</pre>
+
+Result:
+
+<pre>
+false
+</pre>
+
+Meaning:
+
+<blockquote>
+The person is old enough but does not have a license.
+</blockquote>
+
+<hr>
+
+<h3>Why Combining Operators Is Important</h3>
+
+Combining operators allows programs to make complex decisions.
+
+Examples in real applications:
+
+<ul>
+
+<li>Login systems</li>
+<li>Online purchases</li>
+<li>Game rules</li>
+<li>Security checks</li>
+<li>Age restrictions</li>
+<li>Bank transactions</li>
+
+</ul>
+
+Example: ATM withdrawal
+
+<pre>
+let balance = 500;
+let withdraw = 200;
+let cardValid = true;
+
+if (balance >= withdraw && cardValid) {
+console.log("Withdrawal approved");
+}
+</pre>
+
+<hr>
+
+<div class="challenge">
+
+<strong>Mini Challenges</strong>
+
+1️⃣ Check if someone can vote.
+
+Rules:
+<ul>
+<li>Age must be 18 or older</li>
+<li>Must be a citizen</li>
+</ul>
+
+Variables:
+
+<pre>
+let age = 21;
+let isCitizen = true;
+</pre>
+
+---
+
+2️⃣ Check if a user can log in.
+
+Rules:
+<ul>
+<li>Password must be correct</li>
+<li>User must not be banned</li>
+</ul>
+
+---
+
+3️⃣ Check if a student passes.
+
+Rules:
+<ul>
+<li>Score ≥ 50</li>
+<li>OR teacher approval</li>
+</ul>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Step 7: Mental Model</h2>
+
+<ul>
+
+<li><strong>Comparison:</strong> Ask questions</li>
+
+<li><strong>Logical:</strong> Combine answers</li>
+
+<li><strong>Arithmetic:</strong> Perform calculations</li>
+
+<li><strong>Assignment:</strong> Store results</li>
+
+</ul>
+
+<p>
+Think of it like a factory: values go in, operators perform actions, results come out.
+</p>
+
+</section>
+
+<div class="nav-btns">
+
+<a href="VariablesAndDataTypes.html" class="prev-article">
+← Variables & Data Types
+</a>
+
+<a href="ControlFlow.html" class="next-article">
+Control Flow →
+</a>
+
+</div>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Operators";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+
+if (forward) {
+index++;
+if (index >= text.length) {
+forward = false;
+setTimeout(typeLoop, 1500);
+return;
+}
+}
+
+else {
+index--;
+if (index <= 0) {
+forward = true;
+}
+}
+
+typewriter.textContent = text.substring(0, index + 1);
+setTimeout(typeLoop, forward ? 100 : 50);
+
+}
+
+typeLoop();
+
+</script>
+
+</body>
+</html>

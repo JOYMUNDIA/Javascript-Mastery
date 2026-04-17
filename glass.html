@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 90px;
+  background: radial-gradient(circle at top left, #e6edf5, #cfd9e6);
+  perspective: 1400px;
+  font-family: Arial, sans-serif;
+}
+
+/* Scene */
+.scene {
+  width: 150px;
+  height: 150px;
+}
+
+/* Cube */
+.cube {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(30deg);
+  transition: transform 1.5s ease;
+}
+
+.cube:hover {
+  transform: rotateX(-20deg) rotateY(390deg);
+}
+
+/* Shared face style */
+.face {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Clean metallic gradient (no stripes) */
+  background: linear-gradient(
+    160deg,
+    rgba(220,225,232,0.35),
+    rgba(180,190,205,0.25),
+    rgba(140,150,165,0.30)
+  );
+
+  border: 1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+    inset -12px -12px 25px rgba(255,255,255,0.25),
+    inset 12px 12px 25px rgba(0,0,0,0.12),
+    0 15px 30px rgba(0,0,0,0.15);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Face positioning */
+.front  { transform: translateZ(75px); }
+.back   { transform: rotateY(180deg) translateZ(75px); }
+.right  { transform: rotateY(90deg) translateZ(75px); }
+.left   { transform: rotateY(-90deg) translateZ(75px); }
+.top    { transform: rotateX(90deg) translateZ(75px); }
+.bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+/* Label */
+.label {
+  position: absolute;
+  top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #eef2f7, #cfd6df);
+  color: #2f3b4a;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* 3D Number */
+.number {
+  font-size: 60px;
+  font-weight: bold;
+  color: #f4f7fa;
+  transform: translateZ(40px);
+  text-shadow:
+    1px 1px 0 #cfd6df,
+    2px 2px 0 #b8c1cc,
+    3px 3px 6px rgba(0,0,0,0.35);
+}
+</style>
+</head>
+<body>
+
+<!-- 1: Empty -->
+<div class="scene">
+  <div class="cube">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<!-- 2: Label only -->
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">age</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<!-- 3: Label + 25 -->
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">age</div>
+      <div class="number">25</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+<!-- 4: Label + 30 -->
+<div class="scene">
+  <div class="cube">
+    <div class="face front">
+      <div class="label">age</div>
+      <div class="number">30</div>
+    </div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+</div>
+
+</body>
+</html>

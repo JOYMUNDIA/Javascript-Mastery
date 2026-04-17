@@ -1,0 +1,195 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #3a8d99, #7d4d9e); /* Gradient background */
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Header Styling */
+header {
+    padding: 50px 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    border-bottom: 2px solid #ffffff50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Main Section */
+main {
+    padding: 60px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Cards */
+.card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);  /* Glassmorphism effect */
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 800px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Journal Textarea */
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    resize: none;
+    margin-bottom: 20px;
+    border: 2px solid #fff;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #7d4d9e;
+    outline: none;
+}
+
+/* Mood Rating */
+.mood-rating {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mood-rating input[type="range"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #00ff99, #ff0099);
+    cursor: pointer;
+}
+
+.mood-rating input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+}
+
+.mood-rating input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #7d4d9e;
+}
+
+.mood-description {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #eee;
+    width: 100%;
+    padding-top: 5px;
+}
+
+/* Save Button */
+button {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #7d4d9e, #00aaff);
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #00aaff, #7d4d9e);
+}
+
+/* Insights Section */
+#insights {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+#insightsContent {
+    font-size: 1.1rem;
+    color: #f9f9f9;
+    margin-top: 15px;
+}
+
+/* Footer */
+footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    textarea {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}

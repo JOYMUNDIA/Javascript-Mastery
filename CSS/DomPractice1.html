@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herbal Wellness</title>
+
+<style>
+:root {
+    --primary: #2e7d32;
+    --dark: #1b4332;
+    --light: #f4f7f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: var(--light);
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.hamburger {
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.topbar h1 {
+    color: var(--primary);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    width: 260px;
+    height: 100%;
+    background: var(--dark);
+    color: white;
+    padding: 20px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.close-btn {
+    font-size: 22px;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #2d6a4f;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Content */
+.content {
+    padding: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--primary);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+}
+
+.modal-box h2 {
+    color: var(--primary);
+}
+
+.close-modal {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">✖</span>
+    <h2>🌿 HerbalCare</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Herbs</a>
+    <a href="#">Remedies</a>
+    <a href="#">About</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <span class="hamburger" onclick="openSidebar()">☰</span>
+    <h1>Herbal Wellness</h1>
+</div>
+
+<!-- Content -->
+<div class="content">
+    <h2>Explore Herbs</h2>
+    <br>
+
+    <div class="grid">
+        <div class="card" onclick="openModal('aloe')">
+            <h3>Aloe Vera</h3>
+            <p>Skin healing</p>
+        </div>
+
+        <div class="card" onclick="openModal('ginger')">
+            <h3>Ginger</h3>
+            <p>Digestive health</p>
+        </div>
+
+        <div class="card" onclick="openModal('mint')">
+            <h3>Mint</h3>
+            <p>Cooling herb</p>
+        </div>
+
+        <div class="card" onclick="openModal('turmeric')">
+            <h3>Turmeric</h3>
+            <p>Anti-inflammatory</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <span class="close-modal" onclick="closeModal()">✖</span>
+        <h2 id="title"></h2>
+        <p id="desc"></p>
+    </div>
+</div>
+
+<script>
+// Sidebar controls
+function openSidebar() {
+    document.getElementById("sidebar").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
+}
+
+function closeSidebar() {
+    document.getElementById("sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+}
+
+// Modal logic
+function openModal(herb) {
+    const title = document.getElementById("title");
+    const desc = document.getElementById("desc");
+
+    if (herb === "aloe") {
+        title.innerText = "Aloe Vera";
+        desc.innerText = "Aloe Vera helps heal burns, hydrate skin, and soothe irritation.";
+    }
+
+    if (herb === "ginger") {
+        title.innerText = "Ginger";
+        desc.innerText = "Ginger aids digestion and reduces nausea.";
+    }
+
+    if (herb === "mint") {
+        title.innerText = "Mint";
+        desc.innerText = "Mint provides cooling effects and supports digestion.";
+    }
+
+    if (herb === "turmeric") {
+        title.innerText = "Turmeric";
+        desc.innerText = "Turmeric is rich in curcumin and reduces inflammation.";
+    }
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+// Close modal when clicking outside
+window.onclick = function(e) {
+    const modal = document.getElementById("modal");
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

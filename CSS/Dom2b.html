@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herbal Wellness - Beginner DOM</title>
+<style>
+body { font-family: sans-serif; margin: 0; background: #f4f7f5; padding: 20px; }
+h1, h2 { color: #2e7d32; }
+button { margin: 5px 0; padding: 10px; cursor: pointer; }
+#products { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.product { background: white; padding: 15px; border-radius: 10px; width: 150px; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+#consoleDemo { margin-top: 20px; padding: 15px; background: #e0f7fa; border-left: 5px solid #2e7d32; display: none; }
+</style>
+</head>
+<body>
+
+<h1 id="pageTitle">Welcome to Herbal Wellness</h1>
+<p id="introText">Click the buttons below to interact with this page!</p>
+
+<!-- Buttons to practice DOM -->
+<button id="changeTextBtn">Change Intro Text</button>
+<button id="changeStyleBtn">Change Title Style</button>
+<button id="addProductBtn">Add New Product</button>
+
+<!-- Product list -->
+<div id="products">
+    <div class="product">Aloe Vera</div>
+    <div class="product">Ginger</div>
+</div>
+
+<!-- Area to show DOM console feedback -->
+<div id="consoleDemo"></div>
+
+<script>
+// ================= BEGINNER DOM EXAMPLES ==================
+
+// 1. Selecting elements
+const pageTitle = document.getElementById("pageTitle");
+const introText = document.getElementById("introText");
+const productsDiv = document.getElementById("products");
+const consoleDemo = document.getElementById("consoleDemo");
+const changeTextBtn = document.getElementById("changeTextBtn");
+const changeStyleBtn = document.getElementById("changeStyleBtn");
+const addProductBtn = document.getElementById("addProductBtn");
+
+// Log selected elements
+console.log("Page title element:", pageTitle);
+console.log("Intro text element:", introText);
+console.log("Products container:", productsDiv);
+
+// 2. Changing content
+changeTextBtn.addEventListener("click", function() {
+    introText.textContent = "You just changed this text with JavaScript!";
+    console.log("Intro text changed:", introText.textContent);
+    consoleDemo.style.display = "block";
+    consoleDemo.textContent = "✅ Intro text changed via DOM!";
+});
+
+// 3. Changing styles
+changeStyleBtn.addEventListener("click", function() {
+    pageTitle.style.color = "orange";
+    pageTitle.style.fontSize = "2.5em";
+    console.log("Page title style changed:", pageTitle.style.color, pageTitle.style.fontSize);
+    consoleDemo.style.display = "block";
+    consoleDemo.textContent = "🎨 Page title style updated!";
+});
+
+// 4. Creating new elements
+addProductBtn.addEventListener("click", function() {
+    const newProduct = document.createElement("div"); // Create a new div
+    newProduct.textContent = "Mint"; // Set its text
+    newProduct.className = "product"; // Add class
+    productsDiv.appendChild(newProduct); // Add to products container
+    console.log("New product added:", newProduct);
+    consoleDemo.style.display = "block";
+    consoleDemo.textContent = "🌱 New product 'Mint' added!";
+});
+
+// 5. Traversing DOM
+// Example: log first product and its sibling
+const firstProduct = productsDiv.children[0];
+console.log("First product:", firstProduct.textContent);
+console.log("Next sibling of first product:", firstProduct.nextElementSibling.textContent);
+
+// 6. Event on dynamically added product
+// Using event delegation
+productsDiv.addEventListener("click", function(event) {
+    if(event.target.classList.contains("product")) {
+        console.log("You clicked on product:", event.target.textContent);
+        consoleDemo.style.display = "block";
+        consoleDemo.textContent = `💚 You clicked on product: ${event.target.textContent}`;
+    }
+});
+
+</script>
+
+</body>
+</html>

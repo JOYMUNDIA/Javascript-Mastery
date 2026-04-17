@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APGAR Score Explained</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background: #f1f5f9;
+  color: #1f2937;
+  line-height: 1.75;
+  letter-spacing: 0.2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 1200px;
+  background: #fff;
+  padding: 10px 10px 10px 0;
+  border-radius: 20px;
+  min-height: 80vh;
+  margin: 0 auto 60px;
+  overflow: hidden;
+}
+
+.hero-image { flex: 1; }
+
+.hero-content {
+  flex: 1;
+  padding-left: 3rem;
+}
+
+.hero-content h2 {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  color: #222;
+  margin: 0.2rem 0 1rem;
+}
+
+.hero-content p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 60px;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #4f46e5;
+  position: relative;
+}
+
+.section h2::after {
+  content: "";
+  height: 4px;
+  width: 60%;
+  background: linear-gradient(to right, #4f46e5, transparent);
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.card p {
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+/* NOTE STYLE */
+.card .note {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* RANGE */
+.range {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.range div {
+  flex: 1;
+  padding: 25px;
+  border-radius: 14px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.range .good { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.range .mid { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.range .bad { background: linear-gradient(135deg, #dc2626, #ef4444); }
+
+/* ANIMATION */
+.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-image">
+    <svg viewBox="0 0 600 530" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="stripeMask">
+          <path d="M0,0 H260 a40,40 0 0 1 40,40 a40,40 0 0 1 -40,40 H0 Z" />
+          <path d="M0,90 H410 a40,40 0 0 1 40,40 a40,40 0 0 1 -40,40 H0 Z" />
+          <path d="M0,180 H560 a40,40 0 0 1 40,40 a40,40 0 0 1 -40,40 H0 Z" />
+          <path d="M0,270 H460 a40,40 0 0 1 40,40 a40,40 0 0 1 -40,40 H0 Z" />
+          <path d="M0,360 H510 a40,40 0 0 1 40,40 a40,40 0 0 1 -40,40 H0 Z" />
+          <path d="M0,450 H360 a40,40 0 0 1 40,40 a40,40 0 0 1 -40,40 H0 Z" />
+        </clipPath>
+      </defs>
+
+      <image
+        href="https://images.unsplash.com/photo-1626296421068-c66f53276abc?q=80&w=1200&auto=format&fit=crop"
+        width="600"
+        height="530"
+        clip-path="url(#stripeMask)"
+        preserveAspectRatio="xMidYMid slice"
+      />
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <h2>APGAR Scoring System</h2>
+    <h1>Newborn Health Assessment</h1>
+    <p>A quick, standardized method used worldwide to assess a newborn’s condition immediately after birth.</p>
+  </div>
+</section>
+
+<!-- TIMING -->
+<section class="section">
+<h2>When is it done?</h2>
+<div class="card">
+<ul>
+<li><strong>1 minute after birth:</strong> Evaluates how well the baby tolerated the birthing process.</li>
+<li><strong>5 minutes after birth:</strong> Assesses how well the baby is adapting to the new environment.</li>
+<li>If the score is low, assessments may be repeated every 5 minutes.</li>
+</ul>
+</div>
+</section>
+
+<!-- APGAR CARDS -->
+<section class="section">
+<h2>What APGAR stands for</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1618847472790-0ca60378235e?q=80&w=800">
+<h3>A - Appearance (Skin Color)</h3>
+<p>0 → Blue/pale all over<br>1 → Pink body, blue extremities<br>2 → Fully pink</p>
+<div class="note">Checks oxygenation and blood circulation through skin color.</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1618939304347-e91b1f33d2ab?q=80&w=800">
+<h3>P - Pulse (Heart Rate)</h3>
+<p>0 → No heartbeat<br>1 → <100 bpm<br>2 → >100 bpm</p>
+<div class="note">Assesses heart function and circulatory stability.</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1480985041486-c65b20c01d1f?q=80&w=800">
+<h3>G - Grimace (Reflex)</h3>
+<p>0 → No response<br>1 → Weak<br>2 → Strong reaction</p>
+<div class="note">Evaluates reflexes and nervous system responsiveness.</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1693247168883-eaf1165afce8?q=80&w=800">
+<h3>A - Activity (Muscle Tone)</h3>
+<p>0 → Limp<br>1 → Some movement<br>2 → Active movement</p>
+<div class="note">Checks muscle tone and neurological activity.</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1662624914069-a5cb84d7c386?q=80&w=800">
+<h3>R - Respiration (Breathing Effort)</h3>
+<p>0 → None<br>1 → Weak<br>2 → Strong cry</p>
+<div class="note">Assesses breathing effectiveness and lung function.</div>
+</div>
+
+</div>
+</section>
+
+<!-- SCORE -->
+<section class="section">
+<h2>Total Score Interpretation</h2>
+<div class="range">
+<div class="good">7–10 → Normal</div>
+<div class="mid">4–6 → Moderate distress</div>
+<div class="bad">0–3 → Severe distress</div>
+</div>
+</section>
+
+<!-- NOTES -->
+<section class="section">
+<h2>Important Clinical Notes</h2>
+<div class="card">
+<ul>
+<li>The APGAR score is a rapid screening tool, not a diagnosis.</li>
+<li>A low score does not necessarily mean long-term problems.</li>
+<li>It helps guide immediate medical care decisions.</li>
+<li>Various factors (like prematurity) can influence the score.</li>
+</ul>
+</div>
+</section>
+
+<!-- MEMORY -->
+<section class="section">
+<h2>Easy Memory Aid</h2>
+<div class="card">
+<strong>Appearance • Pulse • Grimace • Activity • Respiration</strong>
+</div>
+</section>
+
+</div>
+
+<!-- Navigation Buttons -->
+<!-- Navigation Buttons with Box Shadow -->
+<div style="text-align:center; margin: -30px 0 40px; 
+            display: inline-block;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            background: #f9fafb;">
+  
+  <a href="ApgarAssignment.html" target="_blank">
+    <button style="padding:12px 20px; margin-right:15px; border:none; border-radius:8px; background:#4f46e5; color:white; cursor:pointer; font-size:16px; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;">
+      Go to Assignment Page
+    </button>
+  </a>
+  <a href="apgar_calculator.html" target="_blank">
+    <button style="padding:12px 20px; border:none; border-radius:8px; background:#22c55e; color:white; cursor:pointer; font-size:16px;box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+                        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+                        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;">
+      Open Working APGAR Calculator
+    </button>
+  </a>
+</div>
+
+<footer>© 2026 APGAR Educational Page</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+document.querySelectorAll('.card, h2').forEach(el => {
+  el.classList.add('hidden');
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>

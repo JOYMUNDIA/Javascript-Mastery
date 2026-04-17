@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Scope</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>Understanding Scope in JavaScript: Where Variables Live & Die</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: What is Scope?</h2>
+
+<p>
+Scope determines <strong>where variables are accessible</strong> in your code.  
+Think of it as the “visibility rules” of variables.
+</p>
+
+<p>Mental model:</p>
+<blockquote>
+“Variables exist inside boxes. Some boxes are nested inside others. You can see variables in your own box or outer boxes, but not in inner boxes unless passed.”
+</blockquote>
+</section>
+
+<section>
+<h2>Step 2: Global Scope</h2>
+
+<p>
+Variables declared outside any function or block are in the <strong>global scope</strong>.  
+They can be accessed anywhere in your code.
+</p>
+
+<pre>
+let globalVar = "I am global";
+
+function showGlobal() {
+  console.log(globalVar); // accessible
+}
+
+showGlobal();
+console.log(globalVar); // also accessible
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Declare a global variable and access it from two different functions.
+</div>
+</section>
+
+<section>
+<h2>Step 3: Function Scope</h2>
+
+<p>
+Variables declared inside a function are in <strong>function scope</strong>.  
+They can only be accessed <em>inside that function</em>.
+</p>
+
+<pre>
+function myFunction() {
+  let funcVar = "I am local to this function";
+  console.log(funcVar); // works
+}
+
+myFunction();
+console.log(funcVar); // ❌ Error: funcVar is not defined
+</pre>
+
+<p>Mental model: Function scope = a sealed box. Variables live inside the box and disappear when the function ends.</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a function with a local variable, then try to access it outside the function. Observe the error.
+</div>
+</section>
+
+<section>
+<h2>Step 4: Block Scope</h2>
+
+<p>
+Variables declared with <code>let</code> or <code>const</code> inside <strong>{ }</strong> blocks are in <strong>block scope</strong>.  
+Variables declared with <code>var</code> are <strong>function-scoped</strong>, not block-scoped.
+</p>
+
+<pre>
+if (true) {
+  let blockVar = "I exist only in this block";
+  var functionVar = "I exist in the whole function";
+  console.log(blockVar); // ✅ works
+}
+
+console.log(blockVar); // ❌ Error
+console.log(functionVar); // ✅ works if inside the same function
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Compare <code>let</code>, <code>const</code>, and <code>var</code> inside a block. Which are accessible outside?
+</div>
+</section>
+
+<section>
+<h2>Step 5: Lexical / Static Scope</h2>
+
+<p>
+JavaScript uses <strong>lexical scope</strong>: a function can access variables from its <em>outer scopes</em> where it was defined, not where it is called.
+</p>
+
+<pre>
+let outer = "I am outer";
+
+function parent() {
+  let inner = "I am inner";
+
+  function child() {
+    console.log(outer); // ✅ can access outer
+    console.log(inner); // ✅ can access inner
+  }
+
+  child();
+}
+
+parent();
+</pre>
+
+<p>Mental model: Variables are visible in nested boxes up the chain, but not in sibling or parent boxes.</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Create a nested function that logs a variable from the outer function. Try logging an inner variable from the outer function — what happens?
+</div>
+</section>
+
+<section>
+<h2>Step 6: Scope Cheat Sheet</h2>
+
+<table>
+<thead><th>Variable Type</th><th>Scope</th><th>Example</th></thead>
+<tbody><tr><td>var</td><td>Function-scoped</td><td>Accessible throughout function, not block</td></tr>
+<tr><td>let</td><td>Block-scoped</td><td>Accessible only in { }</td></tr>
+<tr><td>const</td><td>Block-scoped</td><td>Accessible only in { }, immutable reference</td></tr>
+<tr><td>Global</td><td>Accessible anywhere</td><td>Declared outside all functions</td></tr>
+</tbody>
+</table>
+
+<div class="challenge">
+<strong>Mastery Challenge:</strong>  
+Write a function with nested blocks and nested functions using <code>var</code>, <code>let</code>, <code>const</code>. Predict which variables are accessible where, then test.
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript Scope: Global, Function & Block";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+  if (forward) {
+    index++;
+    if (index >= text.length) {
+      forward = false;
+      setTimeout(typeLoop, 1500);
+      return;
+    }
+  } else {
+    index--;
+    if (index <= 0) forward = true;
+  }
+
+  typewriter.textContent = text.substring(0, index + 1);
+  setTimeout(typeLoop, forward ? 100 : 50);
+}
+
+typeLoop();
+</script>
+
+</body>
+</html>

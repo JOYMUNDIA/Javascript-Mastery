@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Realistic Mobile Data Tracker</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;
+  margin:0;
+  padding:0;
+}
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+h1{text-align:center;}
+.dashboard{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+  border-radius:12px;
+  padding:20px;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0 15px;
+  border-radius:6px;
+  border:none;
+}
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  background:#00c6ff;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{background:#0099cc;}
+.progress{width:100%; background:#444; border-radius:20px; overflow:hidden; height:25px; margin-bottom:10px;}
+.progress-bar{height:25px;width:0%;background:linear-gradient(90deg,#00ff87,#60efff);}
+.warning{color:#ff7675; font-weight:bold;}
+.good{color:#55efc4;}
+.app-row{display:flex; justify-content:space-between; margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📱 Realistic Mobile Data Tracker</h1>
+<div class="dashboard">
+<div class="card">
+<h2>User Settings</h2>
+<label>Total Data (GB)</label>
+<input id="totalData" type="number" value="10">
+<label>WiFi Available?</label>
+<select id="wifi">
+<option value="true">Yes</option>
+<option value="false">No</option>
+</select>
+<label>Days Until Next Bundle</label>
+<input id="daysLeft" type="number" value="7">
+<h3>Simulate App Usage</h3>
+<div class="app-row">
+<label>Video (GB)</label><input id="videoData" type="number" value="0">
+</div>
+<div class="app-row">
+<label>Music (GB)</label><input id="musicData" type="number" value="0">
+</div>
+<div class="app-row">
+<label>Browsing (GB)</label><input id="browsingData" type="number" value="0">
+</div>
+<div class="app-row">
+<label>Gaming (GB)</label><input id="gamingData" type="number" value="0">
+</div>
+<button onclick="trackUsage()">Track Data</button>
+</div>
+
+<div class="card">
+<h2>Dashboard</h2>
+<canvas id="gaugeChart"></canvas>
+<h3>Overall Usage</h3>
+<div class="progress">
+  <div class="progress-bar" id="overallProgress"></div>
+</div>
+<div id="results"></div>
+</div>
+</div>
+<script>
+let gaugeChart;
+
+function trackUsage(){
+  let totalData = Number(document.getElementById("totalData").value);
+  let wifiAvailable = document.getElementById("wifi").value === "true";
+  let daysLeft = Number(document.getElementById("daysLeft").value);
+  
+  // App usage simulation
+  let video = Number(document.getElementById("videoData").value);
+  let music = Number(document.getElementById("musicData").value);
+  let browsing = Number(document.getElementById("browsingData").value);
+  let gaming = Number(document.getElementById("gamingData").value);
+  
+  let usedData = video + music + browsing + gaming;
+  let remainingData = totalData - usedData;
+  
+  // PROGRESS BAR
+  let percentUsed = Math.min((usedData/totalData)*100,100);
+  document.getElementById("overallProgress").style.width = percentUsed + "%";
+  
+  // GAUGE CHART
+  let ctx = document.getElementById("gaugeChart");
+  if(gaugeChart) gaugeChart.destroy();
+  gaugeChart = new Chart(ctx,{
+    type:'doughnut',
+    data:{
+      labels:['Used','Remaining'],
+      datasets:[{data:[usedData, Math.max(remainingData,0)], backgroundColor:['#ff7675','#55efc4']}]
+    },
+    options:{plugins:{legend:{labels:{color:'white'}}},cutout:'70%'}
+  });
+  
+  // RESULTS TEXT
+  let results = "";
+  if(remainingData > totalData*0.5) results += "<p class='good'>You have plenty of data left.</p>";
+  else if(remainingData > totalData*0.2) results += "<p>Your data is getting low.</p>";
+  else results += "<p class='warning'>Warning: Very little data remaining!</p>";
+  
+  if(remainingData < totalData*0.2 && !wifiAvailable) results += "<p class='warning'>Avoid heavy apps until you recharge your data.</p>";
+  
+  results += "<h3>App Breakdown</h3>";
+  results += `<p>Video: ${video} GB, Music: ${music} GB, Browsing: ${browsing} GB, Gaming: ${gaming} GB</p>`;
+  results += `<h3>Bundle Countdown</h3>`;
+  for(let i=daysLeft;i>0;i--){ results += `<p>${i} days until next bundle</p>`;}
+  results += `<h3>Summary</h3><p>Total: ${totalData} GB, Used: ${usedData} GB, Remaining: ${remainingData} GB</p>`;
+  
+  document.getElementById("results").innerHTML = results;
+}
+</script>
+</body>
+</html>

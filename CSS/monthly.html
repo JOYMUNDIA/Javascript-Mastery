@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --background: #0f131c;
+            --surface: #0f131c;
+            --surface-container: #1c1f29;
+            --surface-container-low: #181b25;
+            --surface-container-high: #262a34;
+            --surface-container-highest: #31353f;
+            --primary: #bdc2ff;
+            --primary-container: #7c87f3;
+            --on-primary: #131e8c;
+            --secondary: #ddb8ff;
+            --on-surface: #dfe2ef;
+            --on-surface-variant: #c7c4d7;
+            --outline: #908fa0;
+            --tertiary: #3cddc7;
+            --error: #ffb4ab;
+            --tertiary-fixed: #62fae3;
+            --tertiary-container: #008678;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--background);
+            color: var(--on-surface);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid rgba(189, 194, 255, 0.2);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #a5b4fc, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .icon-button {
+            padding: 0.5rem;
+            color: #94a3b8;
+            background: transparent;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .icon-button:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        main {
+            padding: 1.5rem;
+            max-width: 32rem;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .overview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .overview-title-group h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: white;
+            line-height: 1;
+            margin-top: 0.25rem;
+        }
+
+        .label-sm {
+            font-size: 0.875rem;
+            color: var(--on-surface-variant);
+            font-weight: 500;
+        }
+
+        .safe-to-spend {
+            text-align: right;
+        }
+
+        .safe-to-spend .label-xs {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 800;
+            color: var(--on-surface-variant);
+        }
+
+        .safe-to-spend .amount {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tertiary);
+            text-shadow: 0 0 12px rgba(60, 221, 199, 0.3);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 12rem;
+            width: 100%;
+            background: var(--surface-container-low);
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .chart-gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(189, 194, 255, 0.1) 0%, rgba(189, 194, 255, 0) 100%);
+        }
+
+        .chart-label {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 0.625rem;
+            color: rgba(189, 194, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 800;
+        }
+
+        .summary-bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .bento-card {
+            background: var(--surface-container);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            height: 8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .bento-card .amount {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .categories-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .text-link {
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 700;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .glass-panel {
+            background: rgba(49, 53, 63, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(189, 194, 255, 0.1);
+        }
+
+        .category-list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-radius: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .category-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-text p {
+            font-weight: 700;
+            color: white;
+        }
+
+        .category-text span {
+            font-size: 0.75rem;
+            color: var(--on-surface-variant);
+        }
+
+        .category-stats {
+            text-align: right;
+        }
+
+        .category-stats .amount {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 6rem;
+            height: 4px;
+            background: var(--surface-container-highest);
+            border-radius: 9999px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+        }
+
+        .insight-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(0, 134, 120, 0.2);
+            border: 1px solid rgba(60, 221, 199, 0.2);
+            padding: 1.5rem;
+            border-radius: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .insight-glow {
+            position: absolute;
+            left: -1rem;
+            top: -1rem;
+            width: 6rem;
+            height: 6rem;
+            background: rgba(60, 221, 199, 0.2);
+            filter: blur(40px);
+            border-radius: 9999px;
+        }
+
+        .insight-icon {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            background: var(--tertiary);
+            color: var(--on-primary);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(60, 221, 199, 0.4);
+            z-index: 1;
+        }
+
+        .insight-content {
+            z-index: 1;
+        }
+
+        .insight-title {
+            color: var(--tertiary-fixed);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .insight-desc {
+            color: var(--on-surface-variant);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem 2rem 2rem;
+            background: rgba(28, 31, 41, 0.6);
+            backdrop-filter: blur(32px);
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            width: 3rem;
+            height: 3rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-button:hover {
+            color: #a5b4fc;
+        }
+
+        .nav-button .nav-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        .nav-button.active-insights {
+            background: rgba(99, 102, 241, 0.2);
+            color: #c7d2fe;
+            border-radius: 9999px;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .pulse {
+            animation: pulse-anim 2s infinite;
+        }
+
+        @keyframes pulse-anim {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+<header>
+<div class="header-logo">
+<div class="user-avatar">
+<img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7xonIILS1yxWK353zM26Gd7mz3tv7D7tXZj0SX2PD4Z1UtMSxlC8QG1R9KQdPdJcatrw80r37HycK_wUpMEeBtgDSwvTKZiDlY8WfW_VhKcFH6ot3eY_QZ4yTpK7tDMvdsJ3oZJ_57kvPhQy2MusYZD1PpTVpnvxU4gy10dpm0H56EvygwLTwbAz0VTeNdG4BtmoX2i3uoprpTgQMu5sWIc6dLVSzvs2Uo8zQPm1FKVMklKZcOGoKw03wIyyGLWRZbEiXrCMaqWGN"/>
+</div>
+<span class="logo-text">Luminous Ledger</span>
+</div>
+<button class="icon-button">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main>
+<section class="overview-header">
+<div class="overview-title-group">
+<p class="label-sm">Monthly Overview</p>
+<h1>October 2023</h1>
+</div>
+<div class="safe-to-spend">
+<p class="label-xs">Safe to Spend</p>
+<p class="amount">$1,420.50</p>
+</div>
+</section>
+<section class="chart-container">
+<div class="chart-gradient-overlay"></div>
+<p class="chart-label">Daily Trends</p>
+<svg class="chart-svg" style="position: absolute; bottom: 0; width: 100%; height: 100%;" viewbox="0 0 400 150">
+<path d="M0,120 Q50,110 80,130 T160,90 T240,110 T320,60 T400,80 L400,150 L0,150 Z" fill="url(#gradient)" opacity="0.3"></path>
+<path d="M0,120 Q50,110 80,130 T160,90 T240,110 T320,60 T400,80" fill="none" stroke="#bdc2ff" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<lineargradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#7c87f3;stop-opacity:0.5"></stop>
+<stop offset="100%" style="stop-color:#7c87f3;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+<circle class="pulse" cx="320" cy="60" fill="#bdc2ff" r="4"></circle>
+</svg>
+</section>
+<section class="summary-bento">
+<div class="bento-card">
+<p class="label-sm">Income</p>
+<div class="amount">
+<span class="material-symbols-outlined" style="color: var(--tertiary); font-size: 1rem;">arrow_downward</span>
+<span>$8,450</span>
+</div>
+</div>
+<div class="bento-card">
+<p class="label-sm">Expenses</p>
+<div class="amount">
+<span class="material-symbols-outlined" style="color: var(--error); font-size: 1rem;">arrow_upward</span>
+<span>$4,120</span>
+</div>
+</div>
+</section>
+<section class="categories-section">
+<div class="section-header">
+<h2 class="section-title">Categories</h2>
+<button class="text-link">View Details</button>
+</div>
+<div class="category-list">
+<!-- Food Item -->
+<div class="category-list-item glass-panel">
+<div class="category-info">
+<div class="category-icon" style="background: rgba(60, 221, 199, 0.1); color: var(--tertiary);">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div class="category-text">
+<p>Food</p>
+<span>30% of budget</span>
+</div>
+</div>
+<div class="category-stats">
+<p class="amount">$1,236</p>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 30%; background: var(--tertiary);"></div>
+</div>
+</div>
+</div>
+<!-- Bills Item -->
+<div class="category-list-item glass-panel">
+<div class="category-info">
+<div class="category-icon" style="background: rgba(124, 135, 243, 0.2); color: var(--primary);">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div class="category-text">
+<p>Bills</p>
+<span>45% of budget</span>
+</div>
+</div>
+<div class="category-stats">
+<p class="amount">$1,854</p>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 45%; background: var(--primary);"></div>
+</div>
+</div>
+</div>
+<!-- Entertainment -->
+<div class="category-list-item glass-panel">
+<div class="category-info">
+<div class="category-icon" style="background: rgba(221, 184, 255, 0.2); color: var(--secondary);">
+<span class="material-symbols-outlined">movie</span>
+</div>
+<div class="category-text">
+<p>Entertainment</p>
+<span>15% of budget</span>
+</div>
+</div>
+<div class="category-stats">
+<p class="amount">$618</p>
+<div class="progress-bar">
+<div class="progress-fill" style="width: 15%; background: var(--secondary);"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="insight-section">
+<div class="insight-card">
+<div class="insight-glow"></div>
+<div class="insight-icon">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="insight-content">
+<p class="insight-title">Great job!</p>
+<p class="insight-desc">You’re under budget — your allowance increased.</p>
+</div>
+</div>
+</section>
+</main>
+<nav class="bottom-nav">
+<button class="nav-button">
+<span class="material-symbols-outlined">home</span>
+<span class="nav-label">Home</span>
+</button>
+<button class="nav-button">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="nav-label">Add</span>
+</button>
+<button class="nav-button">
+<span class="material-symbols-outlined">target</span>
+<span class="nav-label">Goals</span>
+</button>
+<button class="nav-button active-insights">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+</button>
+</nav>
+</body></html>

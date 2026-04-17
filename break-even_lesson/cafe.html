@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Console.log Café Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f7f5f2;
+  padding:20px;
+  color:#2d2d2d;
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+}
+
+.section{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+input{
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  width:100%;
+}
+
+button{
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#caa25d;
+  color:white;
+  cursor:pointer;
+}
+
+.stat{
+  background:#f0f0f0;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.progress{
+  height:20px;
+  background:#ddd;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  background:#caa25d;
+  width:0%;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>☕ console.log Café</h1>
+<p>Business Dashboard & Break-Even Tracker</p>
+
+<!-- BREAK EVEN CALCULATOR -->
+<div class="section">
+  <h2>📊 Break-Even Calculator</h2>
+
+  <div class="grid">
+    <input type="number" id="fixed" placeholder="Fixed Costs (e.g. 600)">
+    <input type="number" id="price" placeholder="Avg Price (e.g. 4)">
+    <input type="number" id="variable" placeholder="Variable Cost (e.g. 1)">
+  </div>
+
+  <button onclick="calculate()">Calculate</button>
+
+  <div id="calc-results"></div>
+</div>
+
+<!-- SALES INPUT -->
+<div class="section">
+  <h2>🛒 Simulate Daily Sales</h2>
+
+  <div class="grid">
+    <input type="number" id="dailySales" placeholder="Items sold today">
+  </div>
+
+  <button onclick="addSales()">Add Sales</button>
+</div>
+
+<!-- DASHBOARD -->
+<div class="section">
+  <h2>📈 Business Dashboard</h2>
+
+  <div class="grid">
+    <div class="stat">
+      <h3 id="totalItems">0</h3>
+      <p>Total Items Sold</p>
+    </div>
+
+    <div class="stat">
+      <h3 id="revenue">$0</h3>
+      <p>Revenue</p>
+    </div>
+
+    <div class="stat">
+      <h3 id="profit">$0</h3>
+      <p>Profit / Loss</p>
+    </div>
+
+    <div class="stat">
+      <h3 id="remaining">0</h3>
+      <p>Sales to Break Even</p>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+let totalItems = 0;
+let fixed = 0;
+let price = 0;
+let variable = 0;
+let contribution = 0;
+let breakEvenUnits = 0;
+
+function calculate(){
+  fixed = parseFloat(document.getElementById("fixed").value);
+  price = parseFloat(document.getElementById("price").value);
+  variable = parseFloat(document.getElementById("variable").value);
+
+  if(!fixed || !price || !variable){
+    alert("Fill all fields");
+    return;
+  }
+
+  contribution = price - variable;
+
+  if(contribution <= 0){
+    alert("Invalid: Price must be greater than cost");
+    return;
+  }
+
+  breakEvenUnits = fixed / contribution;
+
+  document.getElementById("calc-results").innerHTML = `
+    <p><strong>Contribution:</strong> $${contribution.toFixed(2)}</p>
+    <p><strong>Break-even:</strong> ${breakEvenUnits.toFixed(0)} items/month</p>
+    <p><strong>Daily target:</strong> ${(breakEvenUnits/30).toFixed(1)} items/day</p>
+  `;
+}
+
+function addSales(){
+  const daily = parseFloat(document.getElementById("dailySales").value);
+  if(!daily) return;
+
+  totalItems += daily;
+
+  updateDashboard();
+}
+
+function updateDashboard(){
+  const revenue = totalItems * price;
+  const totalContribution = totalItems * contribution;
+  const profit = totalContribution - fixed;
+  const remaining = Math.max(0, breakEvenUnits - totalItems);
+
+  document.getElementById("totalItems").textContent = totalItems;
+  document.getElementById("revenue").textContent = "$" + revenue.toFixed(2);
+  document.getElementById("profit").textContent = "$" + profit.toFixed(2);
+  document.getElementById("remaining").textContent = remaining.toFixed(0);
+
+  const progress = Math.min((totalItems / breakEvenUnits) * 100, 100);
+  document.getElementById("progressBar").style.width = progress + "%";
+}
+</script>
+
+</body>
+</html>

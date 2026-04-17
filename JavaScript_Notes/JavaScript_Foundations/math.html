@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Math - Complete Master Guide</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin:0;
+  background:#0f172a;
+  color:#e2e8f0;
+}
+
+header{
+  text-align:center;
+  padding:40px;
+  background:linear-gradient(45deg,#1e293b,#020617);
+}
+
+h1{color:#38bdf8;}
+h2{color:#22c55e;margin-top:40px;}
+h3{color:#facc15;}
+pre{
+  background:#020617;
+  padding:15px;
+  border-radius:10px;
+  overflow:auto;
+}
+
+section{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+.challenge{
+  background:#1e293b;
+  padding:15px;
+  border-left:5px solid #22c55e;
+  margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1 id="typewriter"></h1>
+<p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: Understanding Numbers in JavaScript</h2>
+
+<pre>
+let a = 10;
+let b = 3.14;
+
+typeof a; // "number"
+typeof b; // "number"
+</pre>
+
+<pre>
+0.1 + 0.2
+// 0.30000000000000004
+</pre>
+
+</section>
+
+<section>
+<h2>Step 2: Arithmetic Operators</h2>
+
+<pre>
+let a = 10;
+let b = 3;
+
+console.log(a + b);
+console.log(a - b);
+console.log(a * b);
+console.log(a / b);
+console.log(a % b);
+console.log(a ** b);
+</pre>
+
+<pre>
+10 / 0       // Infinity
+"hello" * 5  // NaN
+</pre>
+
+<pre>
+"5" + 2 // "52"
+"5" - 2 // 3
+</pre>
+
+</section>
+
+<section>
+<h2>Step 3: The Math Object</h2>
+
+<pre>
+Math.round(4.6)
+Math.floor(4.9)
+Math.ceil(4.1)
+Math.abs(-7)
+Math.sqrt(16)
+Math.pow(2,3)
+</pre>
+
+<pre>
+Math.floor(Math.random() * 10) + 1
+</pre>
+
+</section>
+
+<section>
+<h2>Step 4: Math Constants</h2>
+
+<pre>
+Math.PI
+Math.E
+</pre>
+
+<pre>
+let radius = 5;
+let area = Math.PI * radius * radius;
+</pre>
+
+</section>
+
+<section>
+<h2>Step 5: Number Formatting</h2>
+
+<pre>
+let price = 10 / 3;
+
+price.toFixed(2)
+parseFloat(price.toFixed(2))
+
+let num = 123.456;
+num.toPrecision(4)
+</pre>
+
+<pre>
+let formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD"
+});
+
+formatter.format(1234.5);
+</pre>
+
+<pre>
+(1000000).toLocaleString();
+
+let value = 0.75;
+(value * 100).toFixed(0) + "%";
+</pre>
+
+</section>
+
+<section>
+<h2>Step 6: Advanced Math</h2>
+
+<pre>
+Math.sqrt(25)
+Math.pow(2,3)
+Math.log(10)
+Math.log10(100)
+</pre>
+
+</section>
+
+<section>
+<h2>Step 7: Precision Fix</h2>
+
+<pre>
+Math.round((0.1 + 0.2) * 100) / 100
+</pre>
+
+</section>
+
+<section>
+<h2>Step 8: Real World Examples</h2>
+
+<pre>
+let price = 19.99;
+let tax = 0.16;
+
+let total = price + (price * tax);
+
+console.log(total.toFixed(2));
+</pre>
+
+<pre>
+let damage = Math.floor(Math.random() * 10) + 1;
+</pre>
+
+</section>
+
+<section>
+<h2>Step 9: Mental Model</h2>
+
+<ul>
+<li>Numbers → data</li>
+<li>Operators → calculations</li>
+<li>Math → tools</li>
+<li>Formatting → display</li>
+</ul>
+
+</section>
+
+</main>
+
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Math & Number Systems";
+
+let i = 0;
+let forward = true;
+
+function loop(){
+if(forward){
+i++;
+if(i >= text.length){
+forward = false;
+setTimeout(loop,1500);
+return;
+}
+}else{
+i--;
+if(i <= 0) forward = true;
+}
+
+typewriter.textContent = text.substring(0,i+1);
+setTimeout(loop, forward ? 100 : 50);
+}
+
+loop();
+</script>
+
+</body>
+</html>

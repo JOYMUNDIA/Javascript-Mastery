@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Realistic Stick-Figure Security Check</title>
+<style>
+body {
+  margin: 0;
+  background: #ccefff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Scene container */
+.scene {
+  width: 700px;
+  height: 350px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+/* Stick figure base */
+.person, .officer {
+  position: relative;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Head with shading */
+.head {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffddbb, #cc9966);
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.3);
+  z-index: 2;
+  position: relative;
+}
+
+/* Officer hat */
+.officer .hat {
+  width: 50px;
+  height: 15px;
+  background: linear-gradient(to bottom, #222, #555);
+  border-radius: 8px 8px 0 0;
+  position: absolute;
+  top: -10px;
+  z-index: 3;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Body with gradient and subtle curves */
+.body {
+  width: 20px;
+  height: 120px;
+  border-radius: 12px;
+  margin-top: -5px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Person uniform */
+.person .body {
+  background: linear-gradient(to bottom, #ff6666 0%, #cc4444 100%);
+}
+
+/* Officer uniform */
+.officer .body {
+  background: repeating-linear-gradient(
+    to bottom,
+    #4169e1, /* royal blue */
+    #4169e1 20px,
+    #ffffff 20px,
+    #ffffff 25px
+  );
+}
+
+/* Arms attached to body */
+.arms {
+  display: flex;
+  justify-content: space-between;
+  width: 60px;
+  margin-top: 5px;
+}
+.arm-left, .arm-right {
+  width: 12px;
+  height: 70px;
+  border-radius: 8px;
+}
+.person .arm-left, .person .arm-right {
+  background: linear-gradient(to bottom, #ffcc99, #cc9966);
+}
+.officer .arm-left, .officer .arm-right {
+  background: linear-gradient(to bottom, #ffddbb, #cccccc);
+}
+
+/* Legs attached to body */
+.legs {
+  display: flex;
+  justify-content: space-between;
+  width: 40px;
+  margin-top: 2px;
+}
+.leg-left, .leg-right {
+  width: 14px;
+  height: 80px;
+  border-radius: 10px;
+}
+.person .leg-left, .person .leg-right {
+  background: linear-gradient(to bottom, #ff6666, #aa3333);
+}
+.officer .leg-left, .officer .leg-right {
+  background: linear-gradient(to bottom, #4169e1, #27408b);
+}
+
+/* ID card */
+.id-card {
+  width: 28px;
+  height: 18px;
+  background: linear-gradient(135deg, #fff, #eee);
+  border: 2px solid #333;
+  border-radius: 4px;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  transform: rotate(-30deg);
+  opacity: 0;
+  animation: moveID 8s infinite;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  z-index: 4;
+}
+
+/* Speech bubbles */
+.tooltip {
+  position: absolute;
+  max-width: 18ch;
+  padding: 0.8em;
+  border-radius: 1em;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0;
+  z-index: 5;
+}
+
+/* Officer bubble gradients */
+.officer-bubble {
+  background: linear-gradient(45deg,#490A3D,#F8CA00);
+  bottom: 180px;
+  left: -10px;
+  animation-fill-mode: forwards;
+}
+
+/* Person bubble gradients */
+.person-bubble {
+  background: linear-gradient(-45deg,#5E412F,#78C0A8);
+  bottom: 180px;
+  right: -10px;
+  animation-fill-mode: forwards;
+}
+
+/* Bubble animation sequences */
+@keyframes dialogueSequence {0%,14% { opacity:0; } 15%,29% { opacity:1; } 30%,100% { opacity:0; }}
+@keyframes dialogueSequence2 {0%,29% { opacity:0; } 30%,44% { opacity:1; } 45%,100% { opacity:0; }}
+@keyframes dialogueSequence3 {0%,44% { opacity:0; } 45%,59% { opacity:1; } 60%,100% { opacity:0; }}
+@keyframes dialogueSequence4 {0%,59% { opacity:0; } 60%,74% { opacity:1; } 75%,100% { opacity:0; }}
+
+/* Move ID card from person to officer */
+@keyframes moveID {
+  0%,59% { opacity: 0; transform: rotate(-30deg) translate(0,0); }
+  60%,74% { opacity: 1; transform: rotate(0deg) translate(180px,-30px); }
+  75%,100% { opacity: 0; transform: rotate(-30deg) translate(0,0); }
+}
+
+/* Assign animations */
+.officer-bubble.age { animation: dialogueSequence 8s infinite; }
+.person-bubble.age { animation: dialogueSequence2 8s infinite; }
+.officer-bubble.id { animation: dialogueSequence3 8s infinite; }
+.person-bubble.id { animation: dialogueSequence4 8s infinite; }
+
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <!-- Person -->
+  <div class="person">
+    <div class="head"></div>
+    <div class="body">
+      <div class="arms">
+        <div class="arm-left"></div>
+        <div class="arm-right"></div>
+      </div>
+      <div class="legs">
+        <div class="leg-left"></div>
+        <div class="leg-right"></div>
+      </div>
+    </div>
+    <div class="id-card"></div>
+    <div class="tooltip person-bubble age">21</div>
+    <div class="tooltip person-bubble id">Here is my ID</div>
+  </div>
+
+  <!-- Officer -->
+  <div class="officer">
+    <div class="hat"></div>
+    <div class="head"></div>
+    <div class="body">
+      <div class="arms">
+        <div class="arm-left"></div>
+        <div class="arm-right"></div>
+      </div>
+      <div class="legs">
+        <div class="leg-left"></div>
+        <div class="leg-right"></div>
+      </div>
+    </div>
+    <div class="tooltip officer-bubble age">Please tell me your age?</div>
+    <div class="tooltip officer-bubble id">Show me your ID!</div>
+  </div>
+</div>
+
+</body>
+</html>

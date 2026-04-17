@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Strings - Complete Guide</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1 id="typewriter"></h1>
+  <p>From Zero Knowledge → Confident JavaScript Developer</p>
+</header>
+
+<main>
+
+<section>
+<h2>Step 1: What is a String?</h2>
+
+<p>
+A string is text data. In JavaScript, strings are written using:
+</p>
+
+<ul>
+<li>Double quotes <code>"Hello"</code></li>
+<li>Single quotes <code>'Hello'</code></li>
+<li>Backticks (template literals) <code>`Hello`</code></li>
+</ul>
+
+<pre>
+let name = "John";
+let city = 'London';
+let message = `Welcome to JavaScript`;
+
+console.log(name);
+console.log(city);
+console.log(message);
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Create a variable called <code>greeting</code> and store your name inside it.
+</div>
+</section>
+
+
+<section>
+<h2>Step 2: String Concatenation</h2>
+
+<p>
+Concatenation means joining strings together.
+</p>
+
+<pre>
+let firstName = "Jane";
+let lastName = "Doe";
+
+let fullName = firstName + " " + lastName;
+console.log(fullName); // Jane Doe
+</pre>
+
+<h3>Using Template Literals (Recommended)</h3>
+
+<pre>
+let age = 25;
+let intro = `My name is ${firstName} and I am ${age} years old.`;
+
+console.log(intro);
+</pre>
+
+<p>
+Template literals use backticks and <code>${}</code> for inserting variables.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Combine your name and favorite hobby into one sentence using template literals.
+</div>
+</section>
+
+
+<section>
+<h2>Step 3: String Properties & Length</h2>
+
+<p>
+Strings have built-in properties.
+</p>
+
+<pre>
+let text = "JavaScript";
+
+console.log(text.length); // 10
+</pre>
+
+<p>
+Remember: string indexing starts at 0.
+</p>
+
+<pre>
+console.log(text[0]); // J
+console.log(text[4]); // S
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Print the first and last character of a string.
+</div>
+</section>
+
+
+<section>
+<h2>Step 4: Common String Methods</h2>
+
+<p>
+JavaScript provides powerful built-in string methods.
+</p>
+
+<pre>
+let str = "  Hello World  ";
+
+console.log(str.toUpperCase());   // HELLO WORLD
+console.log(str.toLowerCase());   // hello world
+console.log(str.trim());          // removes spaces
+console.log(str.includes("World")); // true
+console.log(str.indexOf("World"));  // 8
+console.log(str.slice(2, 7));       // llo W
+console.log(str.replace("World", "JS")); // Hello JS
+</pre>
+
+<p>
+Strings are immutable — methods return a new string.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Replace your name in a sentence with another name using <code>replace()</code>.
+</div>
+</section>
+
+
+<section>
+<h2>Step 5: Escape Sequences</h2>
+
+<p>
+Escape sequences allow special characters inside strings.
+</p>
+
+<pre>
+let quote = "He said, \"JavaScript is awesome!\"";
+let newLine = "First Line\nSecond Line";
+let tabSpace = "Name:\tJohn";
+
+console.log(quote);
+console.log(newLine);
+console.log(tabSpace);
+</pre>
+
+<h3>Common Escape Characters:</h3>
+<ul>
+<li><code>\"</code> → Double quote</li>
+<li><code>\'</code> → Single quote</li>
+<li><code>\n</code> → New line</li>
+<li><code>\t</code> → Tab</li>
+<li><code>\\</code> → Backslash</li>
+</ul>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Write a string that prints a two-line poem using <code>\n</code>.
+</div>
+</section>
+
+
+<section>
+<h2>Step 6: String Splitting & Joining</h2>
+
+<p>
+You can convert strings into arrays and back.
+</p>
+
+<pre>
+let sentence = "JavaScript is powerful";
+
+let words = sentence.split(" ");
+console.log(words); // ["JavaScript", "is", "powerful"]
+
+let joined = words.join("-");
+console.log(joined); // JavaScript-is-powerful
+</pre>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Split a sentence into words and count how many words it contains.
+</div>
+</section>
+
+
+<section>
+<h2>Step 7: String Comparison</h2>
+
+<p>
+Strings can be compared using comparison operators.
+</p>
+
+<pre>
+console.log("apple" === "apple"); // true
+console.log("apple" === "Apple"); // false
+console.log("b" > "a"); // true
+</pre>
+
+<p>
+String comparison is based on Unicode values.
+</p>
+
+<div class="challenge">
+<strong>Mini Challenge:</strong>  
+Compare two names and check if they are equal (case-insensitive).
+</div>
+</section>
+
+
+<section>
+<h2>Step 8: Mental Model – Strings in JavaScript</h2>
+
+<p>
+Think of strings as:
+</p>
+
+<ul>
+<li><strong>Text containers</strong></li>
+<li><strong>Indexed sequences</strong> (like arrays of characters)</li>
+<li><strong>Immutable</strong> (cannot be changed directly)</li>
+<li><strong>Powerful tools</strong> using built-in methods</li>
+</ul>
+
+<p>
+You can:
+</p>
+
+<ul>
+<li>Create them</li>
+<li>Combine them</li>
+<li>Extract parts</li>
+<li>Search inside them</li>
+<li>Replace content</li>
+<li>Transform case</li>
+</ul>
+
+<div class="challenge">
+<strong>Mastery Challenge:</strong>  
+Write a program that:
+<ul>
+<li>Asks the user for their full name</li>
+<li>Removes extra spaces</li>
+<li>Converts it to uppercase</li>
+<li>Prints the number of characters</li>
+<li>Displays a welcome message using template literals</li>
+</ul>
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+const typewriter = document.getElementById("typewriter");
+const text = "Master JavaScript: Strings & String Methods";
+
+let index = 0;
+let forward = true;
+
+function typeLoop() {
+  if (forward) {
+    index++;
+    if (index >= text.length) {
+      forward = false;
+      setTimeout(typeLoop, 1500);
+      return;
+    }
+  } else {
+    index--;
+    if (index <= 0) forward = true;
+  }
+
+  typewriter.textContent = text.substring(0, index + 1);
+  setTimeout(typeLoop, forward ? 100 : 50);
+}
+
+typeLoop();
+</script>
+
+</body>
+</html>

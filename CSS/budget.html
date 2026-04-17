@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --background: #0f131c;
+            --surface: #0f131c;
+            --surface-container: #1c1f29;
+            --surface-container-low: #181b25;
+            --surface-container-high: #262a34;
+            --surface-container-highest: #31353f;
+            --primary: #bdc2ff;
+            --primary-container: #7c87f3;
+            --on-primary: #131e8c;
+            --secondary: #ddb8ff;
+            --secondary-container: #62259b;
+            --on-surface: #dfe2ef;
+            --on-surface-variant: #c7c4d7;
+            --outline: #908fa0;
+            --tertiary: #3cddc7;
+            --tertiary-fixed-dim: #3cddc7;
+            --error: #ffb4ab;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--background);
+            color: var(--on-surface);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            overflow: hidden;
+            background: var(--surface-container-highest);
+            border: 1px solid rgba(189, 194, 255, 0.2);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #a5b4fc, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .icon-button {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a5b4fc;
+            background: transparent;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .icon-button:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        main {
+            flex-grow: 1;
+            max-width: 32rem;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 8rem;
+            position: relative;
+        }
+
+        .glass-glow {
+            position: absolute;
+            top: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20rem;
+            height: 20rem;
+            background: radial-gradient(circle at center, rgba(189, 194, 255, 0.15) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .circular-progress-container {
+            position: relative;
+            width: 16rem;
+            height: 16rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-track {
+            position: absolute;
+            inset: 0;
+            border: 6px solid rgba(49, 53, 63, 0.3);
+            border-radius: 9999px;
+        }
+
+        .progress-fill {
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            border: 6px solid transparent;
+            background: conic-gradient(from 0deg, var(--primary-container) 0%, var(--primary) 75%, transparent 75% 100%);
+            -webkit-mask-image: radial-gradient(transparent 62%, black 63%);
+            mask-image: radial-gradient(transparent 62%, black 63%);
+            opacity: 0.8;
+        }
+
+        .inner-circle {
+            width: 13rem;
+            height: 13rem;
+            border-radius: 9999px;
+            background: rgba(49, 53, 63, 0.4);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(189, 194, 255, 0.1);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .inner-circle .label {
+            color: var(--on-surface-variant);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .inner-circle .amount {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            color: var(--on-surface);
+        }
+
+        .trend-indicator {
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background: rgba(60, 221, 199, 0.1);
+            border: 1px solid rgba(60, 221, 199, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .trend-indicator .material-symbols-outlined {
+            color: var(--tertiary-fixed-dim);
+            font-size: 1.125rem;
+        }
+
+        .trend-text {
+            color: var(--tertiary-fixed-dim);
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface-container-low);
+            padding: 1.25rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.6875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--on-surface-variant);
+        }
+
+        .stat-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--on-surface);
+        }
+
+        .mini-progress {
+            margin-top: 0.75rem;
+            height: 4px;
+            background: var(--surface-container-highest);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .mini-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 25%;
+            border-radius: 9999px;
+        }
+
+        .stat-footer {
+            margin-top: 0.75rem;
+            font-size: 0.625rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .savings-section {
+            background: var(--surface-container);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .savings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .savings-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .savings-header span {
+            font-size: 0.75rem;
+            color: var(--on-surface-variant);
+        }
+
+        .shield-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 1rem;
+            background: rgba(98, 37, 155, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+
+        .goal-item {
+            margin-bottom: 1rem;
+        }
+
+        .goal-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 0.75rem;
+        }
+
+        .goal-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .goal-percentage {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .goal-percentage .val {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .goal-percentage .unit {
+            font-size: 0.625rem;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+        }
+
+        .goal-track {
+            height: 0.75rem;
+            background: var(--surface-container-low);
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .goal-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-container), var(--primary));
+            border-radius: 9999px;
+            width: 85%;
+            position: relative;
+        }
+
+        .goal-shimmer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2rem;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            filter: blur(4px);
+        }
+
+        .goal-footer {
+            margin-top: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--on-surface-variant);
+        }
+
+        .goal-footer .highlight {
+            color: var(--tertiary);
+        }
+
+        .tip-card {
+            position: relative;
+            height: 8rem;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tip-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .tip-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--surface), transparent);
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .tip-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--on-surface-variant);
+            margin-bottom: 0.25rem;
+        }
+
+        .tip-content {
+            font-size: 0.875rem;
+            font-weight: 500;
+            max-width: 14rem;
+        }
+
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem 2rem 2rem;
+            background: rgba(28, 31, 41, 0.6);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            width: 3rem;
+            height: 3rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-button:hover {
+            color: #a5b4fc;
+        }
+
+        .nav-button.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: #c7d2fe;
+            border-radius: 9999px;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+            transform: scale(0.9);
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body>
+<header>
+<div class="header-logo">
+<div class="user-avatar">
+<img alt="User profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrdw8TJhIVgZl5hfLxtwIqA3Wur7VigR4qC3NjKLZDa9T1kuSub2jQv72n7250ttmlnMaOhKrNhT-TpzIROu7rnMYwsRCgFTQlRbMtNuCqeUIv-Klaf_fQW83SmnEPuHnQ29VtaBfrIArl2yDEE5ZAti0AX4Fk7ivSrTNA3auBMizcLBxOs88u4BH65xotZ6oQK97eb8aB9IhfZJ1_tjAo95zm9ZHNwODk5BMsDV8swEDeal_-wJhXMjsgRY29I6MZjannB37XbQ26"/>
+</div>
+<span class="logo-text">Luminous Ledger</span>
+</div>
+<button class="icon-button">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main>
+<div class="glass-glow"></div>
+<section class="hero-section">
+<div class="circular-progress-container">
+<div class="progress-track"></div>
+<div class="progress-fill"></div>
+<div class="inner-circle">
+<span class="label">Daily Allowance</span>
+<h1 class="amount">$45.20</h1>
+</div>
+</div>
+<div class="trend-indicator">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="trend-text">You’re ahead by +$3/day</span>
+</div>
+</section>
+<div class="bento-grid">
+<div class="stat-card">
+<span class="stat-label">Spent Today</span>
+<span class="stat-value">$12.80</span>
+<div class="mini-progress">
+<div class="mini-progress-bar"></div>
+</div>
+</div>
+<div class="stat-card">
+<span class="stat-label">Monthly Bal</span>
+<span class="stat-value">$1,240.50</span>
+<div class="stat-footer">Active Plan</div>
+</div>
+</div>
+<section class="savings-section">
+<div class="savings-header">
+<div>
+<h2>Savings Progress</h2>
+<span>Your Financial Fortress</span>
+</div>
+<div class="shield-icon">
+<span class="material-symbols-outlined">shield</span>
+</div>
+</div>
+<div class="goal-item">
+<div class="goal-info">
+<span class="goal-name">Emergency Fund</span>
+<div class="goal-percentage">
+<span class="val">85%</span>
+<span class="unit">COMPLETE</span>
+</div>
+</div>
+<div class="goal-track">
+<div class="goal-fill">
+<div class="goal-shimmer"></div>
+</div>
+</div>
+<div class="goal-footer">
+<span>Goal: $15,000.00</span>
+<span class="highlight">+$1,200 this month</span>
+</div>
+</div>
+</section>
+<section class="tip-card">
+<img alt="Aesthetic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQk0uYWYstsG-piAvPuJdG3bekyRsm2T66fDwKRxAUSnAT7tyClVf2h1HuWjNPtFRBd1GatnfF1vVnpxYDEEWJMOuuV8hEDlp5MwrivHvsK-eYnvSvH6i1iQdar9y4BXzilb3mnT4jMKlW1ENAVlK5uWSmRkgeYS_sX1JntRw4YMyqnDC9vOw1JWYs9AFnr-16x-QBQ8Nf9qHMsCcAhHzzaLgpxTcHPiIPe5Fe9c7_6pVClM25nMchD-IPfVYgId_ao_rowHsiYTOB"/>
+<div class="tip-overlay">
+<p class="tip-label">Financial Tip</p>
+<p class="tip-content">Automate your savings to reach goals 3x faster.</p>
+</div>
+</section>
+</main>
+<nav class="bottom-nav">
+<button class="nav-button active">
+<span class="material-symbols-outlined">home</span>
+</button>
+<button class="nav-button">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<button class="nav-button">
+<span class="material-symbols-outlined">target</span>
+</button>
+<button class="nav-button">
+<span class="material-symbols-outlined">insights</span>
+</button>
+</nav>
+</body></html>

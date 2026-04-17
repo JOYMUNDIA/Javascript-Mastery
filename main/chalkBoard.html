@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chalkboard Menu</title>
+
+<style>
+
+body{
+  background:#ececec;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  perspective:900px;
+}
+
+/* Frame */
+.board-frame{
+  width:500px;
+  height:320px;
+  padding:18px;
+  background:linear-gradient(135deg,#8b5a2b,#5c3b1e,#9a6a3a);
+  border-radius:6px;
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.4),
+    inset 0 0 6px rgba(0,0,0,0.5);
+  position:relative;
+
+  transition:transform .35s ease;
+}
+
+/* Grow board on hover */
+.board-frame:hover{
+  transform:scale(1.08);
+}
+
+/* Blackboard */
+.board{
+  width:100%;
+  height:100%;
+  background:
+    radial-gradient(circle at 30% 30%, #2b2b2b 0%, #111 60%, #000 100%);
+  border-radius:3px;
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,0.05),
+    inset 0 0 60px rgba(0,0,0,0.9);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Hamburger container */
+.hamburger{
+  width:120px;
+  transform:translateY(0) translateZ(0);
+  transition:transform .4s ease;
+}
+
+/* Pop out effect */
+.board-frame:hover .hamburger{
+  transform:translateY(-12px) translateZ(40px);
+}
+
+/* Chalk lines */
+.line{
+  height:10px;
+  background:#f7f7f7;
+  margin:18px 0;
+  border-radius:4px;
+
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #ddd,
+    0 0 6px rgba(255,255,255,0.6),
+    0 0 12px rgba(255,255,255,0.3);
+
+  filter:blur(.3px);
+  transition:box-shadow .3s ease;
+}
+
+/* Brighter chalk when hovering */
+.board-frame:hover .line{
+  box-shadow:
+    1px 1px 0 #fff,
+    -1px -1px 0 #eee,
+    0 0 10px rgba(255,255,255,0.8),
+    0 0 20px rgba(255,255,255,0.5);
+}
+
+/* Tray */
+.tray{
+  position:absolute;
+  bottom:-10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  height:12px;
+  background:linear-gradient(#8b5a2b,#5c3b1e);
+  border-radius:3px;
+}
+
+/* Chalk */
+.chalk{
+  position:absolute;
+  bottom:2px;
+  left:30px;
+  width:40px;
+  height:10px;
+  background:linear-gradient(#ffffff,#e6e6e6);
+  border-radius:3px;
+  transform:rotate(-15deg);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="board-frame">
+
+  <div class="board">
+    <div class="hamburger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <div class="tray">
+    <div class="chalk"></div>
+  </div>
+
+</div>
+
+</body>
+</html>
